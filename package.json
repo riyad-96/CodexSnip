@@ -14,7 +14,7 @@
     "axios": "^1.13.2",
     "date-fns": "^4.1.0",
     "firebase": "^12.6.0",
-    "kitzo": "^2.1.28",
+    "kitzo": "^2.2.3",
     "lucide-react": "^0.555.0",
     "motion": "^12.23.24",
     "prismjs": "^1.30.0",

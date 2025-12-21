@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Modal from './Modal';
+import Modal from './ModalLayout';
 import GlossyButton from './GlossyButton';
 
 type DeleteModalPropsType = {

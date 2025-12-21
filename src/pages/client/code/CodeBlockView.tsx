@@ -1,8 +1,8 @@
 import type { CodeBlock } from '../../../types/types';
 import GlossyButton from '../../../components/ui/GlossyButton';
 import { CheckIcon, CopyIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
-import kitzo from 'kitzo';
-import { Tooltip } from 'kitzo/react';
+import { copy } from 'kitzo/fns';
+import { Tooltip } from 'kitzo';
 import { useState } from 'react';
 import { supportedLanguages } from './utils/editorLanguage';
 import { useCodeContext } from '../../../contexts/CodeContext';
@@ -166,8 +166,8 @@ export default function CodeBlockView({
                   </AnimatePresence>
                 </span>
               }
-              onClick={() => {
-                kitzo.copy(block?.code);
+              onClick={async () => {
+                await copy(block?.code);
                 if (copied) return;
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1500);

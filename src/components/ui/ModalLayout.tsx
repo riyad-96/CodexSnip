@@ -4,12 +4,14 @@ import type { PropsWithChildren } from 'react';
 type ModalPropsType = PropsWithChildren & {
   className: string;
   onMouseDown: () => void;
+  layoutId?: string;
 };
 
 export default function Modal({
   className,
   onMouseDown,
   children,
+  layoutId,
 }: ModalPropsType) {
   return (
     <motion.div
@@ -20,9 +22,7 @@ export default function Modal({
       className="uni-modal fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/40 px-4 pt-16 pb-26"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 1.2 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
+        layoutId={layoutId}
         onMouseDown={(e) => e.stopPropagation()}
         className={className}
       >

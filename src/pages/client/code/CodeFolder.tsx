@@ -3,7 +3,7 @@ import EditorModal from './EditorModal';
 import GlossyButton from '../../../components/ui/GlossyButton';
 import CodeBlockView from './CodeBlockView';
 import DeleteModal from '../../../components/ui/DeleteModal';
-import Modal from '../../../components/ui/Modal';
+import Modal from '../../../components/ui/ModalLayout';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useAxios } from '../../../hooks/axios.hook';
@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useCodeContext } from '../../../contexts/CodeContext';
 import { FileBracesCornerIcon, PencilLineIcon } from 'lucide-react';
-import { Tooltip } from 'kitzo/react';
+import { Tooltip } from 'kitzo';
 
 // types
 import type {

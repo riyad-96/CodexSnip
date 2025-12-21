@@ -1,4 +1,4 @@
-import { ToastContainer } from 'kitzo/react';
+import { ToastContainer } from 'kitzo';
 import { Outlet } from 'react-router-dom';
 import { motion } from 'motion/react';
 
@@ -18,7 +18,7 @@ export default function App() {
       <div className="h-full">
         <Outlet />
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-right" />
     </motion.div>
   );
 }

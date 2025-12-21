@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
-import { toast } from 'kitzo/react';
+import { toast } from 'kitzo';
 import GlossyButton from '../ui/GlossyButton';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -78,12 +78,12 @@ export default function Nav() {
                   transition={{
                     duration: 0.1,
                   }}
-                  className="dropdown overflow-hidden bg-code absolute top-[calc(100%+20px)] right-0 w-[120px] origin-top-right rounded-lg py-1 shadow"
+                  className="dropdown bg-code absolute top-[calc(100%+20px)] right-0 w-[120px] origin-top-right overflow-hidden rounded-lg py-1 shadow"
                 >
                   <div className="grid">
-                    <button className="pointer-fine:hover:bg-code-50 py-1.5">
+                    {/* <button className="px-5 pointer-fine:hover:bg-code-50 py-1.5 text-start">
                       Profile
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => {
                         signOut(auth).then(() => {
@@ -91,7 +91,7 @@ export default function Nav() {
                           queryClient.clear();
                         });
                       }}
-                      className="pointer-fine:hover:bg-code-50 py-1.5"
+                      className="pointer-fine:hover:bg-code-50 px-5 py-1.5 text-start"
                     >
                       Logout
                     </button>

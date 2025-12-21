@@ -6,7 +6,7 @@ import {
   X,
 } from 'lucide-react';
 import type { CodeFolder } from '../../../types/types';
-import { Tooltip } from 'kitzo/react';
+import { Tooltip } from 'kitzo';
 import { useNavigate } from 'react-router-dom';
 import FormatedDate from './components/FormatedDate';
 import { motion, AnimatePresence } from 'motion/react';
@@ -41,14 +41,16 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   return (
     <motion.div
       layoutId={`folder_card_${folder._id}`}
-      className={`bg-code ring-code-200 border-code-100 relative grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border px-4 py-3 ring-0 transition-shadow duration-150 ${dropdownShowing ? 'border-code-200 ring-3' : 'pointer-fine:hover:border-code-200 pointer-fine:hover:ring-2'}`}
+      className={`bg-code ring-code-200 group border-code-100 relative grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border px-4 py-3 ring-0 transition-shadow duration-150 ${dropdownShowing ? 'border-code-200 ring-3' : 'pointer-fine:hover:border-code-200 pointer-fine:hover:ring-2'}`}
     >
       <button
         onClick={() => navigate(`/code/${_id}`)}
         className="absolute inset-0 z-1"
       ></button>
 
-      <div className="absolute top-2 right-2 z-3">
+      <div
+        className={`absolute top-2 right-2 z-3 ${dropdownShowing ? '' : 'transition-[scale,opacity] duration-150 pointer-fine:scale-60 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100'}`}
+      >
         <Tooltip
           content={dropdownShowing ? 'Close' : 'Menu'}
           tooltipOptions={{

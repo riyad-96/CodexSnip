@@ -6,7 +6,7 @@ import EachCodeFolderCard from './EachCodeFolderCard';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import Modal from '../../../components/ui/Modal';
+import Modal from '../../../components/ui/ModalLayout';
 import { useCodeContext } from '../../../contexts/CodeContext';
 import type { UpdateFolderDetailsType } from '../../../contexts/CodeContext';
 import GlossyButton from '../../../components/ui/GlossyButton';

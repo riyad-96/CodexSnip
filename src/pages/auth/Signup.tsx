@@ -5,8 +5,7 @@ import type { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
-import { toast } from 'kitzo/react';
-import CustomToast from './CustomToast';
+import { toast } from 'kitzo';
 
 export default function Signup() {
   const {
@@ -27,7 +26,7 @@ export default function Signup() {
     } catch (err) {
       const error = err as FirebaseError;
       if (error.code === 'auth/email-already-in-use') {
-        toast.custom(<CustomToast text="Email already exists" />);
+        toast.error('Email already exists');
       }
     } finally {
       setSigning(false);

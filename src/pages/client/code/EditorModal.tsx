@@ -26,7 +26,6 @@ export default function EditorModal({
   actions,
   isAdding,
   isUpdating,
-  layoutId,
 }: EditorModalProps) {
   const { editDetails } = useCodeContext();
   const { addNewCodeBlock, updateCodeBlock } = actions;
@@ -52,7 +51,6 @@ export default function EditorModal({
 
   return (
     <Modal
-      layoutId={layoutId}
       onMouseDown={() => setEditorState(null)}
       className="bg-code w-full max-w-[700px] space-y-2 rounded-2xl p-4 shadow-md"
     >

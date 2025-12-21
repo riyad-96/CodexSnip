@@ -4,9 +4,8 @@ import InputField from '../../components/auth/InputField';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
 import type { FirebaseError } from 'firebase/app';
-import { toast } from 'kitzo/react';
+import { toast } from 'kitzo';
 import { useState } from 'react';
-import CustomToast from './CustomToast';
 
 export default function Login() {
   const {
@@ -27,12 +26,12 @@ export default function Login() {
     } catch (err) {
       const error = err as FirebaseError;
       if (error.code === 'auth/invalid-credential') {
-        toast.custom(<CustomToast text="Invalid email/password" />, {
+        toast.error('Invalid email/password', {
           duration: 3500,
         });
       }
       if (error.code === 'auth/too-many-requests') {
-        toast.custom(<CustomToast text="Try again later" />, {
+        toast.error('Try again later', {
           duration: 3500,
         });
       }

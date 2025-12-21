@@ -1,8 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../components/header/Logo';
 import { GoogleIcon } from '../assets/Svgs';
-import { toast } from 'kitzo/react';
-import CustomToast from '../pages/auth/CustomToast';
+import { toast } from 'kitzo';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../configs/firebase.config';
 import { useState } from 'react';
@@ -21,7 +20,7 @@ export default function AuthLayout() {
       localStorage.setItem('visitor_state', 'old');
     } catch (err) {
       console.error(err);
-      toast.custom(<CustomToast text="Login failed" />);
+      toast.error('Login failed');
     } finally {
       setTrying(false);
     }
