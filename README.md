@@ -1,4 +1,4 @@
-# 💻 KitzoCode
+# 💻 CodexSnip
 
 A full-stack web application designed for developers to **store and organize code snippets** efficiently. Built with **React** and **TypeScript** on the frontend, and backed by a **MongoDB** database.
 
@@ -34,6 +34,6 @@ The frontend is built using **React** and **TypeScript** for a robust and scalab
 
 ## 🌐 Live Demo
 
-Experience KitzoCode live and see how easy it is to manage your code snippets!
+Experience CodexSnip live and see how easy it is to manage your code snippets!
 
 - **Application Link:** [CodexSnip](https://codexsnip.vercel.app)
