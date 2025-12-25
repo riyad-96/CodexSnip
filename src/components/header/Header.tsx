@@ -10,7 +10,7 @@ export default function Header() {
     <header className="sticky top-0 left-0 z-10 w-full py-2">
       <div className="bg-code mx-auto flex h-[60px] max-w-[1300px] items-center justify-between rounded-xl px-3 shadow-sm md:px-4">
         <Logo
-          layoutId="KitzoCodes-logo"
+          layoutId="CodexSnip-logo"
           onClick={() => {
             if (location.pathname !== '/') {
               navigate('/');

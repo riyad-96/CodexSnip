@@ -36,4 +36,4 @@ The frontend is built using **React** and **TypeScript** for a robust and scalab
 
 Experience KitzoCode live and see how easy it is to manage your code snippets!
 
-- **Application Link:** [KitzoCodes](https://kitzocodes.vercel.app)
+- **Application Link:** [CodexSnip](https://codexsnip.vercel.app)

@@ -11,7 +11,7 @@ export default function Logo({ onClick, layoutId }: LogoPropsTypes) {
       layoutId={layoutId}
       className="text-xl font-semibold md:text-2xl"
     >
-      <button onClick={onClick}>KitzoCodes</button>
+      <button onClick={onClick}>CodexSnip</button>
     </motion.div>
   );
 }
