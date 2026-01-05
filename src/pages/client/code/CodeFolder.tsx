@@ -10,7 +10,7 @@ import { useAxios } from '../../../hooks/axios.hook';
 import { AnimatePresence, motion } from 'motion/react';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useCodeContext } from '../../../contexts/CodeContext';
-import { FileBracesCornerIcon, PencilLineIcon } from 'lucide-react';
+import { FileBracesCornerIcon, PencilLineIcon, PlusIcon } from 'lucide-react';
 import { Tooltip } from 'kitzo';
 
 // types
@@ -131,8 +131,30 @@ export default function CodeFolder() {
 
   if (codeFolderError) {
     return (
-      <div>
-        <p className="pt-16 text-center">Folder doesn't exists</p>
+      <div className="pt-20">
+        <div className="mx-auto max-w-md text-center">
+          <div className="rounded-2xl border border-neutral-200 bg-white px-8 py-12">
+            <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-neutral-100">
+              <svg
+                className="size-8 text-neutral-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+            </div>
+            <h3 className="mb-2 tracking-tight">Folder not found</h3>
+            <p className="text-neutral-600">
+              This folder doesn't exist or you don't have access to it.
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -147,12 +169,12 @@ export default function CodeFolder() {
 
   return (
     <div className="pt-8">
-      <div className="flex gap-2">
-        <div className="max-w-130 space-y-2">
-          <h2 className="text-code-800 max-w-8/10 text-xl font-semibold">
+      <div className="mb-6 flex items-start gap-3">
+        <div className="flex-1 space-y-2">
+          <h2 className="tracking-tight">
             {codeFolder?.folder_name || 'Unknown folder name'}
           </h2>
-          <p className="text-code-800">
+          <p className="leading-relaxed text-neutral-600">
             {codeFolder?.folder_description || 'No description yet'}
           </p>
         </div>
@@ -160,7 +182,7 @@ export default function CodeFolder() {
         <motion.div layoutId="folder-details-update-modal">
           <Tooltip
             content={
-              <span className="bg-code-800 box-content grid min-w-20 rounded-md px-2 py-1.5 text-center text-xs font-light tracking-wide text-white">
+              <span className="box-content grid min-w-20 rounded-lg bg-neutral-900 px-2.5 py-2 text-center text-xs text-white">
                 <span>Edit folder</span>
                 <span>name & description</span>
               </span>
@@ -174,8 +196,11 @@ export default function CodeFolder() {
           >
             <GlossyButton
               content={
-                <span className="bg-code grid h-7 place-items-center px-3">
-                  <PencilLineIcon size="16" />
+                <span className="grid h-9 place-items-center px-3.5">
+                  <PencilLineIcon
+                    size={16}
+                    className="text-neutral-700"
+                  />
                 </span>
               }
               onClick={() =>
@@ -190,7 +215,7 @@ export default function CodeFolder() {
         </motion.div>
       </div>
 
-      <div className="mt-4 mb-6 flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <Tooltip
           content={`${code_blocks.length} Blocks`}
           tooltipOptions={{
@@ -198,11 +223,12 @@ export default function CodeFolder() {
           }}
           animation={{ delay: 40 }}
         >
-          <div className="bg-code border-code-100 inset-shadow-code relative z-2 flex w-fit cursor-default items-center gap-1 rounded-lg border px-2 py-1 text-xs shadow-xs inset-shadow-2xs">
-            <span>
-              <FileBracesCornerIcon size="14" />
-            </span>
-            :<span>{code_blocks.length}</span>
+          <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
+            <FileBracesCornerIcon
+              size={16}
+              className="text-neutral-600"
+            />
+            <span>{code_blocks.length}</span>
           </div>
         </Tooltip>
 
@@ -211,15 +237,21 @@ export default function CodeFolder() {
           layoutId="create-code-block-modal"
         >
           <GlossyButton
-            content={<span className="bg-white px-6 py-2">Add Block</span>}
+            content={
+              <span className="flex items-center gap-2 px-5 py-2.5">
+                <PlusIcon size={16} />
+                <span>Add Block</span>
+              </span>
+            }
             onClick={() => setEditorState('new')}
+            primary
           />
         </motion.div>
       </div>
 
       {code_blocks.length > 0 ? (
         <div
-          className={`grid ${code_blocks.length > 1 ? 'gap-3 md:grid-cols-[auto_1fr]' : ''}`}
+          className={`grid ${code_blocks.length > 1 ? 'gap-4 md:grid-cols-[auto_1fr]' : ''}`}
         >
           {code_blocks.length > 1 && (
             <div className="w-50 max-md:hidden">
@@ -227,7 +259,7 @@ export default function CodeFolder() {
             </div>
           )}
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {code_blocks.map((block) => (
               <CodeBlockView
                 key={block._id}
@@ -238,7 +270,32 @@ export default function CodeFolder() {
           </div>
         </div>
       ) : (
-        <p className="pt-16 text-center">No Code blocks in this folder yet</p>
+        <div className="pt-20">
+          <div className="mx-auto max-w-md text-center">
+            <div className="rounded-2xl border border-neutral-200 bg-white px-8 py-12">
+              <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-neutral-100">
+                <FileBracesCornerIcon
+                  size={32}
+                  className="text-neutral-600"
+                />
+              </div>
+              <h3 className="mb-2 tracking-tight">No code blocks yet</h3>
+              <p className="mb-6 text-neutral-600">
+                Start by adding your first code block to this folder.
+              </p>
+              <GlossyButton
+                content={
+                  <span className="flex items-center gap-2 px-5 py-2.5">
+                    <PlusIcon size={16} />
+                    <span>Add Block</span>
+                  </span>
+                }
+                onClick={() => setEditorState('new')}
+                primary
+              />
+            </div>
+          </div>
+        </div>
       )}
 
       <AnimatePresence>
@@ -264,9 +321,9 @@ export default function CodeFolder() {
             layoutId={`delete-modal_${deletingInfo.code_block_id}`}
             title="Delete code block!"
             description={
-              <span className="font-light tracking-wide">
+              <span className="tracking-wide text-neutral-600">
                 Delete '
-                <span className="font-medium">
+                <span className="text-neutral-900">
                   {deletingInfo.code_block_title || 'Untitled'}
                 </span>
                 ' code block permanently? This action is irreversible.
@@ -286,19 +343,19 @@ export default function CodeFolder() {
         {updateDetails && (
           <Modal
             layoutId="folder-details-update-modal"
-            className="w-full max-w-125 rounded-2xl bg-white p-4"
+            className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
             onMouseDown={() => setUpdateDetails(null)}
           >
-            <div className="mb-4 space-y-2">
-              <div className="grid gap-1">
+            <div className="mb-6 space-y-4">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-title"
                 >
                   Name
                 </label>
                 <input
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -315,15 +372,15 @@ export default function CodeFolder() {
                 />
               </div>
 
-              <div className="grid gap-1">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-description"
                 >
                   Description
                 </label>
                 <textarea
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 max-h-75 min-h-25 rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-description"
                   placeholder="Folder description"
                   value={updateDetails.folder_description}
@@ -342,7 +399,7 @@ export default function CodeFolder() {
             <div className="flex justify-end gap-2">
               <GlossyButton
                 content={
-                  <span className="grid h-7 place-items-center px-4">
+                  <span className="grid h-9 place-items-center px-5">
                     Cancel
                   </span>
                 }
@@ -350,7 +407,7 @@ export default function CodeFolder() {
               />
               <GlossyButton
                 content={
-                  <span className="grid h-7 min-w-20 place-items-center px-4">
+                  <span className="grid h-9 min-w-20 place-items-center px-5">
                     {updatingFolderDetails ? (
                       <span className="loading loading-spinner loading-xs opacity-80"></span>
                     ) : (
@@ -366,6 +423,7 @@ export default function CodeFolder() {
                     folder_id: updateDetails.folder_id,
                   });
                 }}
+                primary
               />
             </div>
           </Modal>

@@ -41,7 +41,7 @@ export default function DeleteModal({
             if (isLoading) return;
             clickFn();
           }}
-          className="grid h-9 min-w-[90px] place-items-center rounded-xl border border-red-600 bg-red-600 px-5 text-sm text-white transition-all hover:bg-white hover:text-red-600 active:scale-95 pointer-fine:cursor-pointer"
+          className="grid h-9 min-w-[90px] place-items-center rounded-xl border border-red-600 bg-red-600 px-5 text-sm text-white transition-colors hover:bg-white hover:text-red-600 active:scale-95 pointer-fine:cursor-pointer"
         >
           {isLoading ? (
             <span className="loading loading-spinner loading-xs opacity-80"></span>

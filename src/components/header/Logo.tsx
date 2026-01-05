@@ -13,7 +13,7 @@ export default function Logo({ onClick, layoutId }: LogoPropsTypes) {
     >
       <button
         onClick={onClick}
-        className="tracking-tight transition-colors hover:text-zinc-600"
+        className="tracking-tight transition-colors pointer-fine:hover:text-neutral-600"
       >
         CodexSnip
       </button>

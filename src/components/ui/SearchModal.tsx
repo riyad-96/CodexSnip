@@ -34,13 +34,13 @@ export default function SearchModal() {
 
   return (
     <Modal
-      className="max-h-175 w-full max-w-150 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl"
+      className="max-h-175 w-full max-w-150 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl"
       onMouseDown={() => setSearchModalShowing(false)}
     >
-      <div className="sticky top-0 border-b border-zinc-100 bg-white px-4 py-5">
+      <div className="sticky top-0 border-b border-neutral-100 bg-white px-4 py-5">
         <div className="relative">
           <Search
-            className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-zinc-400"
+            className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-400"
             size={20}
           />
           <input
@@ -49,7 +49,7 @@ export default function SearchModal() {
             placeholder="Search code blocks and folders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full min-w-0 rounded-xl border border-zinc-200 bg-zinc-50 py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-zinc-900 focus:bg-white"
+            className="w-full min-w-0 rounded-xl border border-neutral-200 bg-neutral-50 py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-neutral-900 focus:bg-white"
           />
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function SearchModal() {
           <div className="grid h-50 place-items-center">
             <div className="flex flex-col items-center gap-3">
               <span className="loading loading-spinner loading-md"></span>
-              <p className="text-sm text-zinc-500">Searching...</p>
+              <p className="text-sm text-neutral-500">Searching...</p>
             </div>
           </div>
         )}
@@ -83,7 +83,7 @@ export default function SearchModal() {
                 </svg>
               </div>
               <p className="text-red-600">Something went wrong</p>
-              <p className="text-sm text-zinc-500">Please try again</p>
+              <p className="text-sm text-neutral-500">Please try again</p>
             </div>
           </div>
         )}
@@ -91,15 +91,15 @@ export default function SearchModal() {
         {data && !data.codes.length && !data.folders.length && (
           <div className="grid h-50 place-items-center">
             <div className="flex flex-col items-center gap-3 text-center">
-              <div className="rounded-full bg-zinc-100 p-4">
+              <div className="rounded-full bg-neutral-100 p-4">
                 <Search
-                  className="text-zinc-400"
+                  className="text-neutral-400"
                   size={24}
                 />
               </div>
               <div>
-                <p className="mb-1 text-zinc-900">No results found</p>
-                <p className="text-sm text-zinc-500">
+                <p className="mb-1 text-neutral-900">No results found</p>
+                <p className="text-sm text-neutral-500">
                   Try searching with different keywords
                 </p>
               </div>
@@ -114,9 +114,9 @@ export default function SearchModal() {
                 <div className="flex items-center gap-2 px-1">
                   <File
                     size={16}
-                    className="text-zinc-400"
+                    className="text-neutral-400"
                   />
-                  <h3 className="text-xs tracking-wider text-zinc-500 uppercase">
+                  <h3 className="text-xs tracking-wider text-neutral-500 uppercase">
                     Code Blocks ({data.codes.length})
                   </h3>
                 </div>
@@ -124,7 +124,7 @@ export default function SearchModal() {
                   {data.codes.map((c) => (
                     <div
                       key={c._id}
-                      className="group relative flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-zinc-900 pointer-fine:cursor-pointer"
+                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-900 pointer-fine:cursor-pointer"
                     >
                       <Link
                         className="absolute inset-0 z-5"
@@ -133,17 +133,17 @@ export default function SearchModal() {
                       />
 
                       <div className="flex min-w-0 flex-1 items-start gap-4">
-                        <div className="mt-0.5 shrink-0 rounded-lg bg-zinc-100 p-2.5 transition-colors group-hover:bg-zinc-900">
+                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5 transition-colors group-hover:bg-neutral-900">
                           <File
                             size={18}
-                            className="text-zinc-600 transition-colors group-hover:text-white"
+                            className="text-neutral-600 transition-colors group-hover:text-white"
                           />
                         </div>
                         <div className="grid min-w-0 gap-1">
                           <h4 className="tracking-tight">
                             {c.title || 'Untitled block'}
                           </h4>
-                          <p className="line-clamp-2 text-sm leading-relaxed text-zinc-500">
+                          <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
                             {c.description || 'No description'}
                           </p>
                         </div>
@@ -153,7 +153,7 @@ export default function SearchModal() {
                         <ChevronRight
                           strokeWidth={1.5}
                           size={20}
-                          className="text-zinc-400 transition-colors group-hover:translate-x-1 group-hover:text-zinc-900"
+                          className="text-neutral-400 transition-colors group-hover:translate-x-1 group-hover:text-neutral-900"
                         />
                       </div>
                     </div>
@@ -167,9 +167,9 @@ export default function SearchModal() {
                 <div className="flex items-center gap-2 px-1">
                   <Folder
                     size={16}
-                    className="text-zinc-400"
+                    className="text-neutral-400"
                   />
-                  <h3 className="text-xs tracking-wider text-zinc-500 uppercase">
+                  <h3 className="text-xs tracking-wider text-neutral-500 uppercase">
                     Folders ({data.folders.length})
                   </h3>
                 </div>
@@ -177,7 +177,7 @@ export default function SearchModal() {
                   {data.folders.map((f) => (
                     <div
                       key={f._id}
-                      className="group relative flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-zinc-900 pointer-fine:cursor-pointer"
+                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-900 pointer-fine:cursor-pointer"
                     >
                       <Link
                         className="absolute inset-0 z-5"
@@ -186,17 +186,17 @@ export default function SearchModal() {
                       />
 
                       <div className="flex min-w-0 flex-1 items-start gap-4">
-                        <div className="mt-0.5 shrink-0 rounded-lg bg-zinc-100 p-2.5 transition-colors group-hover:bg-zinc-900">
+                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5 transition-colors group-hover:bg-neutral-900">
                           <Folder
                             size={18}
-                            className="text-zinc-600 transition-colors group-hover:text-white"
+                            className="text-neutral-600 transition-colors group-hover:text-white"
                           />
                         </div>
                         <div className="grid min-w-0 gap-1">
                           <h4 className="tracking-tight">
                             {f.folder_name || 'Untitled folder'}
                           </h4>
-                          <p className="line-clamp-2 text-sm leading-relaxed text-zinc-500">
+                          <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
                             {f.folder_description || 'No description'}
                           </p>
                         </div>
@@ -206,7 +206,7 @@ export default function SearchModal() {
                         <ChevronRight
                           strokeWidth={1.5}
                           size={20}
-                          className="text-zinc-400 transition-colors group-hover:translate-x-1 group-hover:text-zinc-900"
+                          className="text-neutral-400 transition-colors group-hover:translate-x-1 group-hover:text-neutral-900"
                         />
                       </div>
                     </div>

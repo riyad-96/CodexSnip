@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { ProfilePlaceholderSvg } from '../../assets/Svgs';
 import { AnimatePresence, motion } from 'motion/react';
@@ -7,13 +7,13 @@ import { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
 import { toast } from 'kitzo';
-import GlossyButton from '../ui/GlossyButton';
 import { useQueryClient } from '@tanstack/react-query';
 
 export default function Nav() {
   const { user } = useAuthContext();
   const [dropdownShowing, setDropdownShowing] = useState<boolean>(false);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function closeDropdown(e: PointerEvent | TouchEvent) {
@@ -45,8 +45,8 @@ export default function Nav() {
                   className="object-cover"
                 />
               ) : (
-                <span className="grid size-full bg-zinc-100">
-                  <ProfilePlaceholderSvg className="size-full text-zinc-600" />
+                <span className="grid size-full bg-neutral-100">
+                  <ProfilePlaceholderSvg className="size-full text-neutral-600" />
                 </span>
               )}
               <button
@@ -79,17 +79,27 @@ export default function Nav() {
                   transition={{
                     duration: 0.15,
                   }}
-                  className="dropdown absolute top-[calc(100%+12px)] right-0 min-w-35 origin-top-right overflow-hidden rounded-xl border border-zinc-200 bg-white"
+                  className="dropdown absolute top-[calc(100%+12px)] right-0 min-w-35 origin-top-right overflow-hidden rounded-xl border border-neutral-200 bg-white"
                 >
                   <div className="py-1">
+                    <button
+                      onClick={() => {
+                        navigate('/profile');
+                        setDropdownShowing(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                    >
+                      Profile
+                    </button>
                     <button
                       onClick={() => {
                         signOut(auth).then(() => {
                           toast.success('Logout successful');
                           queryClient.clear();
+                          setDropdownShowing(false);
                         });
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-zinc-100 pointer-fine:cursor-pointer"
+                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
                     >
                       Logout
                     </button>
@@ -102,14 +112,14 @@ export default function Nav() {
       ) : (
         <div className="flex items-center gap-2">
           <Link
-            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-zinc-100 pointer-fine:cursor-pointer"
+            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
             to="/auth/login"
           >
             Login
           </Link>
 
           <Link
-            className="inline-block rounded-xl border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm text-white transition-colors hover:bg-white hover:text-zinc-900 pointer-fine:cursor-pointer"
+            className="inline-block rounded-xl border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm text-white transition-colors hover:bg-white hover:text-neutral-900 pointer-fine:cursor-pointer"
             to="/auth/signup"
           >
             Register
