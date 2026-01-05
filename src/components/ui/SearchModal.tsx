@@ -27,7 +27,6 @@ export default function SearchModal() {
       const response = await server.post('/code/search', {
         search: debouncedSearch,
       });
-      console.log(response.data);
       return response.data;
     },
   });

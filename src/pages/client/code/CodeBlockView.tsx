@@ -28,13 +28,12 @@ export default function CodeBlockView({
   const [copied, setCopied] = useState<boolean>(false);
 
   const id = getCodeNavigationId(block.title, block._id);
-  console.log(id);
 
   return (
     <motion.div
       layout
       id={'#' + id}
-      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white px-2 pt-5 pb-4"
+      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white px-4 pt-5 pb-4"
     >
       <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
@@ -179,7 +178,7 @@ export default function CodeBlockView({
       </div>
 
       <div
-        className={`syntax-highlighted-container mx-auto w-[clamp(16.875rem,-3.125rem+100vw,44.8125rem)] ${linkNavEnabled ? 'md:w-[clamp(31.125rem,-16.875rem+100vw,66.5rem)]' : 'md:w-[clamp(44.375rem,-2.7769rem+98.2332vw,79.125rem)]'}`}
+        className={`syntax-highlighted-container mx-auto w-[clamp(16.125rem,-3.875rem+100vw,44.0625rem)] ${linkNavEnabled ? 'md:w-[clamp(30.125rem,-17.875rem+100vw,65.5rem)]' : 'md:w-[clamp(44.375rem,-2.7769rem+98.2332vw,79.125rem)]'}`}
       >
         <div className="overflow-hidden rounded-xl border border-neutral-200">
           <SyntaxHighlighter

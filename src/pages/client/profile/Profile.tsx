@@ -7,7 +7,6 @@ import { toast } from 'kitzo';
 import { updateProfile, type User } from 'firebase/auth';
 import { auth } from '@/configs/firebase.config';
 import FormatedDate from '../home/components/FormatedDate';
-import { motion } from 'motion/react';
 
 export default function Profile() {
   const { user } = useAuthContext();
