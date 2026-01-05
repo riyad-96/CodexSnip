@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { CodeBlock } from '../../../../types/types';
+import getCodeNavigationId from '@/utils/getCodeNavigationId';
 
 type CodeNavMenuPropsType = {
   code_blocks: CodeBlock[];
@@ -22,26 +23,24 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
   }, [hash]);
 
   return (
-    <div className="bg-code sticky top-[85px] overflow-hidden rounded-2xl py-1.5 shadow">
-      <div className="max-h-[300px] overflow-y-auto">
+    <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-2">
+      <div className="max-h-75 overflow-y-auto">
         {code_blocks?.map((p) => {
-          const id = p.title.trim()
-            ? p?.title
-                .trim()
-                .toLowerCase()
-                .replaceAll(/[^a-zA-Z0-9_]/g, '_')
-                .replaceAll(/_+/g, '_') +
-              '_' +
-              p._id
-            : `untitled_${p._id}`;
+          const id = getCodeNavigationId(p.title, p._id);
 
           const link = '#' + id;
           return (
             <div
               key={`title-link-${p._id}`}
-              className={`pointer-fine:hover:bg-code-50 relative px-4 py-1.5 text-sm ${hash === link ? 'bg-code-50 text-blue-500' : 'text-code-600'}`}
+              className={`relative px-4 py-2.5 text-sm transition-colors pointer-fine:cursor-pointer ${
+                hash === link
+                  ? 'bg-neutral-900 text-white'
+                  : 'text-neutral-700 hover:bg-neutral-100'
+              }`}
             >
-              <span>{p.title.trim() || 'Untitled'}</span>
+              <span className="line-clamp-1">
+                {p.title.trim() || 'Untitled'}
+              </span>
               <a
                 onClick={() => {
                   document

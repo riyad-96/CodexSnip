@@ -3,13 +3,22 @@ import type { ReactNode } from 'react';
 type GlossyButtonProps = {
   content: string | ReactNode;
   onClick?: () => void;
+  primary?: boolean;
 };
 
-export default function GlossyButton({ content, onClick }: GlossyButtonProps) {
+export default function GlossyButton({
+  content,
+  onClick,
+  primary,
+}: GlossyButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="bg-code-50 border-code-100 inset-shadow-code grid origin-center overflow-hidden rounded-full border text-sm font-medium shadow-xs inset-shadow-2xs active:transform-[scale(0.96)] active:shadow-none"
+      className={`grid origin-center overflow-hidden rounded-xl border text-sm transition-colors active:scale-95 pointer-fine:cursor-pointer ${
+        primary
+          ? 'border-neutral-900 bg-neutral-900 text-white hover:bg-white hover:text-neutral-900'
+          : 'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-900'
+      }`}
     >
       {content}
     </button>

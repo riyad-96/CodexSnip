@@ -44,17 +44,16 @@ export default function Select<T extends Options>({
           onClick={() => {
             setIsOpen((prev) => !prev);
           }}
-          className={`${randomClass} flex size-full items-center justify-between gap-1.5 rounded-[inherit] px-2 py-1.5`}
+          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors hover:bg-neutral-50 pointer-fine:cursor-pointer`}
         >
-          <span className="line-clamp-1 text-sm text-nowrap">
+          <span className="line-clamp-1 text-sm text-nowrap text-neutral-900">
             {defaultOption?.name}
           </span>
-          <span>
-            <ChevronDownIcon
-              size="14"
-              strokeWidth="3"
-            />
-          </span>
+          <ChevronDownIcon
+            size={16}
+            strokeWidth={2}
+            className={`text-neutral-600 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          />
         </button>
       </div>
 
@@ -67,11 +66,15 @@ export default function Select<T extends Options>({
             display: 'grid',
           }}
           ref={closeOptionRef}
-          className={`bg-code border-code-200 max-h-[195px] w-full overflow-y-auto rounded-md border shadow-md`}
+          className="max-h-48.75 w-full overflow-y-auto rounded-xl border border-neutral-200 bg-white"
         >
           {options.map((o) => (
             <button
-              className={`px-3 py-1.5 text-start text-sm ${defaultOption?.value === o.value ? 'bg-code-100 text-blue-500' : 'hover:bg-code-50'}`}
+              className={`px-4 py-2.5 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
+                defaultOption?.value === o.value
+                  ? 'bg-neutral-900 text-white'
+                  : 'text-neutral-900 hover:bg-neutral-100'
+              }`}
               onClick={() => {
                 onChange(o);
                 setIsOpen(false);

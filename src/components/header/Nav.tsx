@@ -37,15 +37,16 @@ export default function Nav() {
       {user ? (
         <div>
           <div className="relative">
-            <div className="relative size-8 overflow-hidden rounded-full">
+            <div className="relative size-9 overflow-hidden rounded-full">
               {user.photoURL ? (
                 <img
                   src={user.photoURL}
                   alt={user.displayName as string}
+                  className="object-cover"
                 />
               ) : (
-                <span className="text-code-800 grid size-full">
-                  <ProfilePlaceholderSvg className="size-full" />
+                <span className="grid size-full bg-zinc-100">
+                  <ProfilePlaceholderSvg className="size-full text-zinc-600" />
                 </span>
               )}
               <button
@@ -56,7 +57,7 @@ export default function Nav() {
                   }
                   setDropdownShowing(true);
                 }}
-                className="dropdown-btn absolute inset-0 z-1"
+                className="dropdown-btn absolute inset-0 z-1 pointer-fine:cursor-pointer"
               ></button>
             </div>
 
@@ -64,7 +65,7 @@ export default function Nav() {
               {dropdownShowing && (
                 <motion.div
                   initial={{
-                    scale: 0.8,
+                    scale: 0.95,
                     opacity: 0,
                   }}
                   animate={{
@@ -72,18 +73,15 @@ export default function Nav() {
                     opacity: 1,
                   }}
                   exit={{
-                    scale: 0.8,
+                    scale: 0.95,
                     opacity: 0,
                   }}
                   transition={{
-                    duration: 0.1,
+                    duration: 0.15,
                   }}
-                  className="dropdown bg-code absolute top-[calc(100%+20px)] right-0 w-[120px] origin-top-right overflow-hidden rounded-lg py-1 shadow"
+                  className="dropdown absolute top-[calc(100%+12px)] right-0 min-w-35 origin-top-right overflow-hidden rounded-xl border border-zinc-200 bg-white"
                 >
-                  <div className="grid">
-                    {/* <button className="px-5 pointer-fine:hover:bg-code-50 py-1.5 text-start">
-                      Profile
-                    </button> */}
+                  <div className="py-1">
                     <button
                       onClick={() => {
                         signOut(auth).then(() => {
@@ -91,7 +89,7 @@ export default function Nav() {
                           queryClient.clear();
                         });
                       }}
-                      className="pointer-fine:hover:bg-code-50 px-5 py-1.5 text-start"
+                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-zinc-100 pointer-fine:cursor-pointer"
                     >
                       Logout
                     </button>
@@ -102,23 +100,20 @@ export default function Nav() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <Link
-            className="rounded-full px-3 py-1 text-sm font-medium underline active:transform-[scale(0.96)]"
+            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-zinc-100 pointer-fine:cursor-pointer"
             to="/auth/login"
           >
             Login
           </Link>
-          <GlossyButton
-            content={
-              <Link
-                className="px-3 py-1"
-                to="/auth/signup"
-              >
-                Register
-              </Link>
-            }
-          />
+
+          <Link
+            className="inline-block rounded-xl border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm text-white transition-colors hover:bg-white hover:text-zinc-900 pointer-fine:cursor-pointer"
+            to="/auth/signup"
+          >
+            Register
+          </Link>
         </div>
       )}
     </nav>

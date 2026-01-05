@@ -9,9 +9,14 @@ export default function Logo({ onClick, layoutId }: LogoPropsTypes) {
   return (
     <motion.div
       layoutId={layoutId}
-      className="text-xl font-semibold md:text-2xl"
+      className="text-xl md:text-2xl"
     >
-      <button onClick={onClick}>CodexSnip</button>
+      <button
+        onClick={onClick}
+        className="tracking-tight transition-colors hover:text-zinc-600"
+      >
+        CodexSnip
+      </button>
     </motion.div>
   );
 }

@@ -148,7 +148,7 @@ export default function CodeFolder() {
   return (
     <div className="pt-8">
       <div className="flex gap-2">
-        <div className="max-w-[520px] space-y-2">
+        <div className="max-w-130 space-y-2">
           <h2 className="text-code-800 max-w-8/10 text-xl font-semibold">
             {codeFolder?.folder_name || 'Unknown folder name'}
           </h2>
@@ -222,7 +222,7 @@ export default function CodeFolder() {
           className={`grid ${code_blocks.length > 1 ? 'gap-3 md:grid-cols-[auto_1fr]' : ''}`}
         >
           {code_blocks.length > 1 && (
-            <div className="w-[200px] max-md:hidden">
+            <div className="w-50 max-md:hidden">
               <CodeNavMenu code_blocks={code_blocks} />
             </div>
           )}
@@ -286,7 +286,7 @@ export default function CodeFolder() {
         {updateDetails && (
           <Modal
             layoutId="folder-details-update-modal"
-            className="w-full max-w-[500px] rounded-2xl bg-white p-4"
+            className="w-full max-w-125 rounded-2xl bg-white p-4"
             onMouseDown={() => setUpdateDetails(null)}
           >
             <div className="mb-4 space-y-2">
@@ -323,7 +323,7 @@ export default function CodeFolder() {
                   Description
                 </label>
                 <textarea
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 max-h-[300px] min-h-[100px] rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="border-code-150 focus:ring-code-300 focus:border-code-300 max-h-75 min-h-25 rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
                   id="folder-description"
                   placeholder="Folder description"
                   value={updateDetails.folder_description}

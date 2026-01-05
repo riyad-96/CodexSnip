@@ -72,11 +72,11 @@ export default function Home() {
 
   return (
     <div className="pt-12">
-      <div className="space-y-2">
-        <h1 className="text-code-700 text-center text-[clamp(1.125rem,0.6302rem+1.0309vw,1.5rem)] font-semibold tracking-wide">
+      <div className="space-y-3">
+        <h1 className="text-center text-[clamp(1.125rem,0.6302rem+1.0309vw,1.5rem)] tracking-tight">
           {user ? `Welcome Back` : 'Organize and Highlight Your Code'}
         </h1>
-        <p className="text-code-650 mx-auto max-w-[360px] text-center text-[clamp(0.875rem,0.8271rem+0.2128vw,1rem)]">
+        <p className="mx-auto max-w-90 text-center text-[clamp(0.875rem,0.8271rem+0.2128vw,1rem)] leading-relaxed text-neutral-600">
           {user
             ? 'Continue organizing your code snippets and explore your saved folders'
             : 'Sign up to create folders and save your favorite snippets with syntax highlighting for multiple languages and themes.'}
@@ -88,31 +88,35 @@ export default function Home() {
           <span className="loading loading-spinner loading-xl opacity-80"></span>
         </div>
       ) : (
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
           <motion.div
             layoutId="add-folder"
-            className={`text-code-400 hover:text-code-600 bg-code border-code-100 ring-code-200 pointer-fine:hover:border-code-200 relative z-5 grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] place-items-center overflow-hidden rounded-2xl border ring-0 transition-[color,box-shadow] duration-150 select-none pointer-fine:hover:ring-2`}
+            className="relative z-5 grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none hover:border-neutral-900 pointer-fine:cursor-pointer"
           >
             {isNewFolderCreating ? (
               <span className="loading loading-spinner loading-xl opacity-80"></span>
             ) : (
               <>
-                <div className="grid justify-items-center">
+                <div className="grid justify-items-center gap-2">
                   {user ? (
                     <>
-                      <span>
-                        <PlusIcon size="36" />
-                      </span>
-                      <span className="text-lg font-semibold">
-                        Add Code folder
-                      </span>
+                      <div className="rounded-xl bg-neutral-100 p-3 transition-colors group-hover:bg-neutral-900">
+                        <PlusIcon
+                          size={28}
+                          className="text-neutral-600"
+                        />
+                      </div>
+                      <span className="tracking-tight">Add Code folder</span>
                     </>
                   ) : (
                     <>
-                      <span>
-                        <LogInIcon size="36" />
-                      </span>
-                      <span className="text-lg font-semibold">
+                      <div className="rounded-xl bg-neutral-100 p-3">
+                        <LogInIcon
+                          size={28}
+                          className="text-neutral-600"
+                        />
+                      </div>
+                      <span className="tracking-tight">
                         {isOldVisitor ? 'Login' : 'Get started'}
                       </span>
                     </>
@@ -150,19 +154,19 @@ export default function Home() {
         {updateDetails && (
           <Modal
             layoutId={`update_modal_${updateDetails.folder_id}`}
-            className="w-full max-w-[500px] rounded-2xl bg-white p-4"
+            className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
             onMouseDown={() => setUpdateDetails(null)}
           >
-            <div className="mb-4 space-y-2">
-              <div className="grid gap-1">
+            <div className="mb-6 space-y-4">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-title"
                 >
                   Name
                 </label>
                 <input
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -179,15 +183,15 @@ export default function Home() {
                 />
               </div>
 
-              <div className="grid gap-1">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-description"
                 >
                   Description
                 </label>
                 <textarea
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 max-h-[300px] min-h-[100px] rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-description"
                   placeholder="Folder description"
                   value={updateDetails.folder_description}
@@ -206,7 +210,7 @@ export default function Home() {
             <div className="flex justify-end gap-2">
               <GlossyButton
                 content={
-                  <span className="grid h-7 place-items-center px-4">
+                  <span className="grid h-9 place-items-center px-5">
                     Cancel
                   </span>
                 }
@@ -214,7 +218,7 @@ export default function Home() {
               />
               <GlossyButton
                 content={
-                  <span className="grid h-7 min-w-20 place-items-center px-4">
+                  <span className="grid h-9 min-w-20 place-items-center px-5">
                     {updatingFolderDetails ? (
                       <span className="loading loading-spinner loading-xs opacity-80"></span>
                     ) : (
@@ -230,6 +234,7 @@ export default function Home() {
                     folder_id: updateDetails.folder_id,
                   });
                 }}
+                primary
               />
             </div>
           </Modal>
@@ -241,19 +246,19 @@ export default function Home() {
         {addFolderDetails && (
           <Modal
             layoutId="add-folder"
-            className="w-full max-w-[500px] rounded-2xl bg-white p-4"
+            className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
             onMouseDown={() => setAddFolderDetails(null)}
           >
-            <div className="mb-4 space-y-2">
-              <div className="grid gap-1">
+            <div className="mb-6 space-y-4">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-title"
                 >
                   Name
                 </label>
                 <input
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -270,15 +275,15 @@ export default function Home() {
                 />
               </div>
 
-              <div className="grid gap-1">
+              <div className="grid gap-2">
                 <label
-                  className="w-fit"
+                  className="text-sm text-neutral-700"
                   htmlFor="folder-description"
                 >
                   Description
                 </label>
                 <textarea
-                  className="border-code-150 focus:ring-code-300 focus:border-code-300 max-h-[300px] min-h-[100px] rounded-md border px-3 py-2 ring-2 ring-transparent transition-shadow outline-none"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
                   id="folder-description"
                   placeholder="Folder description"
                   value={addFolderDetails.folder_description}
@@ -297,7 +302,7 @@ export default function Home() {
             <div className="flex justify-end gap-2">
               <GlossyButton
                 content={
-                  <span className="grid h-7 place-items-center px-4">
+                  <span className="grid h-9 place-items-center px-5">
                     Cancel
                   </span>
                 }
@@ -305,7 +310,7 @@ export default function Home() {
               />
               <GlossyButton
                 content={
-                  <span className="grid h-7 min-w-20 place-items-center px-4">
+                  <span className="grid h-9 min-w-20 place-items-center px-5">
                     {isNewFolderCreating ? (
                       <span className="loading loading-spinner loading-xs opacity-80"></span>
                     ) : (
@@ -320,6 +325,7 @@ export default function Home() {
                     folder_description: addFolderDetails.folder_description,
                   });
                 }}
+                primary
               />
             </div>
           </Modal>
@@ -332,14 +338,14 @@ export default function Home() {
             layoutId={`delete-modal_${folderDeleteDetails.folder_id}`}
             title="Delete this folder!"
             description={
-              <span className="font-light tracking-wide">
+              <span className="tracking-wide text-neutral-600">
                 Permanently delete the{' '}
-                <span className="font-medium">
+                <span className="text-neutral-900">
                   '{folderDeleteDetails.folder_name || 'Unknown'}'
                 </span>{' '}
                 folder? This action{' '}
-                <span className="font-medium">is irreversible</span> and will
-                remove all code blocks inside it.
+                <span className="text-neutral-900">is irreversible</span> and
+                will remove all code blocks inside it.
               </span>
             }
             cancelFn={() => setFolderDeleteDetails(null)}

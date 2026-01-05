@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'motion/react';
 // syntax highlighting
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { getStyle, supportedThemes } from './utils/editorStyle';
+import getCodeNavigationId from '@/utils/getCodeNavigationId';
 
 type CodeBlockViewProps = {
   block: CodeBlock;
@@ -26,22 +27,16 @@ export default function CodeBlockView({
 
   const [copied, setCopied] = useState<boolean>(false);
 
-  const id = block.title.trim()
-    ? block?.title
-        .trim()
-        .toLowerCase()
-        .replaceAll(/[^a-zA-Z0-9_]/g, '_')
-        .replaceAll(/_+/g, '_') +
-      '_' +
-      block._id
-    : `untitled_${block._id}`;
+  const id = getCodeNavigationId(block.title, block._id);
+  console.log(id);
 
   return (
-    <div
+    <motion.div
+      layout
       id={'#' + id}
-      className="bg-code relative scroll-mt-[85px] rounded-2xl px-3 pt-4 pb-3 shadow"
+      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white px-2 pt-5 pb-4"
     >
-      <div className="absolute top-0 right-4 -translate-y-1/3">
+      <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
           content="Created on"
           tooltipOptions={{
@@ -50,35 +45,35 @@ export default function CodeBlockView({
           }}
         >
           <FormatedDate
-            className="bg-code-50 border-code-100 inset-shadow-code border shadow-xs inset-shadow-2xs"
+            className="rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-xs text-neutral-700"
             time={block?.created_at as string}
           />
         </Tooltip>
       </div>
 
-      <div className="mb-3 pl-2">
-        <h3 className="text-code-800 text-lg font-medium md:text-xl">
+      <div className="mb-4 pl-1">
+        <h3 className="mb-1 tracking-tight">
           {block?.title ? (
             block?.title
           ) : (
-            <span className="text-code-400">Untitled code block</span>
+            <span className="text-neutral-400">Untitled code block</span>
           )}
         </h3>
-        <p className="text-code-700">
+        <p className="leading-relaxed text-neutral-600">
           {block?.description ? (
             block?.description
           ) : (
-            <span className="text-code-300">
+            <span className="text-neutral-400">
               No description yet. Add one if you like
             </span>
           )}
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-end gap-3 pt-2 pb-3">
-        <div className="flex items-center gap-1">
+      <div className="flex flex-wrap items-center justify-end gap-3 pt-2 pb-4">
+        <div className="flex items-center gap-2">
           <Tooltip content="Language">
-            <span className="bg-code-50 border-code-100 inset-shadow-code grid h-7 cursor-default place-items-center rounded-full border px-3 text-sm shadow-xs inset-shadow-2xs">
+            <span className="grid h-8 cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 text-sm text-neutral-700">
               {
                 supportedLanguages.find((l) => l.value === block?.language)
                   ?.name
@@ -87,22 +82,25 @@ export default function CodeBlockView({
           </Tooltip>
 
           <Tooltip content="Theme">
-            <span className="bg-code-50 border-code-100 inset-shadow-code grid h-7 cursor-default place-items-center rounded-full border px-3 text-sm shadow-xs inset-shadow-2xs">
+            <span className="grid h-8 cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 text-sm text-neutral-700">
               {supportedThemes.find((t) => t.value === block?.theme)?.name}
             </span>
           </Tooltip>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <motion.div
-            className="relative z-5 rounded-full"
+            className="relative z-5 rounded-xl"
             layoutId={`delete-modal_${block._id}`}
           >
             <Tooltip content="Delete!">
               <GlossyButton
                 content={
-                  <span className="grid h-7 place-items-center px-3">
-                    <Trash2Icon size="16" />
+                  <span className="grid h-8 place-items-center px-3.5">
+                    <Trash2Icon
+                      size={16}
+                      className="text-neutral-700"
+                    />
                   </span>
                 }
                 onClick={() =>
@@ -117,14 +115,17 @@ export default function CodeBlockView({
           </motion.div>
 
           <motion.div
-            className="relative z-5 rounded-full"
+            className="relative z-5 rounded-xl"
             layoutId={`update-code-block-modal-${block._id}`}
           >
             <Tooltip content="Edit">
               <GlossyButton
                 content={
-                  <span className="grid h-7 place-items-center px-3">
-                    <PencilLineIcon size="16" />
+                  <span className="grid h-8 place-items-center px-3.5">
+                    <PencilLineIcon
+                      size={16}
+                      className="text-neutral-700"
+                    />
                   </span>
                 }
                 onClick={() => {
@@ -138,29 +139,29 @@ export default function CodeBlockView({
           <Tooltip content={copied ? 'Copied' : 'Copy'}>
             <GlossyButton
               content={
-                <span className="relative grid h-7 w-10 place-items-center">
+                <span className="relative grid h-8 w-11 place-items-center">
                   <AnimatePresence mode="wait">
                     {copied ? (
                       <motion.span
                         key="copyied-icon"
-                        initial={{ scaleX: 0.5, opacity: 0 }}
-                        animate={{ scaleX: 1, opacity: 1 }}
-                        exit={{ scaleX: 0.5, opacity: 0 }}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0 }}
                         transition={{ duration: 0.1 }}
-                        className="absolute"
+                        className="absolute text-neutral-700"
                       >
-                        <CheckIcon size="16" />
+                        <CheckIcon size={16} />
                       </motion.span>
                     ) : (
                       <motion.span
                         key="copy-icon"
-                        initial={{ scaleX: 0.5, opacity: 0 }}
-                        animate={{ scaleX: 1, opacity: 1 }}
-                        exit={{ scaleX: 0.5, opacity: 0 }}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0 }}
                         transition={{ duration: 0.1 }}
-                        className="absolute"
+                        className="absolute text-neutral-700"
                       >
-                        <CopyIcon size="16" />
+                        <CopyIcon size={16} />
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -180,31 +181,33 @@ export default function CodeBlockView({
       <div
         className={`syntax-highlighted-container mx-auto w-[clamp(16.875rem,-3.125rem+100vw,44.8125rem)] ${linkNavEnabled ? 'md:w-[clamp(31.125rem,-16.875rem+100vw,66.5rem)]' : 'md:w-[clamp(44.375rem,-2.7769rem+98.2332vw,79.125rem)]'}`}
       >
-        <SyntaxHighlighter
-          children={block?.code as string}
-          style={getStyle(block?.theme)}
-          language={block?.language}
-          customStyle={{
-            fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
-            padding: '0.625rem 1rem',
-            margin: 0,
-            minHeight: 40,
-            maxHeight: 450,
-            borderRadius: '0.5rem',
-          }}
-          showLineNumbers={true}
-        />
+        <div className="overflow-hidden rounded-xl border border-neutral-200">
+          <SyntaxHighlighter
+            children={block?.code as string}
+            style={getStyle(block?.theme)}
+            language={block?.language}
+            customStyle={{
+              fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
+              padding: '1rem 1.25rem',
+              margin: 0,
+              minHeight: 40,
+              maxHeight: 450,
+              borderRadius: 0,
+            }}
+            showLineNumbers={true}
+          />
+        </div>
       </div>
 
-      <div className="pt-3">
-        <div className="flex items-center gap-1 pl-2">
-          <span className="text-sm">Updated:</span>
+      <div className="pt-4 pl-1">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-neutral-600">Updated:</span>
           <FormatedDate
-            className="bg-code-50 shadow-xs"
+            className="rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-700"
             time={block?.updated_at as string}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

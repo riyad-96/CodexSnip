@@ -43,7 +43,7 @@ export default function InputField({
               input.focus();
             }}
             type="button"
-            className="pointer-fine:hover:bg-code-150 bg-code-100 absolute top-1/2 right-1 grid size-8 -translate-y-1/2 place-items-center rounded-full active:transform-[scale(0.96)]"
+            className="pointer-fine:hover:bg-code-150 bg-code-100 absolute top-1/2 right-1 grid h-8 w-11 -translate-y-1/2 place-items-center rounded-full active:transform-[scale(0.96)]"
           >
             {passShowing ? <EyeClosedIcon size="18" /> : <EyeIcon size="18" />}
           </button>
