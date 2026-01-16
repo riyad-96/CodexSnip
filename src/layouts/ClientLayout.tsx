@@ -12,7 +12,7 @@ export default function ClientLayout() {
     <div className="scroller-element grid h-full grid-rows-[auto_1fr_auto] overflow-y-auto px-2 md:px-3">
       <Header />
 
-      <main className="mx-auto w-full max-w-[1300px]">
+      <main className="mx-auto w-full min-w-0 max-w-325">
         <Outlet />
       </main>
       <Footer />
