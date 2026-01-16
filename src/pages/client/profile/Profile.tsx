@@ -46,14 +46,6 @@ export default function Profile() {
     setIsEditing(false);
   };
 
-  // const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     setProfileData((prev) => ({ ...prev, photoURL: imageUrl }));
-  //   }
-  // };
-
   return (
     <div className="pt-12 pb-20">
       <div className="">
@@ -84,25 +76,6 @@ export default function Profile() {
                     </div>
                   )}
                 </div>
-                {/*
-                {isEditing && (
-                  <label
-                    htmlFor="profile-image-upload"
-                    className="absolute right-0 bottom-0 grid size-8 cursor-pointer place-items-center rounded-full border border-neutral-200 bg-white transition-colors hover:border-neutral-900 active:scale-95"
-                  >
-                    <CameraIcon
-                      size={16}
-                      className="text-neutral-700"
-                    />
-                    <input
-                      id="profile-image-upload"
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={handleImageUpload}
-                    />
-                  </label>
-                )} */}
               </div>
               <div className="flex-1">
                 <h2 className="mb-1 tracking-tight">

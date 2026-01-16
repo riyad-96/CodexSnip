@@ -38,10 +38,8 @@ export default function CodeBlockView({
       <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
           content="Created on"
-          tooltipOptions={{
-            position: 'bottom',
-            hideOnTouch: false,
-          }}
+          position="bottom"
+          hideOnTouch={false}
         >
           <FormatedDate
             className="rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-xs text-neutral-700"

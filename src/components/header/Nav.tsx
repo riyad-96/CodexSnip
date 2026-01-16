@@ -57,7 +57,7 @@ export default function Nav() {
                   }
                   setDropdownShowing(true);
                 }}
-                className="dropdown-btn absolute inset-0 z-1 pointer-fine:cursor-pointer"
+                className="dropdown-btn absolute inset-0 z-1"
               ></button>
             </div>
 
@@ -87,7 +87,7 @@ export default function Nav() {
                         navigate('/profile');
                         setDropdownShowing(false);
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100"
                     >
                       Profile
                     </button>
@@ -99,7 +99,7 @@ export default function Nav() {
                           setDropdownShowing(false);
                         });
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100"
                     >
                       Logout
                     </button>
@@ -110,16 +110,16 @@ export default function Nav() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2">
           <Link
-            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-neutral-100"
             to="/auth/login"
           >
             Login
           </Link>
 
           <Link
-            className="inline-block rounded-xl border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm text-white transition-colors hover:bg-white hover:text-neutral-900 pointer-fine:cursor-pointer"
+            className="rounded-xl px-4 py-2 border border-neutral-900 bg-neutral-900 text-sm text-white"
             to="/auth/signup"
           >
             Register

@@ -45,7 +45,7 @@ export default function Header() {
           {user && (
             <button
               onClick={() => setSearchModalShowing(true)}
-              className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm transition-colors hover:border-neutral-900 pointer-fine:cursor-pointer"
+              className="flex items-center gap-2 rounded-xl border border-neutral-200 px-3 py-2 text-sm hover:border-neutral-400"
             >
               <Search
                 size={16}

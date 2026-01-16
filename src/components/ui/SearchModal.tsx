@@ -33,10 +33,10 @@ export default function SearchModal() {
 
   return (
     <Modal
-      className="max-h-175 w-full max-w-150 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl"
+      className="relative max-h-175 w-full max-w-150 rounded-2xl border border-neutral-200 bg-white shadow-2xl"
       onMouseDown={() => setSearchModalShowing(false)}
     >
-      <div className="sticky top-0 border-b border-neutral-100 bg-white px-4 py-5">
+      <div className="border-b border-neutral-100 px-4 py-5">
         <div className="relative">
           <Search
             className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-400"
@@ -48,7 +48,7 @@ export default function SearchModal() {
             placeholder="Search code blocks and folders..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full min-w-0 rounded-xl border border-neutral-200 bg-neutral-50 py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-neutral-900 focus:bg-white"
+            className="w-full min-w-0 rounded-xl border border-neutral-200 bg-neutral-50 py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-neutral-400 focus:bg-white"
           />
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function SearchModal() {
                   {data.codes.map((c) => (
                     <div
                       key={c._id}
-                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-900 pointer-fine:cursor-pointer"
+                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-400 pointer-fine:cursor-pointer"
                     >
                       <Link
                         className="absolute inset-0 z-5"
@@ -132,10 +132,10 @@ export default function SearchModal() {
                       />
 
                       <div className="flex min-w-0 flex-1 items-start gap-4">
-                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5 transition-colors group-hover:bg-neutral-900">
+                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5">
                           <File
                             size={18}
-                            className="text-neutral-600 transition-colors group-hover:text-white"
+                            className="text-neutral-600 transition-colors"
                           />
                         </div>
                         <div className="grid min-w-0 gap-1">
@@ -152,7 +152,7 @@ export default function SearchModal() {
                         <ChevronRight
                           strokeWidth={1.5}
                           size={20}
-                          className="text-neutral-400 transition-colors group-hover:translate-x-1 group-hover:text-neutral-900"
+                          className="text-neutral-400 transition-all group-hover:translate-x-1 group-hover:text-neutral-900"
                         />
                       </div>
                     </div>
@@ -176,7 +176,7 @@ export default function SearchModal() {
                   {data.folders.map((f) => (
                     <div
                       key={f._id}
-                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-900 pointer-fine:cursor-pointer"
+                      className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-400 pointer-fine:cursor-pointer"
                     >
                       <Link
                         className="absolute inset-0 z-5"
@@ -185,10 +185,10 @@ export default function SearchModal() {
                       />
 
                       <div className="flex min-w-0 flex-1 items-start gap-4">
-                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5 transition-colors group-hover:bg-neutral-900">
+                        <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5">
                           <Folder
                             size={18}
-                            className="text-neutral-600 transition-colors group-hover:text-white"
+                            className="text-neutral-600"
                           />
                         </div>
                         <div className="grid min-w-0 gap-1">
@@ -205,7 +205,7 @@ export default function SearchModal() {
                         <ChevronRight
                           strokeWidth={1.5}
                           size={20}
-                          className="text-neutral-400 transition-colors group-hover:translate-x-1 group-hover:text-neutral-900"
+                          className="text-neutral-400 transition-all group-hover:translate-x-1 group-hover:text-neutral-900"
                         />
                       </div>
                     </div>

@@ -34,7 +34,7 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
               key={`title-link-${p._id}`}
               className={`relative px-4 py-2.5 text-sm transition-colors pointer-fine:cursor-pointer ${
                 hash === link
-                  ? 'bg-neutral-900 text-white'
+                  ? 'bg-neutral-100 font-semibold'
                   : 'text-neutral-700 hover:bg-neutral-100'
               }`}
             >

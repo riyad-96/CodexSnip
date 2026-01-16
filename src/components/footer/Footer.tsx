@@ -27,7 +27,7 @@ export default function Footer() {
             <a
               href="https://github.com/riyad-96/"
               target="_self"
-              className="text-neutral-900 underline transition-colors hover:text-neutral-600"
+              className="text-neutral-900 underline transition-colors pointer-fine:hover:text-neutral-600"
             >
               Riyad
             </a>

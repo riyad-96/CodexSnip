@@ -70,7 +70,7 @@ export default function EditorModal({
             onChange={(e) =>
               setValues((prev) => ({ ...prev, title: e.target.value }))
             }
-            className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+            className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
           />
         </div>
         <div className="grid gap-2">
@@ -86,7 +86,7 @@ export default function EditorModal({
             onChange={(e) =>
               setValues((prev) => ({ ...prev, description: e.target.value }))
             }
-            className="max-h-[150px] min-h-[80px] rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+            className="max-h-[150px] min-h-[80px] rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
             placeholder="Block description"
           />
         </div>
@@ -99,7 +99,7 @@ export default function EditorModal({
               Language
             </span>
             <Select
-              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-900 max-sm:flex-2 sm:w-35"
+              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-400 max-sm:flex-2 sm:w-35"
               value={values.language}
               onChange={({ value }) => {
                 setValues((prev) => ({ ...prev, language: value }));
@@ -113,7 +113,7 @@ export default function EditorModal({
               Theme
             </span>
             <Select
-              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-900 max-sm:flex-2 sm:w-[140px]"
+              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-400 max-sm:flex-2 sm:w-[140px]"
               value={values.theme}
               onChange={({ value }) =>
                 setValues((prev) => ({ ...prev, theme: value }))
@@ -131,7 +131,7 @@ export default function EditorModal({
               setValues((prev) => ({ ...prev, code: e.target.value }))
             }
             placeholder="Type or paste your code here..."
-            className="relative max-h-[500px] min-h-[200px] resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-base transition-colors outline-none focus:border-neutral-900 max-sm:text-sm"
+            className="relative max-h-[500px] min-h-[200px] resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-base transition-colors outline-none focus:border-neutral-400 max-sm:text-sm"
           />
         </div>
       </div>

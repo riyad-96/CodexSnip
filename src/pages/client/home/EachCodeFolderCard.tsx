@@ -41,7 +41,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   return (
     <motion.div
       layout
-      className={`group relative grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-900' : 'border-neutral-200 hover:border-neutral-900'}`}
+      className={`group relative grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-900' : 'border-neutral-200 hover:border-neutral-400'}`}
     >
       <button
         onClick={() => navigate(`/code/${_id}`)}
@@ -53,9 +53,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
       >
         <Tooltip
           content={dropdownShowing ? 'Close' : 'Menu'}
-          tooltipOptions={{
-            position: 'left',
-          }}
+          position="left"
           animation={{
             startDelay: 600,
           }}
@@ -68,7 +66,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
               }
               setDropdownShowing(true);
             }}
-            className={`dropdown-close-btn-${i} grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors hover:border-neutral-900 active:scale-95`}
+            className={`dropdown-close-btn-${i} grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors hover:border-neutral-400 active:scale-95`}
           >
             <span className="pointer-events-none relative grid size-full place-items-center overflow-hidden rounded-md">
               <AnimatePresence mode="wait">
@@ -172,9 +170,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
         <Tooltip
           content="Updated on"
           animation={{ delay: 40 }}
-          tooltipOptions={{
-            hideOnTouch: false,
-          }}
+          hideOnTouch={false}
         >
           <FormatedDate
             className="rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 text-xs text-neutral-700"
@@ -185,9 +181,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
         <Tooltip
           content={`${code_blocks.length} Blocks`}
           animation={{ delay: 40 }}
-          tooltipOptions={{
-            hideOnTouch: false,
-          }}
+          hideOnTouch={false}
         >
           <div className="relative z-2 flex w-fit cursor-default items-center gap-1.5 rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 text-xs text-neutral-700">
             <FileBracesCornerIcon

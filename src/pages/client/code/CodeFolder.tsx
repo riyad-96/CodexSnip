@@ -170,8 +170,8 @@ export default function CodeFolder() {
   return (
     <div className="pt-8">
       <div className="mb-6 flex items-start gap-3">
-        <div className="flex-1 space-y-2">
-          <h2 className="tracking-tight">
+        <div className="flex-1 space-y-2 pl-2">
+          <h2 className="text-2xl tracking-tight">
             {codeFolder?.folder_name || 'Unknown folder name'}
           </h2>
           <p className="leading-relaxed text-neutral-600">
@@ -187,9 +187,7 @@ export default function CodeFolder() {
                 <span>name & description</span>
               </span>
             }
-            tooltipOptions={{
-              position: 'left-start',
-            }}
+            position="left-start"
             animation={{
               startDelay: 400,
             }}
@@ -218,9 +216,7 @@ export default function CodeFolder() {
       <div className="mb-8 flex items-center justify-between">
         <Tooltip
           content={`${code_blocks.length} Blocks`}
-          tooltipOptions={{
-            position: 'top-start',
-          }}
+          position="top-start"
           animation={{ delay: 40 }}
         >
           <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
@@ -232,21 +228,26 @@ export default function CodeFolder() {
           </div>
         </Tooltip>
 
-        <motion.div
-          className="relative z-5"
-          layoutId="create-code-block-modal"
-        >
-          <GlossyButton
-            content={
-              <span className="flex items-center gap-2 px-5 py-2.5">
-                <PlusIcon size={16} />
-                <span>Add Block</span>
-              </span>
-            }
-            onClick={() => setEditorState('new')}
-            primary
-          />
-        </motion.div>
+        {codeFolder && codeFolder.code_blocks.length !== 0 && (
+          <motion.div
+            className="relative z-5"
+            layoutId="create-code-block-modal"
+          >
+            <GlossyButton
+              content={
+                <span className="flex items-center gap-2 px-4 py-2.5">
+                  <PlusIcon
+                    size={16}
+                    strokeWidth="3"
+                  />
+                  <span>Add Block</span>
+                </span>
+              }
+              onClick={() => setEditorState('new')}
+              primary
+            />
+          </motion.div>
+        )}
       </div>
 
       {code_blocks.length > 0 ? (
@@ -272,7 +273,7 @@ export default function CodeFolder() {
       ) : (
         <div className="pt-20">
           <div className="mx-auto max-w-md text-center">
-            <div className="rounded-2xl border border-neutral-200 bg-white px-8 py-12">
+            <div className="px-8 py-12">
               <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-neutral-100">
                 <FileBracesCornerIcon
                   size={32}
@@ -283,16 +284,21 @@ export default function CodeFolder() {
               <p className="mb-6 text-neutral-600">
                 Start by adding your first code block to this folder.
               </p>
-              <GlossyButton
-                content={
-                  <span className="flex items-center gap-2 px-5 py-2.5">
-                    <PlusIcon size={16} />
-                    <span>Add Block</span>
-                  </span>
-                }
-                onClick={() => setEditorState('new')}
-                primary
-              />
+              <div className="mx-auto w-fit">
+                <GlossyButton
+                  content={
+                    <span className="flex items-center gap-2 px-4 py-2.5">
+                      <PlusIcon
+                        size={16}
+                        strokeWidth="3"
+                      />
+                      <span>Add Block</span>
+                    </span>
+                  }
+                  onClick={() => setEditorState('new')}
+                  primary
+                />
+              </div>
             </div>
           </div>
         </div>
