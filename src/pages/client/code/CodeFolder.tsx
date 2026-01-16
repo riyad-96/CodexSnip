@@ -361,7 +361,7 @@ export default function CodeFolder() {
                   Name
                 </label>
                 <input
-                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -386,7 +386,7 @@ export default function CodeFolder() {
                   Description
                 </label>
                 <textarea
-                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-description"
                   placeholder="Folder description"
                   value={updateDetails.folder_description}

@@ -50,7 +50,7 @@ export default function Profile() {
     <div className="pt-12 pb-20">
       <div className="">
         {/* Header */}
-        <div className="mb-8">
+        <div className="pl-2 mb-8">
           <h1 className="mb-2 text-lg tracking-tight">Profile Settings</h1>
           <p className="leading-relaxed text-neutral-600">
             Manage your account information and preferences
@@ -119,7 +119,7 @@ export default function Profile() {
                     }))
                   }
                   disabled={!isEditing}
-                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900 disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-600"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400 disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-600"
                 />
               </div>
               {/* Email */}
@@ -174,7 +174,7 @@ export default function Profile() {
                         photoURL: e.target.value,
                       }))
                     }
-                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   />
                 </div>
               )}

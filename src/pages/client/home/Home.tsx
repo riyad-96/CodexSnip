@@ -91,7 +91,7 @@ export default function Home() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
           <motion.div
             layoutId="add-folder"
-            className="relative z-5 grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none hover:border-neutral-400 pointer-fine:cursor-pointer"
+            className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none hover:border-neutral-400 pointer-fine:cursor-pointer"
           >
             {isNewFolderCreating ? (
               <span className="loading loading-spinner loading-xl opacity-80"></span>
@@ -166,7 +166,7 @@ export default function Home() {
                   Name
                 </label>
                 <input
-                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -191,7 +191,7 @@ export default function Home() {
                   Description
                 </label>
                 <textarea
-                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-description"
                   placeholder="Folder description"
                   value={updateDetails.folder_description}
@@ -258,7 +258,7 @@ export default function Home() {
                   Name
                 </label>
                 <input
-                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-title"
                   type="text"
                   placeholder="Folder name"
@@ -283,7 +283,7 @@ export default function Home() {
                   Description
                 </label>
                 <textarea
-                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-900"
+                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                   id="folder-description"
                   placeholder="Folder description"
                   value={addFolderDetails.folder_description}

@@ -41,15 +41,19 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   return (
     <motion.div
       layout
-      className={`group relative grid min-h-[clamp(7.5rem,5.6484rem+8.2292vw,12.4375rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-900' : 'border-neutral-200 hover:border-neutral-400'}`}
+      className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 hover:border-neutral-400'}`}
     >
+      <span
+        className={`absolute inset-0 z-4 transition-all duration-150 ${dropdownShowing ? 'bg-white/60' : 'pointer-events-none bg-transparent'}`}
+      ></span>
+
       <button
         onClick={() => navigate(`/code/${_id}`)}
         className="absolute inset-0 z-1"
       ></button>
 
       <div
-        className={`absolute top-3 right-3 z-3 ${dropdownShowing ? '' : 'transition-colors duration-200 pointer-fine:scale-90 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100'}`}
+        className={`absolute top-3 right-3 z-5 ${dropdownShowing ? '' : 'transition-colors duration-200 pointer-fine:scale-90 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100'}`}
       >
         <Tooltip
           content={dropdownShowing ? 'Close' : 'Menu'}
@@ -66,7 +70,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
               }
               setDropdownShowing(true);
             }}
-            className={`dropdown-close-btn-${i} grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors hover:border-neutral-400 active:scale-95`}
+            className={`dropdown-close-btn-${i} $hover:border-neutral-400 grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors active:scale-95`}
           >
             <span className="pointer-events-none relative grid size-full place-items-center overflow-hidden rounded-md">
               <AnimatePresence mode="wait">
@@ -106,9 +110,9 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="absolute top-[calc(100%+8px)] right-0 origin-top-right"
+              className="absolute top-[calc(100%+4px)] right-0 origin-top-right"
             >
-              <div className="grid min-w-[140px] overflow-hidden rounded-xl border border-neutral-200 bg-white text-sm">
+              <div className="grid min-w-30 overflow-hidden rounded-xl border border-neutral-200 bg-white text-sm">
                 <motion.div
                   layoutId={`update_modal_${_id}`}
                   className="grid bg-white"
