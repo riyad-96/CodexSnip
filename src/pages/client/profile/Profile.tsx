@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useAuthContext } from '../../../contexts/AuthContext';
 import { ProfilePlaceholderSvg } from '../../../assets/Svgs';
 import GlossyButton from '../../../components/ui/GlossyButton';
 import { CameraIcon, UserIcon, MailIcon } from 'lucide-react';
@@ -7,9 +6,10 @@ import { toast } from 'kitzo';
 import { updateProfile, type User } from 'firebase/auth';
 import { auth } from '@/configs/firebase.config';
 import FormatedDate from '../home/components/FormatedDate';
+import { useAuthStore } from '@/store/auth.store';
 
 export default function Profile() {
-  const { user } = useAuthContext();
+  const user = useAuthStore((s) => s.user);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -50,7 +50,7 @@ export default function Profile() {
     <div className="pt-12 pb-20">
       <div className="">
         {/* Header */}
-        <div className="pl-2 mb-8">
+        <div className="mb-8 pl-2">
           <h1 className="mb-2 text-lg tracking-tight">Profile Settings</h1>
           <p className="leading-relaxed text-neutral-600">
             Manage your account information and preferences

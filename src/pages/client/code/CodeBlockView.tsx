@@ -5,7 +5,6 @@ import { copy } from 'kitzo/fns';
 import { Tooltip } from 'kitzo';
 import { useState } from 'react';
 import { supportedLanguages } from './utils/editorLanguage';
-import { useCodeContext } from '../../../contexts/CodeContext';
 import FormatedDate from '../home/components/FormatedDate';
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -13,6 +12,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { getStyle, supportedThemes } from './utils/editorStyle';
 import getCodeNavigationId from '@/utils/getCodeNavigationId';
+import { useCodeStore } from '@/store/code.store';
 
 type CodeBlockViewProps = {
   block: CodeBlock;
@@ -23,7 +23,7 @@ export default function CodeBlockView({
   block,
   linkNavEnabled,
 }: CodeBlockViewProps) {
-  const { setDeletingInfo, setEditDetails, setEditorState } = useCodeContext();
+  const { setDeletingInfo, setEditDetails, setEditorState } = useCodeStore();
 
   const [copied, setCopied] = useState<boolean>(false);
 

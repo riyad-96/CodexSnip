@@ -1,15 +1,15 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import Nav from './Nav';
-import { useAuthContext } from '../../contexts/AuthContext';
 import { Search } from 'lucide-react';
 import { useSearchStore } from '@/store/search.store';
 import { useEffect } from 'react';
+import { useAuthStore } from '@/store/auth.store';
 
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const user = useAuthStore((s) => s.user);
   const { setSearchModalShowing } = useSearchStore();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Header() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [setSearchModalShowing]);
 
   return (
     <header className="sticky top-0 left-0 z-10 w-full py-2">

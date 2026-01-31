@@ -12,7 +12,9 @@ import FormatedDate from './components/FormatedDate';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import useDropdownClose from '../../../hooks/useDropdownClose';
-import { useCodeContext } from '../../../contexts/CodeContext';
+import { queryClient } from '@/main';
+import { useAxios } from '@/hooks/axios.hook';
+import { useCodeStore } from '@/store/code.store';
 
 type EachCodeFolderCard = {
   i: number;
@@ -22,7 +24,7 @@ type EachCodeFolderCard = {
 export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   const { _id, code_blocks, folder_name, folder_description, updated_at } =
     folder;
-
+  const server = useAxios();
   const navigate = useNavigate();
 
   const [dropdownShowing, setDropdownShowing] = useState(false);
@@ -34,7 +36,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   });
 
   // update folder details
-  const { setUpdateDetails, setFolderDeleteDetails } = useCodeContext();
+  const { setUpdateDetails, setFolderDeleteDetails } = useCodeStore();
 
   // delete folder
 
@@ -42,6 +44,15 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
     <motion.div
       layout
       className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 hover:border-neutral-400'}`}
+      onMouseEnter={() => {
+        queryClient.prefetchQuery({
+          queryKey: ['code_folder', _id],
+          queryFn: async () => {
+            const response = await server.get(`/codefolder/get/${_id}`);
+            return response.data;
+          },
+        });
+      }}
     >
       <span
         className={`absolute inset-0 z-4 transition-all duration-150 ${dropdownShowing ? 'bg-white/60' : 'pointer-events-none bg-transparent'}`}

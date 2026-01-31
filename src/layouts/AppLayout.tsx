@@ -5,14 +5,14 @@ import SearchModal from '../components/ui/SearchModal';
 import { useSearchStore } from '../store/search.store';
 import { AnimatePresence } from 'motion/react';
 
-export default function ClientLayout() {
+export default function AppLayout() {
   const { searchModalShowing } = useSearchStore();
 
   return (
-    <div className="scroller-element grid h-full grid-rows-[auto_1fr_auto] overflow-y-auto px-2 md:px-3">
+    <div className="scroller-element grid h-screen grid-rows-[auto_1fr_auto] overflow-y-auto px-2 md:px-3">
       <Header />
 
-      <main className="mx-auto w-full min-w-0 max-w-325">
+      <main className="mx-auto w-full max-w-325 min-w-0">
         <Outlet />
       </main>
       <Footer />

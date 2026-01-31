@@ -4,9 +4,9 @@ import Modal from '../../../components/ui/Modal';
 
 import { supportedLanguages } from './utils/editorLanguage';
 import { supportedThemes } from './utils/editorStyle';
-import { useCodeContext } from '../../../contexts/CodeContext';
 import type { EditorUpdateValuesType, EditorValuesType } from './types/types';
 import Select from './components/Select';
+import { useCodeStore } from '@/store/code.store';
 
 type EditorModalProps = {
   editorState: 'new' | 'update' | null;
@@ -27,7 +27,7 @@ export default function EditorModal({
   isAdding,
   isUpdating,
 }: EditorModalProps) {
-  const { editDetails } = useCodeContext();
+  const editDetails = useCodeStore((s) => s.editDetails);
   const { addNewCodeBlock, updateCodeBlock } = actions;
 
   const [values, setValues] = useState<EditorValuesType>(() => {
@@ -52,7 +52,7 @@ export default function EditorModal({
   return (
     <Modal
       onMouseDown={() => setEditorState(null)}
-      className="w-full max-w-[700px] space-y-4 rounded-2xl border border-neutral-200 bg-white p-6"
+      className="w-full max-w-175 space-y-4 rounded-2xl border border-neutral-200 bg-white p-6"
     >
       <div className="grid gap-4">
         <div className="grid gap-2">
@@ -86,7 +86,7 @@ export default function EditorModal({
             onChange={(e) =>
               setValues((prev) => ({ ...prev, description: e.target.value }))
             }
-            className="max-h-[150px] min-h-[80px] rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
+            className="max-h-37.5 min-h-20 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
             placeholder="Block description"
           />
         </div>
@@ -113,7 +113,7 @@ export default function EditorModal({
               Theme
             </span>
             <Select
-              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-400 max-sm:flex-2 sm:w-[140px]"
+              className="rounded-xl border border-neutral-200 bg-white transition-colors focus-within:border-neutral-400 max-sm:flex-2 sm:w-35"
               value={values.theme}
               onChange={({ value }) =>
                 setValues((prev) => ({ ...prev, theme: value }))
@@ -131,7 +131,7 @@ export default function EditorModal({
               setValues((prev) => ({ ...prev, code: e.target.value }))
             }
             placeholder="Type or paste your code here..."
-            className="relative max-h-[500px] min-h-[200px] resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-base transition-colors outline-none focus:border-neutral-400 max-sm:text-sm"
+            className="relative max-h-125 min-h-50 resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-base transition-colors outline-none focus:border-neutral-400 max-sm:text-sm"
           />
         </div>
       </div>
@@ -158,7 +158,7 @@ export default function EditorModal({
             }
           }}
           content={
-            <span className="grid h-9 min-w-[100px] place-items-center px-5">
+            <span className="grid h-9 min-w-25 place-items-center px-5">
               {isAdding || isUpdating ? (
                 <span className="loading loading-spinner loading-xs opacity-80"></span>
               ) : (

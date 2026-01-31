@@ -1,29 +1,27 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useAxios } from '../../../hooks/axios.hook';
 import { LogInIcon, PlusIcon } from 'lucide-react';
 import type { CodeFolder } from '../../../types/types';
 import EachCodeFolderCard from './EachCodeFolderCard';
-import { useAuthContext } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import Modal from '../../../components/ui/ModalLayout';
-import { useCodeContext } from '../../../contexts/CodeContext';
 import type { UpdateFolderDetailsType } from '../../../contexts/CodeContext';
 import GlossyButton from '../../../components/ui/GlossyButton';
 import DeleteModal from '../../../components/ui/DeleteModal';
 import { useState } from 'react';
-
-type AddFolderDetailsType = {
-  folder_name: string;
-  folder_description: string;
-};
+import { useAuthStore } from '@/store/auth.store';
+import useUpdateFolderDetailsMutation from '@/hooks/code-folder/useUpdateFolderDetailsMutation';
+import useDeleteFolderMutation from '@/hooks/code-folder/useDeleteFolderMutation';
+import { useCodeStore } from '@/store/code.store';
+import type { AddFolderDetailsType } from '@/types/codeFolderTypes';
+import useCreateNewFolderMutation from '@/hooks/code-folder/useCreateNewFolderMutation';
 
 export default function Home() {
-  const server = useAxios();
-  const { user } = useAuthContext();
   const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
+  const server = useAxios();
+  const user = useAuthStore((s) => s.user);
 
   const { isLoading, data } = useQuery<CodeFolder[]>({
     queryKey: ['code_folders'],
@@ -38,34 +36,24 @@ export default function Home() {
   const [addFolderDetails, setAddFolderDetails] =
     useState<AddFolderDetailsType | null>(null);
 
+  // mutation: create new folder
   const { mutate: createNewFolder, isPending: isNewFolderCreating } =
-    useMutation({
-      mutationFn: async (value: AddFolderDetailsType) => {
-        const response = await server.post('/codefolder/add', {
-          folder_name: value.folder_name,
-          folder_description: value.folder_description,
-        });
-        return response.data;
-      },
-      onSuccess() {
-        setAddFolderDetails(null);
-        queryClient.invalidateQueries({
-          queryKey: ['code_folders'],
-        });
-      },
-    });
+    useCreateNewFolderMutation({ setAddFolderDetails });
 
-  // update folder
+  // code store states
   const {
     updateDetails,
     setUpdateDetails,
-    updatingFolderDetails,
-    updateFolderDetails,
     folderDeleteDetails,
     setFolderDeleteDetails,
-    deleteFolder,
-    deletingFolder,
-  } = useCodeContext();
+  } = useCodeStore();
+
+  // mutation: update folder
+  const { mutate: updateFolderDetails, isPending: updatingFolderDetails } =
+    useUpdateFolderDetailsMutation();
+  // mutation: delete folder
+  const { mutate: deleteFolder, isPending: deletingFolder } =
+    useDeleteFolderMutation();
 
   // visitor state check
   const isOldVisitor = localStorage.getItem('visitor_state');

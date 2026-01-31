@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
 import { ProfilePlaceholderSvg } from '../../assets/Svgs';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
@@ -8,9 +7,10 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
 import { toast } from 'kitzo';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAuthStore } from '@/store/auth.store';
 
 export default function Nav() {
-  const { user } = useAuthContext();
+  const user = useAuthStore((s) => s.user);
   const [dropdownShowing, setDropdownShowing] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const navigate = useNavigate();

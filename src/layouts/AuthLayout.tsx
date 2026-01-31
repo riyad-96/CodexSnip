@@ -39,7 +39,7 @@ export default function AuthLayout() {
         />
       </div>
 
-      <div className="w-full max-w-[350px] md:max-w-[400px]">
+      <div className="w-full max-w-87.5 md:max-w-100">
         <Outlet />
         <div className="mt-2 grid gap-2">
           <span className="text-center">or</span>

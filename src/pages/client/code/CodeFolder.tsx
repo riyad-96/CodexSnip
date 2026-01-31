@@ -4,12 +4,10 @@ import GlossyButton from '../../../components/ui/GlossyButton';
 import CodeBlockView from './CodeBlockView';
 import DeleteModal from '../../../components/ui/DeleteModal';
 import Modal from '../../../components/ui/ModalLayout';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useAxios } from '../../../hooks/axios.hook';
 import { AnimatePresence, motion } from 'motion/react';
-import { useAuthContext } from '../../../contexts/AuthContext';
-import { useCodeContext } from '../../../contexts/CodeContext';
 import { FileBracesCornerIcon, PencilLineIcon, PlusIcon } from 'lucide-react';
 import { Tooltip } from 'kitzo';
 
@@ -19,23 +17,28 @@ import type {
   CodeFolderWithCodeBlocks,
 } from '../../../types/types';
 import type { AxiosError } from 'axios';
-import type { EditorValuesType, EditorUpdateValuesType } from './types/types';
 import type { UpdateFolderDetailsType } from '../../../contexts/CodeContext';
+import { useAuthStore } from '@/store/auth.store';
+import { useCodeStore } from '@/store/code.store';
+import useAddNewCodeBlockMutation from '@/hooks/code-block/useAddNewCodeBlockMutation';
+import useUpdateCodeBlockMutation from '@/hooks/code-block/useUpdateCodeBlockMutation';
+import useDeleteCodeBlockMutation from '@/hooks/code-block/useDeleteCodeBlockMutation';
+import useUpdateFolderDetailsMutation from '@/hooks/code-folder/useUpdateFolderDetailsMutation';
 
 export default function CodeFolder() {
-  const { user } = useAuthContext();
+  const user = useAuthStore((s) => s.user);
+
   const {
     editorState,
     setEditorState,
     deletingInfo,
     setDeletingInfo,
     editDetails,
-  } = useCodeContext();
+  } = useCodeStore();
 
   const server = useAxios();
   const params = useParams();
-  const codeFolderId = params.id;
-  const queryClient = useQueryClient();
+  const codeFolderId = params.id as string;
 
   const {
     data: codeFolder,
@@ -53,81 +56,23 @@ export default function CodeFolder() {
   const code_blocks = codeFolder?.code_blocks ?? [];
 
   // udpate folder details
-  const {
-    updateDetails,
-    setUpdateDetails,
-    updatingFolderDetails,
-    updateFolderDetails,
-  } = useCodeContext();
+  const { updateDetails, setUpdateDetails } = useCodeStore();
 
-  // add new code block
-  const { mutate: addNewCodeBlock, isPending: isAddingCodeBlock } = useMutation(
-    {
-      mutationFn: async (values: EditorValuesType) => {
-        const response = await server.post('/code/add', {
-          folder_id: codeFolderId,
-          ...values,
-        });
-        return response.data;
-      },
-      onSuccess: () => {
-        setEditorState(null);
-        queryClient.invalidateQueries({
-          queryKey: ['code_folder', codeFolderId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['code_partials', codeFolderId],
-        });
-      },
-    },
-  );
+  // mutation: update folder details
+  const { mutate: updateFolderDetails, isPending: updatingFolderDetails } =
+    useUpdateFolderDetailsMutation();
 
-  // update code block
+  // mutation: add new code block
+  const { mutate: addNewCodeBlock, isPending: isAddingCodeBlock } =
+    useAddNewCodeBlockMutation({ codeFolderId });
+
+  // mutation: update code block
   const { mutate: updateCodeBlock, isPending: isUpdatingCodeBlock } =
-    useMutation({
-      mutationFn: async (values: EditorUpdateValuesType) => {
-        const response = await server.patch('/code/update', {
-          folder_id: codeFolderId,
-          ...values,
-        });
-        return response.data;
-      },
-      onSuccess: (_data, { code_block_id }) => {
-        setEditorState(null);
-        queryClient.invalidateQueries({
-          queryKey: ['code_folder', codeFolderId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['code_block', code_block_id],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['code_folders'],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['code_partials', codeFolderId],
-        });
-      },
-    });
+    useUpdateCodeBlockMutation({ codeFolderId });
 
-  // delete code block
+  // mutation: delete code block
   const { mutate: deleteCodeBlock, isPending: isDeletingCodeBlock } =
-    useMutation({
-      mutationFn: async (code_block_id: string) => {
-        const response = await server.delete(
-          `/code/delete/${codeFolderId}/${code_block_id}`,
-        );
-        return response.data;
-      },
-      onSuccess: () => {
-        setDeletingInfo(null);
-        queryClient.invalidateQueries({
-          queryKey: ['code_folder', codeFolderId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['code_partials', codeFolderId],
-        });
-      },
-    });
+    useDeleteCodeBlockMutation({ codeFolderId });
 
   if (codeFolderError) {
     return (
