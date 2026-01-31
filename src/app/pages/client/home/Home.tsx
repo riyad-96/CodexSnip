@@ -8,7 +8,10 @@ import { useAuthStore } from '@/store/auth.store';
 import useUpdateFolderDetailsMutation from '@/hooks/code-folder/useUpdateFolderDetailsMutation';
 import useDeleteFolderMutation from '@/hooks/code-folder/useDeleteFolderMutation';
 import { useCodeStore } from '@/store/code.store';
-import type { AddFolderDetailsType, UpdateFolderDetailsType } from '@/types/codeFolderTypes';
+import type {
+  AddFolderDetailsType,
+  UpdateFolderDetailsType,
+} from '@/types/codeFolderTypes';
 import useCreateNewFolderMutation from '@/hooks/code-folder/useCreateNewFolderMutation';
 import { useAxios } from '@/hooks/axios.hook';
 import type { CodeFolder } from '@/types/types';
@@ -126,13 +129,14 @@ export default function Home() {
             )}
           </motion.div>
 
-          {data?.map((f, i) => (
-            <EachCodeFolderCard
-              key={f._id}
-              i={i}
-              folder={f}
-            />
-          ))}
+          {user &&
+            data?.map((f, i) => (
+              <EachCodeFolderCard
+                key={f._id}
+                i={i}
+                folder={f}
+              />
+            ))}
         </div>
       )}
 

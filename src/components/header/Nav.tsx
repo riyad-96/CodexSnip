@@ -6,13 +6,12 @@ import { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../configs/firebase.config';
 import { toast } from 'kitzo';
-import { useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/auth.store';
+import { queryClient } from '@/main';
 
 export default function Nav() {
   const user = useAuthStore((s) => s.user);
   const [dropdownShowing, setDropdownShowing] = useState<boolean>(false);
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,6 +95,7 @@ export default function Nav() {
                         signOut(auth).then(() => {
                           toast.success('Logout successful');
                           queryClient.clear();
+                          queryClient.invalidateQueries();
                           setDropdownShowing(false);
                         });
                       }}
@@ -119,7 +119,7 @@ export default function Nav() {
           </Link>
 
           <Link
-            className="rounded-xl px-4 py-2 border border-neutral-900 bg-neutral-900 text-sm text-white"
+            className="rounded-xl border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm text-white"
             to="/auth/signup"
           >
             Register
