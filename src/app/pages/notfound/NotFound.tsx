@@ -1,4 +1,4 @@
-import Logo from '@/components/header/Logo';
+import Logo from '@/shared/components/header/Logo';
 import { useNavigate } from 'react-router-dom';
 
 export default function NotFound() {
