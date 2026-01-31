@@ -1,5 +1,5 @@
 import { queryClient } from '@/main';
-import type { EditorUpdateValuesType } from '@/pages/client/code/types/types';
+import type { EditorUpdateValuesType } from '@/app/pages/client/code/types/types';
 import { useMutation } from '@tanstack/react-query';
 import { useAxios } from '../axios.hook';
 import { useCodeStore } from '@/store/code.store';

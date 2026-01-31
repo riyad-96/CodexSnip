@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { DeleteInfoType } from '@/pages/client/code/types/types';
+import type { DeleteInfoType } from '@/app/pages/client/code/types/types';
 import type { CodeBlock } from '@/types/types';
 import type { FolderDeleteDetailsType, UpdateFolderDetailsType } from '@/types/codeFolderTypes';
 

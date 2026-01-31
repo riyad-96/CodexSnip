@@ -1,21 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAxios } from '../../../hooks/axios.hook';
 import { LogInIcon, PlusIcon } from 'lucide-react';
-import type { CodeFolder } from '../../../types/types';
 import EachCodeFolderCard from './EachCodeFolderCard';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import Modal from '../../../components/ui/ModalLayout';
-import type { UpdateFolderDetailsType } from '../../../contexts/CodeContext';
-import GlossyButton from '../../../components/ui/GlossyButton';
-import DeleteModal from '../../../components/ui/DeleteModal';
 import { useState } from 'react';
 import { useAuthStore } from '@/store/auth.store';
 import useUpdateFolderDetailsMutation from '@/hooks/code-folder/useUpdateFolderDetailsMutation';
 import useDeleteFolderMutation from '@/hooks/code-folder/useDeleteFolderMutation';
 import { useCodeStore } from '@/store/code.store';
-import type { AddFolderDetailsType } from '@/types/codeFolderTypes';
+import type { AddFolderDetailsType, UpdateFolderDetailsType } from '@/types/codeFolderTypes';
 import useCreateNewFolderMutation from '@/hooks/code-folder/useCreateNewFolderMutation';
+import { useAxios } from '@/hooks/axios.hook';
+import type { CodeFolder } from '@/types/types';
+import Modal from '@/components/ui/ModalLayout';
+import GlossyButton from '@/components/ui/GlossyButton';
+import DeleteModal from '@/components/ui/DeleteModal';
 
 export default function Home() {
   const navigate = useNavigate();

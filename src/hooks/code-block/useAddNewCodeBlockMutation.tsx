@@ -1,4 +1,4 @@
-import type { EditorValuesType } from '@/pages/client/code/types/types';
+import type { EditorValuesType } from '@/app/pages/client/code/types/types';
 import { useMutation } from '@tanstack/react-query';
 import { useAxios } from '../axios.hook';
 import { useCodeStore } from '@/store/code.store';

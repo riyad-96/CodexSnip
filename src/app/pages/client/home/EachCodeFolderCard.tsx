@@ -5,16 +5,16 @@ import {
   Trash2Icon,
   X,
 } from 'lucide-react';
-import type { CodeFolder } from '../../../types/types';
 import { Tooltip } from 'kitzo';
 import { useNavigate } from 'react-router-dom';
 import FormatedDate from './components/FormatedDate';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
-import useDropdownClose from '../../../hooks/useDropdownClose';
 import { queryClient } from '@/main';
 import { useAxios } from '@/hooks/axios.hook';
 import { useCodeStore } from '@/store/code.store';
+import type { CodeFolder } from '@/types/types';
+import useDropdownClose from '@/hooks/useDropdownClose';
 
 type EachCodeFolderCard = {
   i: number;
@@ -45,13 +45,17 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
       layout
       className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 hover:border-neutral-400'}`}
       onMouseEnter={() => {
-        queryClient.prefetchQuery({
-          queryKey: ['code_folder', _id],
-          queryFn: async () => {
-            const response = await server.get(`/codefolder/get/${_id}`);
-            return response.data;
-          },
-        });
+        const data = queryClient.getQueryData(['code_folder', _id]);
+
+        if (!data) {
+          queryClient.prefetchQuery({
+            queryKey: ['code_folder', _id],
+            queryFn: async () => {
+              const response = await server.get(`/codefolder/get/${_id}`);
+              return response.data;
+            },
+          });
+        }
       }}
     >
       <span

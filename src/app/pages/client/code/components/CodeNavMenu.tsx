@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import type { CodeBlock } from '../../../../types/types';
 import getCodeNavigationId from '@/utils/getCodeNavigationId';
+import type { CodeBlock } from '@/types/types';
 
 type CodeNavMenuPropsType = {
   code_blocks: CodeBlock[];

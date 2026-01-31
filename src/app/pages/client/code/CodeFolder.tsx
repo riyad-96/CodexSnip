@@ -1,29 +1,27 @@
 import CodeNavMenu from './components/CodeNavMenu';
 import EditorModal from './EditorModal';
-import GlossyButton from '../../../components/ui/GlossyButton';
 import CodeBlockView from './CodeBlockView';
-import DeleteModal from '../../../components/ui/DeleteModal';
-import Modal from '../../../components/ui/ModalLayout';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { useAxios } from '../../../hooks/axios.hook';
 import { AnimatePresence, motion } from 'motion/react';
 import { FileBracesCornerIcon, PencilLineIcon, PlusIcon } from 'lucide-react';
 import { Tooltip } from 'kitzo';
 
 // types
-import type {
-  CodeFolder,
-  CodeFolderWithCodeBlocks,
-} from '../../../types/types';
+
 import type { AxiosError } from 'axios';
-import type { UpdateFolderDetailsType } from '../../../contexts/CodeContext';
 import { useAuthStore } from '@/store/auth.store';
 import { useCodeStore } from '@/store/code.store';
 import useAddNewCodeBlockMutation from '@/hooks/code-block/useAddNewCodeBlockMutation';
 import useUpdateCodeBlockMutation from '@/hooks/code-block/useUpdateCodeBlockMutation';
 import useDeleteCodeBlockMutation from '@/hooks/code-block/useDeleteCodeBlockMutation';
 import useUpdateFolderDetailsMutation from '@/hooks/code-folder/useUpdateFolderDetailsMutation';
+import type { UpdateFolderDetailsType } from '@/types/codeFolderTypes';
+import { useAxios } from '@/hooks/axios.hook';
+import GlossyButton from '@/components/ui/GlossyButton';
+import DeleteModal from '@/components/ui/DeleteModal';
+import Modal from '@/components/ui/ModalLayout';
+import type { CodeFolderWithCodeBlocks } from '@/types/types';
 
 export default function CodeFolder() {
   const user = useAuthStore((s) => s.user);
@@ -205,12 +203,11 @@ export default function CodeFolder() {
             </div>
           )}
 
-          <div className="space-y-6">
+          <div className="min-w-0 space-y-6">
             {code_blocks.map((block) => (
               <CodeBlockView
                 key={block._id}
                 block={block}
-                linkNavEnabled={code_blocks.length > 1}
               />
             ))}
           </div>

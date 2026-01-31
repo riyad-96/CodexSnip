@@ -1,53 +1,46 @@
 import { useForm } from 'react-hook-form';
 import type { EmailPassword } from './types';
-import InputField from '../../components/auth/InputField';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../configs/firebase.config';
 import type { FirebaseError } from 'firebase/app';
-import { toast } from 'kitzo';
 import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'kitzo';
+import { auth } from '@/configs/firebase.config';
+import InputField from '@/components/auth/InputField';
 
-export default function Login() {
+export default function Signup() {
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<EmailPassword>();
 
-  const [logging, setLogging] = useState<boolean>(false);
+  const [signing, setSigning] = useState<boolean>(false);
 
-  async function login(data: EmailPassword) {
-    if (logging) return;
-    setLogging(true);
+  async function signup(data: EmailPassword) {
+    if (signing) return;
+    setSigning(true);
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
       localStorage.setItem('visitor_state', 'old');
-      toast.success('Login successful');
+      toast.success('Registration successful');
     } catch (err) {
       const error = err as FirebaseError;
-      if (error.code === 'auth/invalid-credential') {
-        toast.error('Invalid email/password', {
-          duration: 3500,
-        });
-      }
-      if (error.code === 'auth/too-many-requests') {
-        toast.error('Try again later', {
-          duration: 3500,
-        });
+      if (error.code === 'auth/email-already-in-use') {
+        toast.error('Email already exists');
       }
     } finally {
-      setLogging(false);
+      setSigning(false);
     }
   }
 
   return (
     <div>
       <h1 className="mb-4 text-center text-2xl font-bold md:text-3xl">
-        Welcome back!
+        Create account!
       </h1>
 
       <form
-        onSubmit={handleSubmit(login)}
+        onSubmit={handleSubmit(signup)}
         className="grid gap-2"
       >
         <InputField
@@ -55,7 +48,7 @@ export default function Login() {
           type="email"
           label="Email"
           placeholder="Your email"
-          autoComplete="on"
+          autoComplete="off"
           error={errors.email?.message}
           {...register('email', {
             required: {
@@ -73,7 +66,7 @@ export default function Login() {
           type="password"
           label="Password"
           placeholder="Your password"
-          autoComplete="on"
+          autoComplete="off"
           error={errors.password?.message}
           {...register('password', {
             required: {
@@ -88,10 +81,10 @@ export default function Login() {
         />
 
         <button className="bg-code-900 text-code-100 keyboard-focus-effect block h-10 w-full rounded-full tracking-wide">
-          {logging ? (
+          {signing ? (
             <span className="loading loading-spinner loading-xs"></span>
           ) : (
-            <span>Login</span>
+            <span>Signup</span>
           )}
         </button>
       </form>

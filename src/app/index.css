@@ -75,11 +75,11 @@ a {
 }
 
 .syntax-highlighted-container *::selection {
-  background-color: rgb(26, 85, 212);
+  background-color: hsl(221, 78%, 40%);
   color: white;
 }
 .syntax-highlighted-container *::-moz-selection {
-  background-color: rgb(26, 85, 212);
+  background-color: hsl(221, 78%, 40%);
   color: white;
 }
 

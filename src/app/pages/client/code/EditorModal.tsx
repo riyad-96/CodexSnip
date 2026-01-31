@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import GlossyButton from '../../../components/ui/GlossyButton';
-import Modal from '../../../components/ui/Modal';
 
 import { supportedLanguages } from './utils/editorLanguage';
 import { supportedThemes } from './utils/editorStyle';
 import type { EditorUpdateValuesType, EditorValuesType } from './types/types';
 import Select from './components/Select';
 import { useCodeStore } from '@/store/code.store';
+import Modal from '@/components/ui/Modal';
+import GlossyButton from '@/components/ui/GlossyButton';
 
 type EditorModalProps = {
   editorState: 'new' | 'update' | null;

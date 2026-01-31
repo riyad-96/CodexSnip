@@ -1,5 +1,5 @@
+import Logo from '@/components/header/Logo';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../components/header/Logo';
 
 export default function NotFound() {
   const navigate = useNavigate();

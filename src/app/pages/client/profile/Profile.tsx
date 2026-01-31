@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { ProfilePlaceholderSvg } from '../../../assets/Svgs';
-import GlossyButton from '../../../components/ui/GlossyButton';
 import { CameraIcon, UserIcon, MailIcon } from 'lucide-react';
 import { toast } from 'kitzo';
 import { updateProfile, type User } from 'firebase/auth';
 import { auth } from '@/configs/firebase.config';
 import FormatedDate from '../home/components/FormatedDate';
 import { useAuthStore } from '@/store/auth.store';
+import { ProfilePlaceholderSvg } from '@/assets/Svgs';
+import GlossyButton from '@/components/ui/GlossyButton';
 
 export default function Profile() {
   const user = useAuthStore((s) => s.user);

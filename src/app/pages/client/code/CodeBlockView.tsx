@@ -1,5 +1,3 @@
-import type { CodeBlock } from '../../../types/types';
-import GlossyButton from '../../../components/ui/GlossyButton';
 import { CheckIcon, CopyIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
 import { copy } from 'kitzo/fns';
 import { Tooltip } from 'kitzo';
@@ -13,16 +11,14 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { getStyle, supportedThemes } from './utils/editorStyle';
 import getCodeNavigationId from '@/utils/getCodeNavigationId';
 import { useCodeStore } from '@/store/code.store';
+import type { CodeBlock } from '@/types/types';
+import GlossyButton from '@/components/ui/GlossyButton';
 
 type CodeBlockViewProps = {
   block: CodeBlock;
-  linkNavEnabled: boolean;
 };
 
-export default function CodeBlockView({
-  block,
-  linkNavEnabled,
-}: CodeBlockViewProps) {
+export default function CodeBlockView({ block }: CodeBlockViewProps) {
   const { setDeletingInfo, setEditDetails, setEditorState } = useCodeStore();
 
   const [copied, setCopied] = useState<boolean>(false);
@@ -175,25 +171,21 @@ export default function CodeBlockView({
         </div>
       </div>
 
-      <div
-        className={`syntax-highlighted-container mx-auto w-[clamp(16.125rem,-3.875rem+100vw,44.0625rem)] ${linkNavEnabled ? 'md:w-[clamp(30.125rem,-17.875rem+100vw,65.5rem)]' : 'md:w-[clamp(44.375rem,-2.7769rem+98.2332vw,79.125rem)]'}`}
-      >
-        <div className="overflow-hidden rounded-xl border border-neutral-200">
-          <SyntaxHighlighter
-            children={block?.code as string}
-            style={getStyle(block?.theme)}
-            language={block?.language}
-            customStyle={{
-              fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
-              padding: '1rem 1.25rem',
-              margin: 0,
-              minHeight: 40,
-              maxHeight: 450,
-              borderRadius: 0,
-            }}
-            showLineNumbers={true}
-          />
-        </div>
+      <div className={`syntax-highlighted-container`}>
+        <SyntaxHighlighter
+          children={block?.code as string}
+          style={getStyle(block?.theme)}
+          language={block?.language}
+          customStyle={{
+            fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
+            padding: '1rem 1.25rem',
+            margin: 0,
+            minHeight: 40,
+            maxHeight: 450,
+            borderRadius: 12,
+          }}
+          showLineNumbers={true}
+        />
       </div>
 
       <div className="pt-4 pl-1">

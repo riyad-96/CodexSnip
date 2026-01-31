@@ -2,7 +2,7 @@ import type { SupportedThemesType } from '../utils/editorStyle';
 import type { SupportedLanguagesType } from '../utils/editorLanguage';
 import { useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
-import useDropdownClose from '../../../../hooks/useDropdownClose';
+import useDropdownClose from '@/hooks/useDropdownClose';
 
 type Options = SupportedThemesType | SupportedLanguagesType;
 
