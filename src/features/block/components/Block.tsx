@@ -1,24 +1,24 @@
-// syntax highlighting
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import type { CodeBlock } from '../types/types';
-import { useCodeStore } from '../store/code.store';
+import type { CodeBlock } from '../../folder/types/types';
 import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
-import { getStyle, supportedThemes } from '../lib/editorStyle';
+import { getStyle, supportedThemes } from '../../folder/lib/editorStyle';
 import GlossyButton from '@/shared/components/ui/GlossyButton';
 
 import { AnimatePresence, motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
 import FormatedDate from '@/shared/components/ui/FormatedDate';
-import { supportedLanguages } from '../lib/editorLanguage';
+import { supportedLanguages } from '../../folder/lib/editorLanguage';
 import { CheckIcon, CopyIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
 import { useCopy } from 'kitzo';
+import { useBlockStore } from '@/features/block/store/block.store';
 
 type CodeBlockViewProps = {
   block: CodeBlock;
 };
 
-export default function CodeBlockView({ block }: CodeBlockViewProps) {
-  const { setDeletingInfo, setEditDetails, setEditorState } = useCodeStore();
+export default function Block({ block }: CodeBlockViewProps) {
+  const { setBlockDeleteDetails, setBlockEditDetails, setEditorState } =
+    useBlockStore();
 
   const id = getCodeNavigationId(block.title, block._id);
 
@@ -96,7 +96,7 @@ export default function CodeBlockView({ block }: CodeBlockViewProps) {
                   </span>
                 }
                 onClick={() =>
-                  setDeletingInfo({
+                  setBlockDeleteDetails({
                     folder_id: block?.folder_id,
                     code_block_id: block?._id,
                     code_block_title: block?.title,
@@ -121,7 +121,7 @@ export default function CodeBlockView({ block }: CodeBlockViewProps) {
                   </span>
                 }
                 onClick={() => {
-                  setEditDetails(block);
+                  setBlockEditDetails(block);
                   setEditorState('update');
                 }}
               />

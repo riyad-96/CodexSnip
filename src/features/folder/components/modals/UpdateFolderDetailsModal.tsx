@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react';
-import { useCodeStore } from '../../store/code.store';
+import { useCodeStore } from '../../store/folder.store';
 import type { UpdateFolderDetailsType } from '../../types/codeFolderTypes';
 import GlossyButton from '@/shared/components/ui/GlossyButton';
 import useUpdateFolderDetailsMutation from '../../hooks/useUpdateFolderDetailsMutation';
@@ -7,7 +7,7 @@ import Modal from '@/shared/components/ui/Modal';
 import { isPointerDevice } from '@/shared/constants/general';
 
 export default function UpdateFolderDetailsModal() {
-  const { updateDetails, setUpdateDetails } = useCodeStore();
+  const { folderUpdateDetails, setFolderUpdateDetails } = useCodeStore();
 
   // mutation: update folder
   const { mutate: updateFolderDetails, isPending: updatingFolderDetails } =
@@ -15,10 +15,10 @@ export default function UpdateFolderDetailsModal() {
 
   return (
     <AnimatePresence>
-      {updateDetails && (
+      {folderUpdateDetails && (
         <Modal
           className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
-          onMouseDown={() => setUpdateDetails(null)}
+          onMouseDown={() => setFolderUpdateDetails(null)}
         >
           <div className="mb-6 space-y-4">
             <div className="grid gap-2">
@@ -34,9 +34,9 @@ export default function UpdateFolderDetailsModal() {
                 id="folder-title"
                 type="text"
                 placeholder="Folder name"
-                value={updateDetails.folder_name}
+                value={folderUpdateDetails.folder_name}
                 onChange={(e) =>
-                  setUpdateDetails(
+                  setFolderUpdateDetails(
                     (prev) =>
                       ({
                         ...prev,
@@ -58,9 +58,9 @@ export default function UpdateFolderDetailsModal() {
                 className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                 id="folder-description"
                 placeholder="Folder description"
-                value={updateDetails.folder_description}
+                value={folderUpdateDetails.folder_description}
                 onChange={(e) =>
-                  setUpdateDetails(
+                  setFolderUpdateDetails(
                     (prev) =>
                       ({
                         ...prev,
@@ -76,7 +76,7 @@ export default function UpdateFolderDetailsModal() {
               content={
                 <span className="grid h-9 place-items-center px-5">Cancel</span>
               }
-              onClick={() => setUpdateDetails(null)}
+              onClick={() => setFolderUpdateDetails(null)}
             />
             <GlossyButton
               content={
@@ -91,9 +91,9 @@ export default function UpdateFolderDetailsModal() {
               onClick={() => {
                 if (updatingFolderDetails) return;
                 updateFolderDetails({
-                  folder_name: updateDetails.folder_name,
-                  folder_description: updateDetails.folder_description,
-                  folder_id: updateDetails.folder_id,
+                  folder_name: folderUpdateDetails.folder_name,
+                  folder_description: folderUpdateDetails.folder_description,
+                  folder_id: folderUpdateDetails.folder_id,
                 });
               }}
               primary

@@ -1,6 +1,6 @@
 import DeleteModal from '@/shared/components/ui/DeleteModal';
 import { AnimatePresence } from 'motion/react';
-import { useCodeStore } from '../../store/code.store';
+import { useCodeStore } from '../../store/folder.store';
 import useDeleteFolderMutation from '../../hooks/useDeleteFolderMutation';
 
 export default function DeleteFolderModal() {

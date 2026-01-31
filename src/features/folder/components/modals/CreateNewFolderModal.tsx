@@ -1,5 +1,5 @@
 import Modal from '@/shared/components/ui/Modal';
-import { useCodeStore } from '../../store/code.store';
+import { useCodeStore } from '../../store/folder.store';
 import type { AddFolderDetailsType } from '../../types/codeFolderTypes';
 import GlossyButton from '@/shared/components/ui/GlossyButton';
 import { AnimatePresence } from 'motion/react';
@@ -7,18 +7,18 @@ import useCreateNewFolderMutation from '../../hooks/useCreateNewFolderMutation';
 import { isPointerDevice } from '@/shared/constants/general';
 
 export default function CreateNewFolderModal() {
-  const { createNewFolderDetails, setCreateNewFolderDetails } = useCodeStore();
+  const { folderCreateDetails, setFolderCreateDetails } = useCodeStore();
 
   // mutation: create new folder
   const { mutate: createNewFolder, isPending: isNewFolderCreating } =
-    useCreateNewFolderMutation({ setCreateNewFolderDetails });
+    useCreateNewFolderMutation({ setFolderCreateDetails });
 
   return (
     <AnimatePresence>
-      {createNewFolderDetails && (
+      {folderCreateDetails && (
         <Modal
           className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
-          onMouseDown={() => setCreateNewFolderDetails(null)}
+          onMouseDown={() => setFolderCreateDetails(null)}
         >
           <div className="mb-6 space-y-4">
             <div className="grid gap-2">
@@ -34,9 +34,9 @@ export default function CreateNewFolderModal() {
                 id="folder-title"
                 type="text"
                 placeholder="Folder name"
-                value={createNewFolderDetails.folder_name}
+                value={folderCreateDetails.folder_name}
                 onChange={(e) =>
-                  setCreateNewFolderDetails(
+                  setFolderCreateDetails(
                     (prev) =>
                       ({
                         ...prev,
@@ -58,9 +58,9 @@ export default function CreateNewFolderModal() {
                 className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
                 id="folder-description"
                 placeholder="Folder description"
-                value={createNewFolderDetails.folder_description}
+                value={folderCreateDetails.folder_description}
                 onChange={(e) =>
-                  setCreateNewFolderDetails(
+                  setFolderCreateDetails(
                     (prev) =>
                       ({
                         ...prev,
@@ -76,7 +76,7 @@ export default function CreateNewFolderModal() {
               content={
                 <span className="grid h-9 place-items-center px-5">Cancel</span>
               }
-              onClick={() => setCreateNewFolderDetails(null)}
+              onClick={() => setFolderCreateDetails(null)}
             />
             <GlossyButton
               content={
@@ -91,8 +91,8 @@ export default function CreateNewFolderModal() {
               onClick={() => {
                 if (isNewFolderCreating) return;
                 createNewFolder({
-                  folder_name: createNewFolderDetails.folder_name,
-                  folder_description: createNewFolderDetails.folder_description,
+                  folder_name: folderCreateDetails.folder_name,
+                  folder_description: folderCreateDetails.folder_description,
                 });
               }}
               primary

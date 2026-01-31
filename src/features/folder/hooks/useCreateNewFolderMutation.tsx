@@ -1,17 +1,16 @@
-import useAxios from "@/shared/hooks/useAxios";
-import type { AddFolderDetailsType } from "../types/codeFolderTypes";
-import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "@/main";
-
+import useAxios from '@/shared/hooks/useAxios';
+import type { AddFolderDetailsType } from '../types/codeFolderTypes';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '@/main';
 
 type UseCreateNewFolderMutation = {
-  setCreateNewFolderDetails: React.Dispatch<
+  setFolderCreateDetails: React.Dispatch<
     React.SetStateAction<AddFolderDetailsType | null>
   >;
 };
 
 export default function useCreateNewFolderMutation({
-  setCreateNewFolderDetails,
+  setFolderCreateDetails,
 }: UseCreateNewFolderMutation) {
   const server = useAxios();
 
@@ -24,7 +23,7 @@ export default function useCreateNewFolderMutation({
       return response.data;
     },
     onSuccess() {
-      setCreateNewFolderDetails(null);
+      setFolderCreateDetails(null);
       queryClient.invalidateQueries({
         queryKey: ['code_folders'],
       });

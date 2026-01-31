@@ -1,9 +1,6 @@
 import { useAuthStore } from '@/features/auth/store/auth.store';
-import useAddNewCodeBlockMutation from '@/features/block/hooks/useAddNewCodeBlockMutation';
 import useDeleteCodeBlockMutation from '@/features/block/hooks/useDeleteCodeBlockMutation';
-import useUpdateCodeBlockMutation from '@/features/block/hooks/useUpdateCodeBlockMutation';
-import useUpdateFolderDetailsMutation from '@/features/folder/hooks/useUpdateFolderDetailsMutation';
-import { useCodeStore } from '@/features/folder/store/code.store';
+import { useCodeStore } from '@/features/folder/store/folder.store';
 import type { CodeFolderWithCodeBlocks } from '@/features/folder/types/types';
 import useAxios from '@/shared/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
@@ -12,24 +9,17 @@ import { useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
 import GlossyButton from '@/shared/components/ui/GlossyButton';
-import { FileBracesCornerIcon, PencilLineIcon, PlusIcon } from 'lucide-react';
-import CodeNavMenu from '@/features/folder/components/CodeNavMenu';
-import CodeBlockView from '@/features/folder/components/CodeBlockView';
-import EditorModal from '@/features/folder/components/modals/EditorModal';
+import { PencilLineIcon } from 'lucide-react';
+import EditorModal from '@/features/block/components/modal/EditorModal';
 import DeleteModal from '@/shared/components/ui/DeleteModal';
-import type { UpdateFolderDetailsType } from '@/features/folder/types/codeFolderTypes';
-import Modal from '@/shared/components/ui/Modal';
+import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
+import CodeFolderContent from '@/features/folder/components/CodeFolderContent';
+import { useBlockStore } from '@/features/block/store/block.store';
 
 export default function CodeFolder() {
   const user = useAuthStore((s) => s.user);
 
-  const {
-    editorState,
-    setEditorState,
-    deletingInfo,
-    setDeletingInfo,
-    editDetails,
-  } = useCodeStore();
+  const { blockDeleteDetails, setBlockDeleteDetails } = useBlockStore();
 
   const server = useAxios();
   const params = useParams();
@@ -48,28 +38,22 @@ export default function CodeFolder() {
     enabled: !!user,
   });
 
-  const code_blocks = codeFolder?.code_blocks ?? [];
-
   // udpate folder details
-  const { updateDetails, setUpdateDetails } = useCodeStore();
-
-  // mutation: update folder details
-  const { mutate: updateFolderDetails, isPending: updatingFolderDetails } =
-    useUpdateFolderDetailsMutation();
-
-  // mutation: add new code block
-  const { mutate: addNewCodeBlock, isPending: isAddingCodeBlock } =
-    useAddNewCodeBlockMutation({ codeFolderId });
-
-  // mutation: update code block
-  const { mutate: updateCodeBlock, isPending: isUpdatingCodeBlock } =
-    useUpdateCodeBlockMutation({ codeFolderId });
+  const { setFolderUpdateDetails } = useCodeStore();
 
   // mutation: delete code block
   const { mutate: deleteCodeBlock, isPending: isDeletingCodeBlock } =
     useDeleteCodeBlockMutation({ codeFolderId });
 
-  if (codeFolderError) {
+  if (codeFolderLoading) {
+    return (
+      <div className="flex justify-center pt-42">
+        <span className="loading loading-spinner loading-xl opacity-80"></span>
+      </div>
+    );
+  }
+
+  if (codeFolderError || !codeFolder) {
     return (
       <div className="pt-20">
         <div className="mx-auto max-w-md text-center">
@@ -95,14 +79,6 @@ export default function CodeFolder() {
             </p>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  if (codeFolderLoading) {
-    return (
-      <div className="flex justify-center pt-42">
-        <span className="loading loading-spinner loading-xl opacity-80"></span>
       </div>
     );
   }
@@ -142,10 +118,10 @@ export default function CodeFolder() {
                 </span>
               }
               onClick={() =>
-                setUpdateDetails({
-                  folder_name: codeFolder?.folder_name as string,
-                  folder_description: codeFolder?.folder_description as string,
-                  folder_id: codeFolder?._id as string,
+                setFolderUpdateDetails({
+                  folder_name: codeFolder.folder_name,
+                  folder_description: codeFolder.folder_description,
+                  folder_id: codeFolder._id,
                 })
               }
             />
@@ -153,226 +129,34 @@ export default function CodeFolder() {
         </motion.div>
       </div>
 
-      <div className="mb-8 flex items-center justify-between">
-        <Tooltip
-          content={`${code_blocks.length} Blocks`}
-          position="top-start"
-          animation={{ delay: 40 }}
-        >
-          <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
-            <FileBracesCornerIcon
-              size={16}
-              className="text-neutral-600"
-            />
-            <span>{code_blocks.length}</span>
-          </div>
-        </Tooltip>
-
-        {codeFolder && codeFolder.code_blocks.length !== 0 && (
-          <motion.div
-            className="relative z-5"
-            layoutId="create-code-block-modal"
-          >
-            <GlossyButton
-              content={
-                <span className="flex items-center gap-2 px-4 py-2.5">
-                  <PlusIcon
-                    size={16}
-                    strokeWidth="3"
-                  />
-                  <span>Add Block</span>
-                </span>
-              }
-              onClick={() => setEditorState('new')}
-              primary
-            />
-          </motion.div>
-        )}
-      </div>
-
-      {code_blocks.length > 0 ? (
-        <div
-          className={`grid ${code_blocks.length > 1 ? 'gap-4 md:grid-cols-[auto_1fr]' : ''}`}
-        >
-          {code_blocks.length > 1 && (
-            <div className="w-50 max-md:hidden">
-              <CodeNavMenu code_blocks={code_blocks} />
-            </div>
-          )}
-
-          <div className="min-w-0 space-y-6">
-            {code_blocks.map((block) => (
-              <CodeBlockView
-                key={block._id}
-                block={block}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="pt-20">
-          <div className="mx-auto max-w-md text-center">
-            <div className="px-8 py-12">
-              <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-neutral-100">
-                <FileBracesCornerIcon
-                  size={32}
-                  className="text-neutral-600"
-                />
-              </div>
-              <h3 className="mb-2 tracking-tight">No code blocks yet</h3>
-              <p className="mb-6 text-neutral-600">
-                Start by adding your first code block to this folder.
-              </p>
-              <div className="mx-auto w-fit">
-                <GlossyButton
-                  content={
-                    <span className="flex items-center gap-2 px-4 py-2.5">
-                      <PlusIcon
-                        size={16}
-                        strokeWidth="3"
-                      />
-                      <span>Add Block</span>
-                    </span>
-                  }
-                  onClick={() => setEditorState('new')}
-                  primary
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <CodeFolderContent code_blocks={codeFolder.code_blocks} />
+      <EditorModal />
 
       <AnimatePresence>
-        {editorState && (
-          <EditorModal
-            layoutId={
-              editorState === 'new'
-                ? 'create-code-block-modal'
-                : `update-code-block-modal-${editDetails?._id}`
-            }
-            editorState={editorState}
-            setEditorState={setEditorState}
-            actions={{ addNewCodeBlock, updateCodeBlock }}
-            isAdding={isAddingCodeBlock}
-            isUpdating={isUpdatingCodeBlock}
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {deletingInfo && (
+        {blockDeleteDetails && (
           <DeleteModal
-            layoutId={`delete-modal_${deletingInfo.code_block_id}`}
+            layoutId={`delete-modal_${blockDeleteDetails.code_block_id}`}
             title="Delete code block!"
             description={
               <span className="tracking-wide text-neutral-600">
                 Delete '
                 <span className="text-neutral-900">
-                  {deletingInfo.code_block_title || 'Untitled'}
+                  {blockDeleteDetails.code_block_title || 'Untitled'}
                 </span>
                 ' code block permanently? This action is irreversible.
               </span>
             }
             isLoading={isDeletingCodeBlock}
-            cancelFn={() => setDeletingInfo(null)}
+            cancelFn={() => setBlockDeleteDetails(null)}
             clickFn={() => {
               if (isDeletingCodeBlock) return;
-              deleteCodeBlock(deletingInfo.code_block_id);
+              deleteCodeBlock(blockDeleteDetails.code_block_id);
             }}
           />
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {updateDetails && (
-          <Modal
-            className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
-            onMouseDown={() => setUpdateDetails(null)}
-          >
-            <div className="mb-6 space-y-4">
-              <div className="grid gap-2">
-                <label
-                  className="text-sm text-neutral-700"
-                  htmlFor="folder-title"
-                >
-                  Name
-                </label>
-                <input
-                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
-                  id="folder-title"
-                  type="text"
-                  placeholder="Folder name"
-                  value={updateDetails.folder_name}
-                  onChange={(e) =>
-                    setUpdateDetails(
-                      (prev) =>
-                        ({
-                          ...prev,
-                          folder_name: e.target.value,
-                        }) as UpdateFolderDetailsType,
-                    )
-                  }
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <label
-                  className="text-sm text-neutral-700"
-                  htmlFor="folder-description"
-                >
-                  Description
-                </label>
-                <textarea
-                  className="max-h-75 min-h-25 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-colors outline-none focus:border-neutral-400"
-                  id="folder-description"
-                  placeholder="Folder description"
-                  value={updateDetails.folder_description}
-                  onChange={(e) =>
-                    setUpdateDetails(
-                      (prev) =>
-                        ({
-                          ...prev,
-                          folder_description: e.target.value,
-                        }) as UpdateFolderDetailsType,
-                    )
-                  }
-                />
-              </div>
-            </div>
-            <div className="flex justify-end gap-2">
-              <GlossyButton
-                content={
-                  <span className="grid h-9 place-items-center px-5">
-                    Cancel
-                  </span>
-                }
-                onClick={() => setUpdateDetails(null)}
-              />
-              <GlossyButton
-                content={
-                  <span className="grid h-9 min-w-20 place-items-center px-5">
-                    {updatingFolderDetails ? (
-                      <span className="loading loading-spinner loading-xs opacity-80"></span>
-                    ) : (
-                      <span>Update</span>
-                    )}
-                  </span>
-                }
-                onClick={() => {
-                  if (updatingFolderDetails) return;
-                  updateFolderDetails({
-                    folder_name: updateDetails.folder_name,
-                    folder_description: updateDetails.folder_description,
-                    folder_id: updateDetails.folder_id,
-                  });
-                }}
-                primary
-              />
-            </div>
-          </Modal>
-        )}
-      </AnimatePresence>
+      <UpdateFolderDetailsModal />
     </div>
   );
 }

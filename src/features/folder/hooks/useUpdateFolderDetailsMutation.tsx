@@ -1,11 +1,11 @@
 import useAxios from "@/shared/hooks/useAxios";
-import { useCodeStore } from "../store/code.store";
+import { useCodeStore } from "../store/folder.store";
 import { useMutation } from "@tanstack/react-query";
 import type { UpdateFolderDetailsType } from "../types/codeFolderTypes";
 import { queryClient } from "@/main";
 
 export default function useUpdateFolderDetailsMutation() {
-  const setUpdateDetails = useCodeStore((s) => s.setUpdateDetails);
+  const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
   const server = useAxios();
 
   return useMutation({
@@ -14,7 +14,7 @@ export default function useUpdateFolderDetailsMutation() {
       return response.data;
     },
     onSuccess: (_, value) => {
-      setUpdateDetails(null);
+      setFolderUpdateDetails(null);
       queryClient.invalidateQueries({
         queryKey: ['code_folder', value.folder_id],
       });

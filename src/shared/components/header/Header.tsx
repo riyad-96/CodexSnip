@@ -3,8 +3,8 @@ import { useSearchStore } from '@/features/search/store/search.store';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
-import { SearchIcon } from 'lucide-react';
 import Nav from './Nav';
+import SearchButton from '@/features/search/components/SearchButton';
 
 export default function Header() {
   const location = useLocation();
@@ -42,20 +42,7 @@ export default function Header() {
         />
 
         <div className="flex items-center gap-3">
-          {user && (
-            <button
-              onClick={() => setSearchModalShowing(true)}
-              className="flex items-center gap-2 rounded-xl border border-neutral-200 px-3 py-2 text-sm hover:border-neutral-400"
-            >
-              <SearchIcon
-                size={16}
-                className="text-neutral-600"
-              />
-              <span className="text-xs tracking-wide text-neutral-600">
-                CTRL + K
-              </span>
-            </button>
-          )}
+          {user && <SearchButton />}
           <Nav />
         </div>
       </div>

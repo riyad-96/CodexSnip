@@ -1,5 +1,5 @@
 import useAxios from "@/shared/hooks/useAxios";
-import { useCodeStore } from "../store/code.store";
+import { useCodeStore } from "../store/folder.store";
 import { useMutation } from "@tanstack/react-query";
 import type { FolderDeleteDetailsType } from "../types/codeFolderTypes";
 import { queryClient } from "@/main";

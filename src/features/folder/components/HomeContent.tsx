@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCodeStore } from '../store/code.store';
+import { useCodeStore } from '../store/folder.store';
 import { useNavigate } from 'react-router-dom';
 import useAxios from '@/shared/hooks/useAxios';
 import type { CodeFolder } from '../types/types';
@@ -21,7 +21,7 @@ export default function HomeContent() {
     enabled: !!user,
   });
 
-  const { setCreateNewFolderDetails } = useCodeStore();
+  const setFolderCreateDetails = useCodeStore((s) => s.setFolderCreateDetails);
 
   // visitor state check
   const isOldVisitor = localStorage.getItem('visitor_state');
@@ -66,7 +66,7 @@ export default function HomeContent() {
                   navigate(isOldVisitor ? '/auth/login' : '/auth/signup');
                   return;
                 }
-                setCreateNewFolderDetails({
+                setFolderCreateDetails({
                   folder_name: '',
                   folder_description: '',
                 });

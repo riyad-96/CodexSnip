@@ -1,4 +1,4 @@
-import { useCodeStore } from '@/features/folder/store/code.store';
+import { useCodeStore } from '@/features/folder/store/folder.store';
 import type { CodeFolder } from '@/features/folder/types/types';
 import useAxios from '@/shared/hooks/useAxios';
 import useDropdownClose from '@/shared/hooks/useDropdownClose';
@@ -36,9 +36,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   });
 
   // update folder details
-  const { setUpdateDetails, setFolderDeleteDetails } = useCodeStore();
-
-  // delete folder
+  const { setFolderUpdateDetails, setFolderDeleteDetails } = useCodeStore();
 
   return (
     <motion.div
@@ -134,7 +132,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
                 >
                   <button
                     onClick={() => {
-                      setUpdateDetails({
+                      setFolderUpdateDetails({
                         folder_id: _id,
                         folder_name: folder_name,
                         folder_description: folder_description,
