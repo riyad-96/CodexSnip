@@ -1,14 +1,18 @@
-import type { CodeBlock, CodeFolder } from "@/features/folder/types/types";
-import { useSearchStore } from "../store/search.store";
-import { useState } from "react";
-import { useDebounce } from "kitzo";
-import useAxios from "@/shared/hooks/useAxios";
-import { useQuery } from "@tanstack/react-query";
-import Modal from "@/shared/components/ui/Modal";
-import { ChevronRightIcon, FileIcon, FolderIcon, SearchIcon } from "lucide-react";
-import { Link } from "react-router-dom";
-import getCodeNavigationId from "@/shared/utils/getCodeNavigationId";
-
+import type { CodeBlock, CodeFolder } from '@/features/folder/types/types';
+import { useSearchStore } from '../store/search.store';
+import { useState } from 'react';
+import { useDebounce } from 'kitzo';
+import useAxios from '@/shared/hooks/useAxios';
+import { useQuery } from '@tanstack/react-query';
+import Modal from '@/shared/components/ui/Modal';
+import {
+  ChevronRightIcon,
+  FileIcon,
+  FolderIcon,
+  SearchIcon,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
 
 type QueryFnDataType = {
   codes: CodeBlock[];

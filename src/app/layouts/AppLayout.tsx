@@ -1,10 +1,9 @@
-import { useSearchStore } from "@/features/search/store/search.store";
-import Footer from "@/shared/components/footer/Footer";
-import Header from "@/shared/components/header/Header";
-import SearchModal from "@/shared/components/ui/SearchModal";
-import { AnimatePresence } from "motion/react";
-import { Outlet } from "react-router-dom";
-
+import SearchModal from '@/features/search/components/SearchModal';
+import { useSearchStore } from '@/features/search/store/search.store';
+import Footer from '@/shared/components/footer/Footer';
+import Header from '@/shared/components/header/Header';
+import { AnimatePresence } from 'motion/react';
+import { Outlet } from 'react-router-dom';
 
 export default function AppLayout() {
   const { searchModalShowing } = useSearchStore();
