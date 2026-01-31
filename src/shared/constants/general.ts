@@ -1,0 +1,1 @@
+export const isPointerDevice = window.matchMedia('(pointer: fine)').matches;

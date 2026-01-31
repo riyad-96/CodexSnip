@@ -1,14 +1,20 @@
-import { useCodeStore } from "@/features/folder/store/code.store";
-import type { CodeFolder } from "@/features/folder/types/types";
-import useAxios from "@/shared/hooks/useAxios";
-import useDropdownClose from "@/shared/hooks/useDropdownClose";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCodeStore } from '@/features/folder/store/code.store';
+import type { CodeFolder } from '@/features/folder/types/types';
+import useAxios from '@/shared/hooks/useAxios';
+import useDropdownClose from '@/shared/hooks/useDropdownClose';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { queryClient } from "@/main";
-import { Tooltip } from "kitzo";
-import { EllipsisIcon, FileBracesCornerIcon, PencilLineIcon, Trash2Icon, XIcon } from "lucide-react";
-import FormatedDate from "../ui/FormatedDate";
+import { queryClient } from '@/main';
+import { Tooltip } from 'kitzo';
+import {
+  EllipsisIcon,
+  FileBracesCornerIcon,
+  PencilLineIcon,
+  Trash2Icon,
+  XIcon,
+} from 'lucide-react';
+import FormatedDate from '@/shared/components/ui/FormatedDate';
 
 type EachCodeFolderCard = {
   i: number;

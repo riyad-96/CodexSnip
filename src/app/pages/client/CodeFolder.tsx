@@ -15,10 +15,10 @@ import GlossyButton from '@/shared/components/ui/GlossyButton';
 import { FileBracesCornerIcon, PencilLineIcon, PlusIcon } from 'lucide-react';
 import CodeNavMenu from '@/features/folder/components/CodeNavMenu';
 import CodeBlockView from '@/features/folder/components/CodeBlockView';
-import EditorModal from '@/features/folder/components/EditorModal';
+import EditorModal from '@/features/folder/components/modals/EditorModal';
 import DeleteModal from '@/shared/components/ui/DeleteModal';
-import ModalWithLayoutId from '@/shared/components/ui/ModalWithLayoutId';
 import type { UpdateFolderDetailsType } from '@/features/folder/types/codeFolderTypes';
+import Modal from '@/shared/components/ui/Modal';
 
 export default function CodeFolder() {
   const user = useAuthStore((s) => s.user);
@@ -286,8 +286,7 @@ export default function CodeFolder() {
 
       <AnimatePresence>
         {updateDetails && (
-          <ModalWithLayoutId
-            layoutId="folder-details-update-modal"
+          <Modal
             className="w-full max-w-125 rounded-2xl border border-neutral-200 bg-white p-6"
             onMouseDown={() => setUpdateDetails(null)}
           >
@@ -371,7 +370,7 @@ export default function CodeFolder() {
                 primary
               />
             </div>
-          </ModalWithLayoutId>
+          </Modal>
         )}
       </AnimatePresence>
     </div>

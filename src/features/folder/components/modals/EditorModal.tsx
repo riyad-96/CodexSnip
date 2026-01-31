@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useCodeStore } from "../store/code.store";
-import type { EditorUpdateValuesType, EditorValuesType } from "../types/editor";
+import { useCodeStore } from "../../store/code.store";
+import type { EditorUpdateValuesType, EditorValuesType } from "../../types/editor";
 import Modal from "@/shared/components/ui/Modal";
-import Select from "./Select";
-import { supportedLanguages } from "../lib/editorLanguage";
-import { supportedThemes } from "../lib/editorStyle";
+import Select from "../Select";
+import { supportedLanguages } from "../../lib/editorLanguage";
+import { supportedThemes } from "../../lib/editorStyle";
 import GlossyButton from "@/shared/components/ui/GlossyButton";
 
 type EditorModalProps = {

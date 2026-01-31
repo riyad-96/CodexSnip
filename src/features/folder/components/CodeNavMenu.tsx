@@ -23,7 +23,7 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
   }, [hash]);
 
   return (
-    <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-2">
+    <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-1">
       <div className="max-h-75 overflow-y-auto">
         {code_blocks?.map((p) => {
           const id = getCodeNavigationId(p.title, p._id);
@@ -32,7 +32,7 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
           return (
             <div
               key={`title-link-${p._id}`}
-              className={`relative px-4 py-2.5 text-sm transition-colors pointer-fine:cursor-pointer ${
+              className={`relative px-4 py-2.5 text-sm pointer-fine:cursor-pointer ${
                 hash === link
                   ? 'bg-neutral-100 font-semibold'
                   : 'text-neutral-700 hover:bg-neutral-100'

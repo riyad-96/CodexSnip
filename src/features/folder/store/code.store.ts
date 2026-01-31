@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type {
+  AddFolderDetailsType,
   FolderDeleteDetailsType,
   UpdateFolderDetailsType,
 } from '../types/codeFolderTypes';
@@ -19,6 +20,9 @@ type CodeStore = {
   setUpdateDetails: SetState<UpdateFolderDetailsType | null>;
   folderDeleteDetails: FolderDeleteDetailsType | null;
   setFolderDeleteDetails: SetState<FolderDeleteDetailsType | null>;
+
+  createNewFolderDetails: AddFolderDetailsType | null;
+  setCreateNewFolderDetails: SetState<AddFolderDetailsType | null>;
 };
 
 const store = create<CodeStore>((set) => ({
@@ -52,6 +56,14 @@ const store = create<CodeStore>((set) => ({
     set((s) => ({
       folderDeleteDetails:
         typeof state === 'function' ? state(s.folderDeleteDetails) : state,
+    }));
+  },
+
+  createNewFolderDetails: null,
+  setCreateNewFolderDetails: (state) => {
+    set((s) => ({
+      createNewFolderDetails:
+        typeof state === 'function' ? state(s.createNewFolderDetails) : state,
     }));
   },
 }));

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import ModalWithLayoutId from './ModalWithLayoutId';
 import GlossyButton from './GlossyButton';
+import Modal from './Modal';
 
 type DeleteModalPropsType = {
   layoutId?: string;
@@ -12,7 +12,6 @@ type DeleteModalPropsType = {
 };
 
 export default function DeleteModal({
-  layoutId,
   title,
   description,
   cancelFn,
@@ -20,8 +19,7 @@ export default function DeleteModal({
   isLoading,
 }: DeleteModalPropsType) {
   return (
-    <ModalWithLayoutId
-      layoutId={layoutId}
+    <Modal
       onMouseDown={cancelFn}
       className="w-full max-w-112.5 rounded-2xl border border-neutral-200 bg-white p-6"
     >
@@ -50,6 +48,6 @@ export default function DeleteModal({
           )}
         </button>
       </div>
-    </ModalWithLayoutId>
+    </Modal>
   );
 }

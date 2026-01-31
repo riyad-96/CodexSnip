@@ -5,13 +5,13 @@ import { queryClient } from "@/main";
 
 
 type UseCreateNewFolderMutation = {
-  setAddFolderDetails: React.Dispatch<
+  setCreateNewFolderDetails: React.Dispatch<
     React.SetStateAction<AddFolderDetailsType | null>
   >;
 };
 
 export default function useCreateNewFolderMutation({
-  setAddFolderDetails,
+  setCreateNewFolderDetails,
 }: UseCreateNewFolderMutation) {
   const server = useAxios();
 
@@ -24,7 +24,7 @@ export default function useCreateNewFolderMutation({
       return response.data;
     },
     onSuccess() {
-      setAddFolderDetails(null);
+      setCreateNewFolderDetails(null);
       queryClient.invalidateQueries({
         queryKey: ['code_folders'],
       });
