@@ -1,8 +1,9 @@
-import useAxios from "@/shared/hooks/useAxios";
-import { useCodeStore } from "../store/folder.store";
-import { useMutation } from "@tanstack/react-query";
-import type { UpdateFolderDetailsType } from "../types/codeFolderTypes";
-import { queryClient } from "@/main";
+import useAxios from '@/shared/hooks/useAxios';
+import { useCodeStore } from '../store/folder.store';
+import { useMutation } from '@tanstack/react-query';
+import type { UpdateFolderDetailsType } from '../types/codeFolderTypes';
+import { queryClient } from '@/main';
+import type { CodeFolder, CodeFolderWithBlocks } from '../types/types';
 
 export default function useUpdateFolderDetailsMutation() {
   const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
@@ -13,13 +14,66 @@ export default function useUpdateFolderDetailsMutation() {
       const response = await server.patch<string>('/codefolder/update', value);
       return response.data;
     },
-    onSuccess: (_, value) => {
+    onMutate: async (variable) => {
       setFolderUpdateDetails(null);
+      // cancel queries
+      await queryClient.cancelQueries({ queryKey: ['folders'] });
+      await queryClient.cancelQueries({
+        queryKey: ['folder_with_blocks', variable.folder_id],
+      });
+
+      // update query data
+      const folders = queryClient.getQueryData(['folders']) as CodeFolder[];
+      const updatedFolders = folders.map((f) =>
+        f._id === variable.folder_id
+          ? {
+              ...f,
+              folder_name: variable.folder_name,
+              folder_description: variable.folder_description,
+              updated_at: new Date().toISOString(),
+            }
+          : f,
+      );
+      queryClient.setQueryData(['folders'], updatedFolders);
+
+      const folder = queryClient.getQueryData([
+        'folder_with_blocks',
+        variable.folder_id,
+      ]) as CodeFolderWithBlocks;
+
+      if (folder) {
+        const updatedFolder = {
+          ...folder,
+          folder_name: variable.folder_name,
+          folder_description: variable.folder_description,
+          updated_at: new Date().toISOString(),
+        };
+
+        queryClient.setQueryData(
+          ['folder_with_blocks', variable.folder_id],
+          updatedFolder,
+        );
+      }
+
+      return { prevFolders: folders, prevFolderWithBlocks: folder };
+    },
+    onError: (_, variable, mutateResult) => {
+      // rollback query data
+      queryClient.setQueryData(['folders'], mutateResult?.prevFolders);
+      if (mutateResult?.prevFolderWithBlocks) {
+        queryClient.setQueryData(
+          ['folder_with_blocks', variable.folder_id],
+          mutateResult?.prevFolderWithBlocks,
+        );
+      }
+    },
+    onSettled: (_, __, variable) => {
+      // invalidate queries
       queryClient.invalidateQueries({
-        queryKey: ['code_folder', value.folder_id],
+        queryKey: ['folders'],
       });
       queryClient.invalidateQueries({
-        queryKey: ['code_folders'],
+        queryKey: ['folders_with_blocks', variable.folder_id],
       });
     },
   });

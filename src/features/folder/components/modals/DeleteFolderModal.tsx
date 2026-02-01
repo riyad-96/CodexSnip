@@ -18,11 +18,11 @@ export default function DeleteFolderModal() {
           description={
             <span className="text-neutral-600">
               Permanently delete the{' '}
-              <span className="text-neutral-900">
+              <span className="text-neutral-900 font-medium">
                 '{folderDeleteDetails.folder_name || 'Unknown'}'
               </span>{' '}
-              folder? This action{' '}
-              <span className="text-neutral-900">is irreversible</span> and will
+              folder? This action is{' '}
+              <span className="text-neutral-900 font-medium"> irreversible</span> and will
               remove all code blocks inside it.
             </span>
           }

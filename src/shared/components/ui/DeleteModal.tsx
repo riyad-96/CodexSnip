@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import GlossyButton from './GlossyButton';
+import Button from './Button';
 import Modal from './Modal';
 
 type DeleteModalPropsType = {
@@ -27,24 +27,18 @@ export default function DeleteModal({
         <p className="text-neutral-600">{description}</p>
       </div>
       <div className="flex justify-end gap-2">
-        <GlossyButton
-          content={
-            <span className="grid h-9 place-items-center px-5">Cancel</span>
-          }
-          onClick={cancelFn}
-        />
+        <Button onClick={cancelFn}>
+          <span className="grid h-9 place-items-center px-5">Cancel</span>
+        </Button>
         <button
+          disabled={isLoading}
           onClick={() => {
             if (isLoading) return;
             clickFn();
           }}
           className="grid h-9 min-w-22.5 place-items-center rounded-xl border border-red-600 bg-red-600 px-5 text-sm text-white transition-colors active:scale-98 pointer-fine:cursor-pointer"
         >
-          {isLoading ? (
-            <span className="loading loading-spinner loading-xs opacity-80"></span>
-          ) : (
-            <span>Delete</span>
-          )}
+          <span>Delete</span>
         </button>
       </div>
     </Modal>

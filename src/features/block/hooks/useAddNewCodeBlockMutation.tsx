@@ -24,10 +24,7 @@ export default function useAddNewCodeBlockMutation() {
       setEditorState(null);
       setBlockEditDetails(null);
       queryClient.invalidateQueries({
-        queryKey: ['code_folder', folder_id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['code_partials', folder_id],
+        queryKey: ['folder_with_blocks', folder_id],
       });
     },
   });

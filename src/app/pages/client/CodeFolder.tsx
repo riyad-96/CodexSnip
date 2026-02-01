@@ -2,12 +2,12 @@ import { useCodeStore } from '@/features/folder/store/folder.store';
 import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 import { PencilLineIcon } from 'lucide-react';
 import EditorModal from '@/features/block/components/modal/EditorModal';
 import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
 import CodeFolderContent from '@/features/folder/components/CodeFolderContent';
-import useFetchCodeFolderQuery from '@/features/folder/hooks/useFetchCodeFolderQuery';
+import useFetchFolderQuery from '@/features/folder/hooks/useFetchFolderQuery';
 import BlockDeleteModal from '@/features/block/components/modal/BlockDeleteModal';
 
 export default function CodeFolder() {
@@ -17,7 +17,7 @@ export default function CodeFolder() {
     data: codeFolder,
     isLoading: codeFolderLoading,
     error: codeFolderError,
-  } = useFetchCodeFolderQuery({ folderId: codeFolderId });
+  } = useFetchFolderQuery({ folderId: codeFolderId });
 
   // udpate folder details
   const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
@@ -85,15 +85,7 @@ export default function CodeFolder() {
               startDelay: 400,
             }}
           >
-            <GlossyButton
-              content={
-                <span className="grid h-9 place-items-center px-3.5">
-                  <PencilLineIcon
-                    size={16}
-                    className="text-neutral-700"
-                  />
-                </span>
-              }
+            <Button
               onClick={() =>
                 setFolderUpdateDetails({
                   folder_name: codeFolder.folder_name,
@@ -101,7 +93,14 @@ export default function CodeFolder() {
                   folder_id: codeFolder._id,
                 })
               }
-            />
+            >
+              <span className="grid h-9 place-items-center px-3.5">
+                <PencilLineIcon
+                  size={16}
+                  className="text-neutral-700"
+                />
+              </span>
+            </Button>
           </Tooltip>
         </motion.div>
       </div>

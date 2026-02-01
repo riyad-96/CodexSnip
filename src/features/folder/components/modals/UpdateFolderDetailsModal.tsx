@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'motion/react';
 import { useCodeStore } from '../../store/folder.store';
 import type { UpdateFolderDetailsType } from '../../types/codeFolderTypes';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 import useUpdateFolderDetailsMutation from '../../hooks/useUpdateFolderDetailsMutation';
 import Modal from '@/shared/components/ui/Modal';
 import { isPointerDevice } from '@/shared/constants/general';
@@ -72,22 +72,10 @@ export default function UpdateFolderDetailsModal() {
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <GlossyButton
-              content={
-                <span className="grid h-9 place-items-center px-5">Cancel</span>
-              }
-              onClick={() => setFolderUpdateDetails(null)}
-            />
-            <GlossyButton
-              content={
-                <span className="grid h-9 min-w-20 place-items-center px-5">
-                  {updatingFolderDetails ? (
-                    <span className="loading loading-spinner loading-xs opacity-80"></span>
-                  ) : (
-                    <span>Update</span>
-                  )}
-                </span>
-              }
+            <Button onClick={() => setFolderUpdateDetails(null)}>
+              <span className="grid h-9 place-items-center px-5">Cancel</span>
+            </Button>
+            <Button
               onClick={() => {
                 if (updatingFolderDetails) return;
                 updateFolderDetails({
@@ -97,7 +85,12 @@ export default function UpdateFolderDetailsModal() {
                 });
               }}
               primary
-            />
+              disabled={updatingFolderDetails}
+            >
+              <span className="grid h-9 min-w-20 place-items-center px-5">
+                <span>Update</span>
+              </span>
+            </Button>
           </div>
         </Modal>
       )}

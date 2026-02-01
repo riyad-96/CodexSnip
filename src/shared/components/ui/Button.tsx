@@ -1,26 +1,28 @@
-import type { ReactNode } from 'react';
+type DefaultType = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 type GlossyButtonProps = {
-  content: string | ReactNode;
-  onClick?: () => void;
   primary?: boolean;
-};
+} & DefaultType;
 
-export default function GlossyButton({
-  content,
+export default function Button({
   onClick,
   primary,
+  ...rest
 }: GlossyButtonProps) {
   return (
     <button
       onClick={onClick}
       className={`grid origin-center overflow-hidden rounded-xl border text-sm transition-colors active:scale-98 pointer-fine:cursor-pointer ${
         primary
-          ? 'border-neutral-900 bg-neutral-900 text-neutral-100 tracking-wide'
+          ? 'border-neutral-900 bg-neutral-900 tracking-wide text-neutral-100'
           : 'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-400'
       }`}
+      {...rest}
     >
-      {content}
+      {rest.children}
     </button>
   );
 }

@@ -1,13 +1,12 @@
-import { auth } from "@/features/auth/lib/firebase.config";
-import { useAuthStore } from "@/features/auth/store/auth.store";
-import { ProfilePlaceholderSvg } from "@/shared/assets/Svgs";
-import FormatedDate from "@/shared/components/ui/FormatedDate";
-import GlossyButton from "@/shared/components/ui/GlossyButton";
-import { updateProfile, type User } from "firebase/auth";
-import { toast } from "kitzo";
-import { CameraIcon, MailIcon, UserIcon } from "lucide-react";
-import { useState } from "react";
-
+import { auth } from '@/features/auth/lib/firebase.config';
+import { useAuthStore } from '@/features/auth/store/auth.store';
+import { ProfilePlaceholderSvg } from '@/shared/assets/Svgs';
+import FormatedDate from '@/shared/components/ui/FormatedDate';
+import Button from '@/shared/components/ui/Button';
+import { updateProfile, type User } from 'firebase/auth';
+import { toast } from 'kitzo';
+import { CameraIcon, MailIcon, UserIcon } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Profile() {
   const user = useAuthStore((s) => s.user);
@@ -85,11 +84,12 @@ export default function Profile() {
                 <p className="text-sm text-neutral-600">{user?.email}</p>
               </div>
               {!isEditing && (
-                <GlossyButton
-                  content={<span className="px-5 py-2.5">Edit Profile</span>}
+                <Button
                   onClick={() => setIsEditing(true)}
                   primary
-                />
+                >
+                  <span className="px-5 py-2.5">Edit Profile</span>
+                </Button>
               )}
             </div>
             {/* Form Fields */}
@@ -183,27 +183,23 @@ export default function Profile() {
             {/* Action Buttons */}
             {isEditing && (
               <div className="mt-8 flex justify-end gap-2 border-t border-neutral-200 pt-6">
-                <GlossyButton
-                  content={
-                    <span className="grid h-9 place-items-center px-5">
-                      Cancel
-                    </span>
-                  }
-                  onClick={handleCancel}
-                />
-                <GlossyButton
-                  content={
-                    <span className="grid h-9 min-w-24 place-items-center px-5">
-                      {isSaving ? (
-                        <span className="loading loading-spinner loading-xs opacity-80"></span>
-                      ) : (
-                        <span>Save Changes</span>
-                      )}
-                    </span>
-                  }
+                <Button onClick={handleCancel}>
+                  <span className="grid h-9 place-items-center px-5">
+                    Cancel
+                  </span>
+                </Button>
+                <Button
                   onClick={handleSave}
                   primary
-                />
+                >
+                  <span className="grid h-9 min-w-24 place-items-center px-5">
+                    {isSaving ? (
+                      <span className="loading loading-spinner loading-xs opacity-80"></span>
+                    ) : (
+                      <span>Save Changes</span>
+                    )}
+                  </span>
+                </Button>
               </div>
             )}
           </div>

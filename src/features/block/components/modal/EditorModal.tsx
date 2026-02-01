@@ -3,7 +3,7 @@ import Modal from '@/shared/components/ui/Modal';
 import Select from '@/features/folder/components/Select';
 import { supportedLanguages } from '@/features/folder/lib/editorLanguage';
 import { supportedThemes } from '@/features/folder/lib/editorStyle';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 import { useBlockStore } from '@/features/block/store/block.store';
 import type { EditorValuesType } from '@/features/folder/types/editor';
 import useAddNewCodeBlockMutation from '../../hooks/useAddNewCodeBlockMutation';
@@ -11,7 +11,8 @@ import useUpdateCodeBlockMutation from '../../hooks/useUpdateCodeBlockMutation';
 import { AnimatePresence } from 'motion/react';
 
 export default function EditorModal() {
-  const { blockEditDetails, setBlockEditDetails, editorState, setEditorState } = useBlockStore();
+  const { blockEditDetails, setBlockEditDetails, editorState, setEditorState } =
+    useBlockStore();
 
   // mutation: add new code block
   const { mutate: addNewCodeBlock, isPending: isAddingCodeBlock } =
@@ -138,19 +139,16 @@ export default function EditorModal() {
 
           <div className="flex justify-end gap-2 pt-2">
             {!isAddingCodeBlock && !isUpdatingCodeBlock && (
-              <GlossyButton
-                content={
-                  <span className="grid h-9 place-items-center px-5">
-                    Cancel
-                  </span>
-                }
+              <Button
                 onClick={() => {
                   setEditorState(null);
                   setBlockEditDetails(null);
                 }}
-              />
+              >
+                <span className="grid h-9 place-items-center px-5">Cancel</span>
+              </Button>
             )}
-            <GlossyButton
+            <Button
               onClick={() => {
                 if (isAddingCodeBlock || isUpdatingCodeBlock) return;
                 if (editorState === 'new') {
@@ -162,19 +160,16 @@ export default function EditorModal() {
                   });
                 }
               }}
-              content={
-                <span className="grid h-9 min-w-25 place-items-center px-5">
-                  {isAddingCodeBlock || isUpdatingCodeBlock ? (
-                    <span className="loading loading-spinner loading-xs opacity-80"></span>
-                  ) : (
-                    <span>
-                      {editorState === 'new' ? 'Add block' : 'Update'}
-                    </span>
-                  )}
-                </span>
-              }
               primary
-            />
+            >
+              <span className="grid h-9 min-w-25 place-items-center px-5">
+                {isAddingCodeBlock || isUpdatingCodeBlock ? (
+                  <span className="loading loading-spinner loading-xs opacity-80"></span>
+                ) : (
+                  <span>{editorState === 'new' ? 'Add block' : 'Update'}</span>
+                )}
+              </span>
+            </Button>
           </div>
         </Modal>
       )}

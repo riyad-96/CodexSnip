@@ -23,7 +23,7 @@ export type CodeFolder = {
   updated_at: number | string | Date;
 };
 
-export type CodeFolderWithCodeBlocks = Omit<CodeFolder, 'code_blocks'> & {
+export type CodeFolderWithBlocks = Omit<CodeFolder, 'code_blocks'> & {
   code_blocks: CodeBlock[];
 };
 

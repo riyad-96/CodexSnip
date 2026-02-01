@@ -13,7 +13,7 @@ export default function HomeContent() {
   const user = useAuthStore((s) => s.user);
 
   const { isLoading, data } = useQuery<CodeFolder[]>({
-    queryKey: ['code_folders'],
+    queryKey: ['folders'],
     queryFn: async () => {
       const response = await server.get('/codefolder/getall');
       return response.data;

@@ -1,7 +1,7 @@
 import Modal from '@/shared/components/ui/Modal';
 import { useCodeStore } from '../../store/folder.store';
 import type { AddFolderDetailsType } from '../../types/codeFolderTypes';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 import { AnimatePresence } from 'motion/react';
 import useCreateNewFolderMutation from '../../hooks/useCreateNewFolderMutation';
 import { isPointerDevice } from '@/shared/constants/general';
@@ -72,22 +72,10 @@ export default function CreateNewFolderModal() {
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <GlossyButton
-              content={
-                <span className="grid h-9 place-items-center px-5">Cancel</span>
-              }
-              onClick={() => setFolderCreateDetails(null)}
-            />
-            <GlossyButton
-              content={
-                <span className="grid h-9 min-w-20 place-items-center px-5">
-                  {isNewFolderCreating ? (
-                    <span className="loading loading-spinner loading-xs opacity-80"></span>
-                  ) : (
-                    <span>Create</span>
-                  )}
-                </span>
-              }
+            <Button onClick={() => setFolderCreateDetails(null)}>
+              <span className="grid h-9 place-items-center px-5">Cancel</span>
+            </Button>
+            <Button
               onClick={() => {
                 if (isNewFolderCreating) return;
                 createNewFolder({
@@ -96,7 +84,15 @@ export default function CreateNewFolderModal() {
                 });
               }}
               primary
-            />
+            >
+              <span className="grid h-9 min-w-20 place-items-center px-5">
+                {isNewFolderCreating ? (
+                  <span className="loading loading-spinner loading-xs opacity-80"></span>
+                ) : (
+                  <span>Create</span>
+                )}
+              </span>
+            </Button>
           </div>
         </Modal>
       )}

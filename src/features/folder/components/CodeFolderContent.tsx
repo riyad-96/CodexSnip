@@ -2,7 +2,7 @@ import { Tooltip } from 'kitzo';
 import type { CodeBlock } from '../types/types';
 import { FileBracesCornerIcon, PlusIcon } from 'lucide-react';
 import { motion } from 'motion/react';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 import CodeNavMenu from './CodeNavMenu';
 import Block from '../../block/components/Block';
 import { useBlockStore } from '@/features/block/store/block.store';
@@ -38,19 +38,18 @@ export default function CodeFolderContent({
             className="relative z-5"
             layoutId="create-code-block-modal"
           >
-            <GlossyButton
-              content={
-                <span className="flex items-center gap-2 px-4 py-2.5">
-                  <PlusIcon
-                    size={16}
-                    strokeWidth="3"
-                  />
-                  <span>Add Block</span>
-                </span>
-              }
+            <Button
               onClick={() => setEditorState('new')}
               primary
-            />
+            >
+              <span className="flex items-center gap-2 px-4 py-2.5">
+                <PlusIcon
+                  size={16}
+                  strokeWidth="3"
+                />
+                <span>Add Block</span>
+              </span>
+            </Button>
           </motion.div>
         )}
       </div>
@@ -89,19 +88,18 @@ export default function CodeFolderContent({
                 Start by adding your first code block to this folder.
               </p>
               <div className="mx-auto w-fit">
-                <GlossyButton
-                  content={
-                    <span className="flex items-center gap-2 px-4 py-2.5">
-                      <PlusIcon
-                        size={16}
-                        strokeWidth="3"
-                      />
-                      <span>Add Block</span>
-                    </span>
-                  }
+                <Button
                   onClick={() => setEditorState('new')}
                   primary
-                />
+                >
+                  <span className="flex items-center gap-2 px-4 py-2.5">
+                    <PlusIcon
+                      size={16}
+                      strokeWidth="3"
+                    />
+                    <span>Add Block</span>
+                  </span>
+                </Button>
               </div>
             </div>
           </div>

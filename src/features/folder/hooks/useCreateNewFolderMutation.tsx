@@ -25,7 +25,7 @@ export default function useCreateNewFolderMutation({
     onSuccess() {
       setFolderCreateDetails(null);
       queryClient.invalidateQueries({
-        queryKey: ['code_folders'],
+        queryKey: ['folders'],
       });
     },
   });

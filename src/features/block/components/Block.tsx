@@ -2,7 +2,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import type { CodeBlock } from '../../folder/types/types';
 import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
 import { getStyle, supportedThemes } from '../../folder/lib/editorStyle';
-import GlossyButton from '@/shared/components/ui/GlossyButton';
+import Button from '@/shared/components/ui/Button';
 
 import { AnimatePresence, motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
@@ -86,15 +86,7 @@ export default function Block({ block }: CodeBlockViewProps) {
             layoutId={`delete-modal_${block._id}`}
           >
             <Tooltip content="Delete!">
-              <GlossyButton
-                content={
-                  <span className="grid h-8 place-items-center px-3.5">
-                    <Trash2Icon
-                      size={16}
-                      className="text-neutral-700"
-                    />
-                  </span>
-                }
+              <Button
                 onClick={() =>
                   setBlockDeleteDetails({
                     folder_id: block?.folder_id,
@@ -102,7 +94,14 @@ export default function Block({ block }: CodeBlockViewProps) {
                     code_block_title: block?.title,
                   })
                 }
-              />
+              >
+                <span className="grid h-8 place-items-center px-3.5">
+                  <Trash2Icon
+                    size={16}
+                    className="text-neutral-700"
+                  />
+                </span>
+              </Button>
             </Tooltip>
           </motion.div>
 
@@ -111,56 +110,52 @@ export default function Block({ block }: CodeBlockViewProps) {
             layoutId={`update-code-block-modal-${block._id}`}
           >
             <Tooltip content="Edit">
-              <GlossyButton
-                content={
-                  <span className="grid h-8 place-items-center px-3.5">
-                    <PencilLineIcon
-                      size={16}
-                      className="text-neutral-700"
-                    />
-                  </span>
-                }
+              <Button
                 onClick={() => {
                   setBlockEditDetails(block);
                   setEditorState('update');
                 }}
-              />
+              >
+                <span className="grid h-8 place-items-center px-3.5">
+                  <PencilLineIcon
+                    size={16}
+                    className="text-neutral-700"
+                  />
+                </span>
+              </Button>
             </Tooltip>
           </motion.div>
 
           <Tooltip content={isCopied ? 'Copied' : 'Copy'}>
-            <GlossyButton
-              content={
-                <span className="relative grid h-8 w-11 place-items-center">
-                  <AnimatePresence mode="wait">
-                    {isCopied ? (
-                      <motion.span
-                        key="copyied-icon"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.8, opacity: 0 }}
-                        transition={{ duration: 0.1 }}
-                        className="absolute text-neutral-700"
-                      >
-                        <CheckIcon size={16} />
-                      </motion.span>
-                    ) : (
-                      <motion.span
-                        key="copy-icon"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.8, opacity: 0 }}
-                        transition={{ duration: 0.1 }}
-                        className="absolute text-neutral-700"
-                      >
-                        <CopyIcon size={16} />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </span>
-              }
-              onClick={() => copy(block?.code)}
-            />
+            <Button onClick={() => copy(block?.code)}>
+              <span className="relative grid h-8 w-11 place-items-center">
+                <AnimatePresence mode="wait">
+                  {isCopied ? (
+                    <motion.span
+                      key="copyied-icon"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.8, opacity: 0 }}
+                      transition={{ duration: 0.1 }}
+                      className="absolute text-neutral-700"
+                    >
+                      <CheckIcon size={16} />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="copy-icon"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.8, opacity: 0 }}
+                      transition={{ duration: 0.1 }}
+                      className="absolute text-neutral-700"
+                    >
+                      <CopyIcon size={16} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </span>
+            </Button>
           </Tooltip>
         </div>
       </div>

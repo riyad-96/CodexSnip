@@ -18,20 +18,14 @@ export default function useUpdateCodeBlockMutation() {
       });
       return response.data;
     },
-    onSuccess: (_data, { code_block_id }) => {
+    onSuccess: () => {
       setEditorState(null);
       setBlockEditDetails(null);
       queryClient.invalidateQueries({
-        queryKey: ['code_folder', blockEditDetails?.folder_id],
+        queryKey: ['folders'],
       });
       queryClient.invalidateQueries({
-        queryKey: ['code_block', code_block_id],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['code_folders'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['code_partials', blockEditDetails?.folder_id],
+        queryKey: ['folder_with_blocks', blockEditDetails?.folder_id],
       });
     },
   });
