@@ -14,7 +14,6 @@ export default function DeleteFolderModal() {
     <AnimatePresence>
       {folderDeleteDetails && (
         <DeleteModal
-          layoutId={`delete-modal_${folderDeleteDetails.folder_id}`}
           title="Delete this folder!"
           description={
             <span className="text-neutral-600">
