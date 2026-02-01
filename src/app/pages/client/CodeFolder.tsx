@@ -1,49 +1,26 @@
-import { useAuthStore } from '@/features/auth/store/auth.store';
-import useDeleteCodeBlockMutation from '@/features/block/hooks/useDeleteCodeBlockMutation';
 import { useCodeStore } from '@/features/folder/store/folder.store';
-import type { CodeFolderWithCodeBlocks } from '@/features/folder/types/types';
-import useAxios from '@/shared/hooks/useAxios';
-import { useQuery } from '@tanstack/react-query';
-import type { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
 import GlossyButton from '@/shared/components/ui/GlossyButton';
 import { PencilLineIcon } from 'lucide-react';
 import EditorModal from '@/features/block/components/modal/EditorModal';
-import DeleteModal from '@/shared/components/ui/DeleteModal';
 import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
 import CodeFolderContent from '@/features/folder/components/CodeFolderContent';
-import { useBlockStore } from '@/features/block/store/block.store';
+import useFetchCodeFolderQuery from '@/features/folder/hooks/useFetchCodeFolderQuery';
+import BlockDeleteModal from '@/features/block/components/modal/BlockDeleteModal';
 
 export default function CodeFolder() {
-  const user = useAuthStore((s) => s.user);
-
-  const { blockDeleteDetails, setBlockDeleteDetails } = useBlockStore();
-
-  const server = useAxios();
-  const params = useParams();
-  const codeFolderId = params.id as string;
+  const codeFolderId = useParams().id as string;
 
   const {
     data: codeFolder,
     isLoading: codeFolderLoading,
     error: codeFolderError,
-  } = useQuery<CodeFolderWithCodeBlocks, AxiosError>({
-    queryKey: ['code_folder', codeFolderId],
-    queryFn: async () => {
-      const response = await server.get(`/codefolder/get/${codeFolderId}`);
-      return response.data;
-    },
-    enabled: !!user,
-  });
+  } = useFetchCodeFolderQuery({ folderId: codeFolderId });
 
   // udpate folder details
-  const { setFolderUpdateDetails } = useCodeStore();
-
-  // mutation: delete code block
-  const { mutate: deleteCodeBlock, isPending: isDeletingCodeBlock } =
-    useDeleteCodeBlockMutation({ codeFolderId });
+  const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
 
   if (codeFolderLoading) {
     return (
@@ -130,32 +107,9 @@ export default function CodeFolder() {
       </div>
 
       <CodeFolderContent code_blocks={codeFolder.code_blocks} />
+
       <EditorModal />
-
-      <AnimatePresence>
-        {blockDeleteDetails && (
-          <DeleteModal
-            layoutId={`delete-modal_${blockDeleteDetails.code_block_id}`}
-            title="Delete code block!"
-            description={
-              <span className="tracking-wide text-neutral-600">
-                Delete '
-                <span className="text-neutral-900">
-                  {blockDeleteDetails.code_block_title || 'Untitled'}
-                </span>
-                ' code block permanently? This action is irreversible.
-              </span>
-            }
-            isLoading={isDeletingCodeBlock}
-            cancelFn={() => setBlockDeleteDetails(null)}
-            clickFn={() => {
-              if (isDeletingCodeBlock) return;
-              deleteCodeBlock(blockDeleteDetails.code_block_id);
-            }}
-          />
-        )}
-      </AnimatePresence>
-
+      <BlockDeleteModal />
       <UpdateFolderDetailsModal />
     </div>
   );

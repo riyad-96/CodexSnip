@@ -3,7 +3,6 @@ import GlossyButton from './GlossyButton';
 import Modal from './Modal';
 
 type DeleteModalPropsType = {
-  layoutId?: string;
   title: ReactNode;
   description: ReactNode;
   cancelFn: () => void;
