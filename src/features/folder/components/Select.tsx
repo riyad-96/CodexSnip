@@ -1,9 +1,8 @@
-import { useState } from "react";
-import type { SupportedLanguagesType } from "../lib/editorLanguage";
-import type { SupportedThemesType } from "../lib/editorStyle";
-import useDropdownClose from "@/shared/hooks/useDropdownClose";
-import { ChevronDownIcon } from "lucide-react";
-
+import { useEffect, useState } from 'react';
+import type { SupportedLanguagesType } from '../lib/editorLanguage';
+import type { SupportedThemesType } from '../lib/editorStyle';
+import useDropdownClose from '@/shared/hooks/useDropdownClose';
+import { ChevronDownIcon } from 'lucide-react';
 
 type Options = SupportedThemesType | SupportedLanguagesType;
 
@@ -34,6 +33,14 @@ export default function Select<T extends Options>({
     },
     ignoredSelectors: [`.${randomClass}`],
   });
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const selectedOptions = document.querySelector(
+      '.selected-option',
+    ) as HTMLDivElement;
+    selectedOptions.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }, [isOpen]);
 
   return (
     <div
@@ -73,8 +80,8 @@ export default function Select<T extends Options>({
             <button
               className={`px-4 py-2.5 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
                 defaultOption?.value === o.value
-                  ? 'bg-neutral-900 text-white'
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  ? 'selected-option bg-neutral-200'
+                  : 'hover:bg-neutral-100'
               }`}
               onClick={() => {
                 onChange(o);
