@@ -1,5 +1,4 @@
-import Logo from "../header/Logo";
-
+import Logo from '../header/Logo';
 
 export default function LoadingScreen() {
   return (

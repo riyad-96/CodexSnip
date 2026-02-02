@@ -1,7 +1,6 @@
-import { EyeClosedIcon, EyeIcon } from "lucide-react";
-import { useState, type HTMLInputTypeAttribute } from "react";
-import ErrorElement from "./ErrorElement";
-
+import { EyeClosedIcon, EyeIcon } from 'lucide-react';
+import { useState, type HTMLInputTypeAttribute } from 'react';
+import ErrorElement from './ErrorElement';
 
 type InputFieldPropsTypes = React.InputHTMLAttributes<HTMLInputElement> & {
   id: string;
@@ -21,7 +20,10 @@ export default function InputField({
 
   return (
     <div className="grid gap-1">
-      <label className="pl-1 w-fit" htmlFor={id}>
+      <label
+        className="w-fit pl-1"
+        htmlFor={id}
+      >
         {label}
       </label>
       <div className="relative">

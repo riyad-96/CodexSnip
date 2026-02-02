@@ -1,8 +1,8 @@
-import type { CodeBlock, CodeFolder } from '@/features/folder/types/types';
+import type { Block, Folder } from '@/features/folder/types/types';
 import { useSearchStore } from '../store/search.store';
 import { useState } from 'react';
 import { useDebounce } from 'kitzo';
-import useAxios from '@/shared/hooks/useAxios';
+import api from '@/shared/api';
 import { useQuery } from '@tanstack/react-query';
 import Modal from '@/shared/components/ui/Modal';
 import {
@@ -13,11 +13,12 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { UNTITLED_BLOCK, UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
 
 type QueryFnDataType = {
-  codes: CodeBlock[];
-  folders: CodeFolder[];
+  codes: Block[];
+  folders: Folder[];
 };
 
 export default function SearchModal() {
@@ -25,12 +26,11 @@ export default function SearchModal() {
 
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
-  const server = useAxios();
 
   const { data, isLoading, error } = useQuery<QueryFnDataType>({
     queryKey: ['search', debouncedSearch],
     queryFn: async () => {
-      const response = await server.post('/code/search', {
+      const response = await api.post('/code/search', {
         search: debouncedSearch,
       });
       return response.data;
@@ -131,9 +131,10 @@ export default function SearchModal() {
                     </div>
                     <div className="space-y-2">
                       {data.codes.map((c) => (
-                        <div
+                        <motion.div
+                          layoutId={c._id}
                           key={c._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:hover:border-neutral-400 pointer-fine:cursor-pointer"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -150,7 +151,7 @@ export default function SearchModal() {
                             </div>
                             <div className="grid min-w-0 gap-1">
                               <h4 className="tracking-tight">
-                                {c.title || 'Untitled block'}
+                                {c.title || UNTITLED_BLOCK}
                               </h4>
                               <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
                                 {c.description || 'No description'}
@@ -165,7 +166,7 @@ export default function SearchModal() {
                               className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
@@ -184,9 +185,10 @@ export default function SearchModal() {
                     </div>
                     <div className="space-y-2">
                       {data.folders.map((f) => (
-                        <div
+                        <motion.div
+                          layoutId={f._id}
                           key={f._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:hover:border-neutral-400 pointer-fine:cursor-pointer"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -203,7 +205,7 @@ export default function SearchModal() {
                             </div>
                             <div className="grid min-w-0 gap-1">
                               <h4 className="tracking-tight">
-                                {f.folder_name || 'Untitled folder'}
+                                {f.folder_name || UNTITLED_FOLDER}
                               </h4>
                               <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
                                 {f.folder_description || 'No description'}
@@ -218,7 +220,7 @@ export default function SearchModal() {
                               className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>

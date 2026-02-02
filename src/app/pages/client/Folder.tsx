@@ -4,13 +4,11 @@ import { motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
 import Button from '@/shared/components/ui/Button';
 import { PencilLineIcon } from 'lucide-react';
-import EditorModal from '@/features/block/components/modal/EditorModal';
-import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
-import CodeFolderContent from '@/features/folder/components/CodeFolderContent';
+import FolderContent from '@/features/folder/components/FolderContent';
 import useFetchFolderQuery from '@/features/folder/hooks/useFetchFolderQuery';
-import BlockDeleteModal from '@/features/block/components/modal/BlockDeleteModal';
+import { UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
 
-export default function CodeFolder() {
+export default function Folder() {
   const codeFolderId = useParams().id as string;
 
   const {
@@ -65,7 +63,7 @@ export default function CodeFolder() {
       <div className="mb-6 flex items-start gap-3">
         <div className="flex-1 space-y-2 pl-2">
           <h2 className="text-2xl tracking-tight">
-            {codeFolder?.folder_name || 'Unknown folder name'}
+            {codeFolder?.folder_name || UNTITLED_FOLDER}
           </h2>
           <p className="leading-relaxed text-neutral-600">
             {codeFolder?.folder_description || 'No description yet'}
@@ -105,11 +103,7 @@ export default function CodeFolder() {
         </motion.div>
       </div>
 
-      <CodeFolderContent code_blocks={codeFolder.code_blocks} />
-
-      <EditorModal />
-      <BlockDeleteModal />
-      <UpdateFolderDetailsModal />
+      <FolderContent code_blocks={codeFolder.code_blocks} />
     </div>
   );
 }

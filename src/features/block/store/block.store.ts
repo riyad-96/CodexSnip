@@ -1,5 +1,5 @@
 import type { DeleteInfoType } from '@/features/folder/types/editor';
-import type { CodeBlock } from '@/features/folder/types/types';
+import type { Block } from '@/features/folder/types/types';
 import type { SetState } from '@/shared/types';
 import { create } from 'zustand';
 
@@ -8,8 +8,8 @@ type BlockStore = {
   setEditorState: SetState<'new' | 'update' | null>;
   blockDeleteDetails: DeleteInfoType | null;
   setBlockDeleteDetails: SetState<DeleteInfoType | null>;
-  blockEditDetails: CodeBlock | null;
-  setBlockEditDetails: SetState<CodeBlock | null>;
+  blockEditDetails: Block | null;
+  setBlockEditDetails: SetState<Block | null>;
 };
 
 const store = create<BlockStore>((set) => ({

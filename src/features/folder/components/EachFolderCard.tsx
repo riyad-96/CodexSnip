@@ -1,6 +1,6 @@
 import { useCodeStore } from '@/features/folder/store/folder.store';
-import type { CodeFolder } from '@/features/folder/types/types';
-import useAxios from '@/shared/hooks/useAxios';
+import type { Folder } from '@/features/folder/types/types';
+import api from '@/shared/api';
 import useDropdownClose from '@/shared/hooks/useDropdownClose';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -15,16 +15,17 @@ import {
   XIcon,
 } from 'lucide-react';
 import FormatedDate from '@/shared/components/ui/FormatedDate';
+import { UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
 
-type EachCodeFolderCard = {
+type EachFolderCard = {
   i: number;
-  folder: CodeFolder;
+  folder: Folder;
 };
 
-export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
+export default function EachFolderCard({ i, folder }: EachFolderCard) {
   const { _id, code_blocks, folder_name, folder_description, updated_at } =
     folder;
-  const server = useAxios();
+
   const navigate = useNavigate();
 
   const [dropdownShowing, setDropdownShowing] = useState(false);
@@ -49,7 +50,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
           queryClient.prefetchQuery({
             queryKey: ['folder_with_blocks', _id],
             queryFn: async () => {
-              const response = await server.get(`/codefolder/get/${_id}`);
+              const response = await api.get(`/codefolder/get/${_id}`);
               return response.data;
             },
           });
@@ -159,7 +160,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
                         folder_name: folder_name,
                       });
                     }}
-                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:cursor-pointer pointer-fine:hover:bg-neutral-100"
                   >
                     <Trash2Icon
                       size={16}
@@ -176,7 +177,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
 
       <div className="mb-4 space-y-2">
         <h3 className="line-clamp-2 max-w-8/10 tracking-tight">
-          {folder_name || 'Unknown'}
+          {folder_name || UNTITLED_FOLDER}
         </h3>
         <p className="line-clamp-2 leading-relaxed text-neutral-600 sm:line-clamp-3 lg:line-clamp-4">
           {folder_description || 'Click to view folder content'}

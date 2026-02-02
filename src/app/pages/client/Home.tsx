@@ -1,6 +1,5 @@
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import HomeContent from '@/features/folder/components/HomeContent';
-import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
 import DeleteFolderModal from '@/features/folder/components/modals/DeleteFolderModal';
 import CreateNewFolderModal from '@/features/folder/components/modals/CreateNewFolderModal';
 
@@ -23,7 +22,6 @@ export default function Home() {
       <HomeContent />
 
       <CreateNewFolderModal />
-      <UpdateFolderDetailsModal />
       <DeleteFolderModal />
     </div>
   );

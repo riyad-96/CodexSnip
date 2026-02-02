@@ -52,7 +52,7 @@ export default function Select<T extends Options>({
           onClick={() => {
             setIsOpen((prev) => !prev);
           }}
-          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors pointer-fine:hover:bg-neutral-50 pointer-fine:cursor-pointer`}
+          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors pointer-fine:cursor-pointer pointer-fine:hover:bg-neutral-50`}
         >
           <span className="line-clamp-1 text-sm text-nowrap text-neutral-900">
             {defaultOption?.name}

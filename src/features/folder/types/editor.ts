@@ -7,6 +7,7 @@ export type EditorValuesType = {
 };
 
 export type EditorUpdateValuesType = EditorValuesType & {
+  folder_id: string;
   code_block_id: string;
 };
 

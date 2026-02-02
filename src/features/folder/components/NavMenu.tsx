@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import type { CodeBlock } from '../types/types';
+import type { Block } from '../types/types';
 import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
+import { UNTITLED_BLOCK } from '@/shared/constants/fallbacks';
 
-type CodeNavMenuPropsType = {
-  code_blocks: CodeBlock[];
+type NavMenuPropsType = {
+  code_blocks: Block[];
 };
 
-export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
+export default function NavMenu({ code_blocks }: NavMenuPropsType) {
   const hash = location.hash;
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
               }`}
             >
               <span className="line-clamp-1">
-                {p.title.trim() || 'Untitled'}
+                {p.title.trim() || UNTITLED_BLOCK}
               </span>
               <a
                 onClick={() => {

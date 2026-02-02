@@ -3,6 +3,7 @@ import useDeleteCodeBlockMutation from '../../hooks/useDeleteCodeBlockMutation';
 import { useBlockStore } from '../../store/block.store';
 import { AnimatePresence } from 'motion/react';
 import DeleteModal from '@/shared/components/ui/DeleteModal';
+import { UNTITLED_BLOCK } from '@/shared/constants/fallbacks';
 
 export default function BlockDeleteModal() {
   const { blockDeleteDetails, setBlockDeleteDetails } = useBlockStore();
@@ -21,7 +22,7 @@ export default function BlockDeleteModal() {
             <span className="tracking-wide text-neutral-600">
               Delete '
               <span className="text-neutral-900">
-                {blockDeleteDetails.code_block_title || 'Untitled'}
+                {blockDeleteDetails.code_block_title || UNTITLED_BLOCK}
               </span>
               ' code block permanently? This action is irreversible.
             </span>

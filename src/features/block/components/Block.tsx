@@ -1,5 +1,5 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import type { CodeBlock } from '../../folder/types/types';
+import type { Block } from '../../folder/types/types';
 import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
 import { getStyle, supportedThemes } from '../../folder/lib/editorStyle';
 import Button from '@/shared/components/ui/Button';
@@ -11,9 +11,10 @@ import { supportedLanguages } from '../../folder/lib/editorLanguage';
 import { CheckIcon, CopyIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
 import { useCopy } from 'kitzo';
 import { useBlockStore } from '@/features/block/store/block.store';
+import { UNTITLED_BLOCK } from '@/shared/constants/fallbacks';
 
 type CodeBlockViewProps = {
-  block: CodeBlock;
+  block: Block;
 };
 
 export default function Block({ block }: CodeBlockViewProps) {
@@ -48,7 +49,7 @@ export default function Block({ block }: CodeBlockViewProps) {
           {block?.title ? (
             block?.title
           ) : (
-            <span className="text-neutral-400">Untitled code block</span>
+            <span className="text-neutral-400">{UNTITLED_BLOCK}</span>
           )}
         </h3>
         <p className="leading-relaxed text-neutral-600">

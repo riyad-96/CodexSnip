@@ -1,20 +1,20 @@
 import { Tooltip } from 'kitzo';
-import type { CodeBlock } from '../types/types';
+import type { Block as BlockT } from '../types/types';
 import { FileBracesCornerIcon, PlusIcon } from 'lucide-react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import Button from '@/shared/components/ui/Button';
-import CodeNavMenu from './CodeNavMenu';
+import NavMenu from './NavMenu';
 import Block from '../../block/components/Block';
 import { useBlockStore } from '@/features/block/store/block.store';
+import EditorModal from '@/features/block/components/modal/EditorModal';
+import BlockDeleteModal from '@/features/block/components/modal/BlockDeleteModal';
 
-type CodeFolderContentType = {
-  code_blocks: CodeBlock[];
+type FolderContentType = {
+  code_blocks: BlockT[];
 };
 
-export default function CodeFolderContent({
-  code_blocks,
-}: CodeFolderContentType) {
-  const setEditorState = useBlockStore((s) => s.setEditorState);
+export default function FolderContent({ code_blocks }: FolderContentType) {
+  const { editorState, setEditorState } = useBlockStore();
 
   return (
     <>
@@ -60,7 +60,7 @@ export default function CodeFolderContent({
         >
           {code_blocks.length > 1 && (
             <div className="w-50 max-md:hidden">
-              <CodeNavMenu code_blocks={code_blocks} />
+              <NavMenu code_blocks={code_blocks} />
             </div>
           )}
 
@@ -105,6 +105,9 @@ export default function CodeFolderContent({
           </div>
         </div>
       )}
+
+      <AnimatePresence>{editorState && <EditorModal />}</AnimatePresence>
+      <BlockDeleteModal />
     </>
   );
 }

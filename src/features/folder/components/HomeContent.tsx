@@ -1,21 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCodeStore } from '../store/folder.store';
 import { useNavigate } from 'react-router-dom';
-import useAxios from '@/shared/hooks/useAxios';
-import type { CodeFolder } from '../types/types';
+import api from '@/shared/api';
+import type { Folder } from '../types/types';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { LogInIcon, PlusIcon } from 'lucide-react';
-import EachCodeFolderCard from './EachCodeFolderCard';
+import EachFolderCard from './EachFolderCard';
 
 export default function HomeContent() {
   const navigate = useNavigate();
-  const server = useAxios();
+
   const user = useAuthStore((s) => s.user);
 
-  const { isLoading, data } = useQuery<CodeFolder[]>({
+  const { isLoading, data } = useQuery<Folder[]>({
     queryKey: ['folders'],
     queryFn: async () => {
-      const response = await server.get('/codefolder/getall');
+      const response = await api.get('/codefolder/getall');
       return response.data;
     },
     enabled: !!user,
@@ -34,7 +34,7 @@ export default function HomeContent() {
         </div>
       ) : (
         <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
-          <div className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none pointer-fine:hover:border-neutral-400 pointer-fine:cursor-pointer">
+          <div className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400">
             <div className="grid justify-items-center gap-2">
               {user ? (
                 <>
@@ -77,7 +77,7 @@ export default function HomeContent() {
 
           {user &&
             data?.map((f, i) => (
-              <EachCodeFolderCard
+              <EachFolderCard
                 key={f._id}
                 i={i}
                 folder={f}

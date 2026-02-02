@@ -1,3 +1,6 @@
+import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
+import { PrefetchFolders } from '@/features/prefetch/prefetchFolders';
+import { PrefetchSearchData } from '@/features/prefetch/prefetchSearchData';
 import SearchModal from '@/features/search/components/SearchModal';
 import Footer from '@/shared/components/footer/Footer';
 import Header from '@/shared/components/header/Header';
@@ -13,7 +16,10 @@ export default function AppLayout() {
       </main>
       <Footer />
 
+      <PrefetchFolders />
+      <PrefetchSearchData />
       <SearchModal />
+      <UpdateFolderDetailsModal />
     </div>
   );
 }

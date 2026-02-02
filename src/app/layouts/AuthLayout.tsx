@@ -1,11 +1,10 @@
-import { auth, googleProvider } from "@/features/auth/lib/firebase.config";
-import { GoogleIcon } from "@/shared/assets/Svgs";
-import Logo from "@/shared/components/header/Logo";
-import { signInWithPopup } from "firebase/auth";
-import { toast } from "kitzo";
-import { useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-
+import { auth, googleProvider } from '@/features/auth/lib/firebase.config';
+import { GoogleIcon } from '@/shared/assets/Svgs';
+import Logo from '@/shared/components/header/Logo';
+import { signInWithPopup } from 'firebase/auth';
+import { toast } from 'kitzo';
+import { useState } from 'react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 export default function AuthLayout() {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import useAxios from '@/shared/hooks/useAxios';
+import api from '@/shared/api';
 import type { AddFolderDetailsType } from '../types/codeFolderTypes';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/main';
@@ -12,11 +12,9 @@ type UseCreateNewFolderMutation = {
 export default function useCreateNewFolderMutation({
   setFolderCreateDetails,
 }: UseCreateNewFolderMutation) {
-  const server = useAxios();
-
   return useMutation({
     mutationFn: async (value: AddFolderDetailsType) => {
-      const response = await server.post('/codefolder/add', {
+      const response = await api.post('/codefolder/add', {
         folder_name: value.folder_name,
         folder_description: value.folder_description,
       });

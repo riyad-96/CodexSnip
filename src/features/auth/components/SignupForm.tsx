@@ -1,12 +1,11 @@
-import { useForm } from "react-hook-form";
-import type { EmailPassword } from "../types/types";
-import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../lib/firebase.config";
-import type { FirebaseError } from "firebase/app";
-import { toast } from "kitzo";
-import InputField from "./InputField";
-
+import { useForm } from 'react-hook-form';
+import type { EmailPassword } from '../types/types';
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../lib/firebase.config';
+import type { FirebaseError } from 'firebase/app';
+import { toast } from 'kitzo';
+import InputField from './InputField';
 
 export default function SignupForm() {
   const {

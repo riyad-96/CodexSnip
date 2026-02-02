@@ -1,14 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import RootLayout from "./layouts/RootLayout";
-import AppLayout from "./layouts/AppLayout";
-import Home from "./pages/client/Home";
-import ProtectedPageWrapper from "@/shared/components/wrapper/ProtectedPageWrapper";
-import CodeFolder from "./pages/client/CodeFolder";
-import Profile from "./pages/client/Profile";
-import AuthProtectedWrapper from "@/features/auth/components/AuthProtectedWrapper";
-import AuthLayout from "./layouts/AuthLayout";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
+import { createBrowserRouter } from 'react-router-dom';
+import RootLayout from './layouts/RootLayout';
+import AppLayout from './layouts/AppLayout';
+import Home from './pages/client/Home';
+import ProtectedPageWrapper from '@/shared/components/wrapper/ProtectedPageWrapper';
+import Folder from './pages/client/Folder';
+import Profile from './pages/client/Profile';
+import AuthProtectedWrapper from '@/features/auth/components/AuthProtectedWrapper';
+import AuthLayout from './layouts/AuthLayout';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Signup';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: 'code/:id',
-                element: <CodeFolder />,
+                element: <Folder />,
               },
               {
                 path: 'profile',

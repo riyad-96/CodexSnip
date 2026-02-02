@@ -1,7 +1,6 @@
-import type { ReactNode } from "react";
-import { useAuthStore } from "../store/auth.store";
-import { Navigate, useLocation } from "react-router-dom";
-
+import type { ReactNode } from 'react';
+import { useAuthStore } from '../store/auth.store';
+import { Navigate, useLocation } from 'react-router-dom';
 
 export default function AuthProtectedWrapper({
   children,

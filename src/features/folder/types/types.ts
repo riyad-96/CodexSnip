@@ -1,4 +1,4 @@
-export type CodeBlock = {
+export type Block = {
   _id: string;
   uid: string;
   folder_id: string;
@@ -12,7 +12,7 @@ export type CodeBlock = {
   updated_at: number | string | Date;
 };
 
-export type CodeFolder = {
+export type Folder = {
   _id: string;
   uid: string;
   email: string;
@@ -23,11 +23,11 @@ export type CodeFolder = {
   updated_at: number | string | Date;
 };
 
-export type CodeFolderWithBlocks = Omit<CodeFolder, 'code_blocks'> & {
-  code_blocks: CodeBlock[];
+export type CodeFolderWithBlocks = Omit<Folder, 'code_blocks'> & {
+  code_blocks: Block[];
 };
 
 export type ClientCodeFolderPostType = Omit<
-  CodeFolder,
+  Folder,
   '_id' | 'created_at' | 'updated_at'
 >;
