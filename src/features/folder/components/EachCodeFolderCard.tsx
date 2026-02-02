@@ -41,7 +41,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
   return (
     <motion.div
       layout
-      className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 hover:border-neutral-400'}`}
+      className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 pointer-fine:hover:border-neutral-400'}`}
       onMouseEnter={() => {
         const data = queryClient.getQueryData(['folder_with_blocks', _id]);
 
@@ -83,7 +83,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
               }
               setDropdownShowing(true);
             }}
-            className={`dropdown-close-btn-${i} $hover:border-neutral-400 grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors active:scale-95`}
+            className={`dropdown-close-btn-${i} grid size-8 place-items-center rounded-lg border border-neutral-200 bg-white transition-colors active:scale-95 pointer-fine:hover:border-neutral-400`}
           >
             <span className="pointer-events-none relative grid size-full place-items-center overflow-hidden rounded-md">
               <AnimatePresence mode="wait">
@@ -138,7 +138,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
                         folder_description: folder_description,
                       });
                     }}
-                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:hover:bg-neutral-100"
                   >
                     <PencilLineIcon
                       size={16}
@@ -159,7 +159,7 @@ export default function EachCodeFolderCard({ i, folder }: EachCodeFolderCard) {
                         folder_name: folder_name,
                       });
                     }}
-                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors hover:bg-neutral-100 pointer-fine:cursor-pointer"
+                    className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:hover:bg-neutral-100 pointer-fine:cursor-pointer"
                   >
                     <Trash2Icon
                       size={16}

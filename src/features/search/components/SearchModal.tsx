@@ -133,7 +133,7 @@ export default function SearchModal() {
                       {data.codes.map((c) => (
                         <div
                           key={c._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-400 pointer-fine:cursor-pointer"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:hover:border-neutral-400 pointer-fine:cursor-pointer"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -162,7 +162,7 @@ export default function SearchModal() {
                             <ChevronRightIcon
                               strokeWidth={1.5}
                               size={20}
-                              className="text-neutral-400 transition-all group-hover:translate-x-1 group-hover:text-neutral-900"
+                              className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
                         </div>
@@ -186,7 +186,7 @@ export default function SearchModal() {
                       {data.folders.map((f) => (
                         <div
                           key={f._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 hover:border-neutral-400 pointer-fine:cursor-pointer"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:hover:border-neutral-400 pointer-fine:cursor-pointer"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -215,7 +215,7 @@ export default function SearchModal() {
                             <ChevronRightIcon
                               strokeWidth={1.5}
                               size={20}
-                              className="text-neutral-400 transition-all group-hover:translate-x-1 group-hover:text-neutral-900"
+                              className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
                         </div>

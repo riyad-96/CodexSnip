@@ -52,7 +52,7 @@ export default function Select<T extends Options>({
           onClick={() => {
             setIsOpen((prev) => !prev);
           }}
-          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors hover:bg-neutral-50 pointer-fine:cursor-pointer`}
+          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors pointer-fine:hover:bg-neutral-50 pointer-fine:cursor-pointer`}
         >
           <span className="line-clamp-1 text-sm text-nowrap text-neutral-900">
             {defaultOption?.name}
@@ -81,7 +81,7 @@ export default function Select<T extends Options>({
               className={`px-4 py-2.5 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
                 defaultOption?.value === o.value
                   ? 'selected-option bg-neutral-200'
-                  : 'hover:bg-neutral-100'
+                  : 'pointer-fine:hover:bg-neutral-100'
               }`}
               onClick={() => {
                 onChange(o);

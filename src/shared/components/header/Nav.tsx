@@ -85,7 +85,7 @@ export default function Nav() {
                         navigate('/profile');
                         setDropdownShowing(false);
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100"
+                      className="w-full px-4 py-2.5 text-start transition-colors pointer-fine:hover:bg-neutral-100"
                     >
                       Profile
                     </button>
@@ -98,7 +98,7 @@ export default function Nav() {
                           setDropdownShowing(false);
                         });
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors hover:bg-neutral-100"
+                      className="w-full px-4 py-2.5 text-start transition-colors pointer-fine:hover:bg-neutral-100"
                     >
                       Logout
                     </button>
@@ -111,7 +111,7 @@ export default function Nav() {
       ) : (
         <div className="flex gap-2">
           <Link
-            className="rounded-xl px-4 py-2 text-sm transition-colors hover:bg-neutral-100"
+            className="rounded-xl px-4 py-2 text-sm transition-colors pointer-fine:hover:bg-neutral-100"
             to="/auth/login"
           >
             Login

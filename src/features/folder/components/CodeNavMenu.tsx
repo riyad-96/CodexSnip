@@ -35,7 +35,7 @@ export default function CodeNavMenu({ code_blocks }: CodeNavMenuPropsType) {
               className={`relative px-4 py-2.5 text-sm pointer-fine:cursor-pointer ${
                 hash === link
                   ? 'bg-neutral-100 font-semibold'
-                  : 'text-neutral-700 hover:bg-neutral-100'
+                  : 'text-neutral-700 pointer-fine:hover:bg-neutral-100'
               }`}
             >
               <span className="line-clamp-1">
