@@ -29,7 +29,7 @@ export default function Block({ block }: CodeBlockViewProps) {
     <motion.div
       layout
       id={'#' + id}
-      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white px-4 pt-5 pb-4"
+      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white pt-5 pb-4"
     >
       <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
@@ -44,7 +44,7 @@ export default function Block({ block }: CodeBlockViewProps) {
         </Tooltip>
       </div>
 
-      <div className="mb-4 pl-1">
+      <div className="pr-4 pl-5">
         <h3 className="mb-1 tracking-tight">
           {block?.title ? (
             block?.title
@@ -63,7 +63,7 @@ export default function Block({ block }: CodeBlockViewProps) {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-end gap-3 pt-2 pb-4">
+      <div className="flex flex-wrap items-center justify-end gap-3 px-4 py-4">
         <div className="flex items-center gap-2">
           <Tooltip content="Language">
             <span className="grid h-8 cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 text-sm text-neutral-700">
@@ -161,24 +161,28 @@ export default function Block({ block }: CodeBlockViewProps) {
         </div>
       </div>
 
-      <div className={`syntax-highlighted-container`}>
-        <SyntaxHighlighter
-          children={block?.code as string}
-          style={getStyle(block?.theme)}
-          language={block?.language}
-          customStyle={{
-            fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
-            padding: '1rem 1.25rem',
-            margin: 0,
-            minHeight: 40,
-            maxHeight: 450,
-            borderRadius: 12,
-          }}
-          showLineNumbers={true}
-        />
+      <div className="sm:px-4">
+        <div className="overflow-hidden sm:rounded-xl">
+          <div className={`syntax-highlighted-container`}>
+            <SyntaxHighlighter
+              children={block?.code as string}
+              style={getStyle(block?.theme)}
+              language={block?.language}
+              customStyle={{
+                fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
+                padding: '1rem 1.25rem',
+                margin: 0,
+                minHeight: 40,
+                maxHeight: 450,
+                borderRadius: 0,
+              }}
+              showLineNumbers={true}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="pt-4 pl-1">
+      <div className="pt-4 pr-4 pl-5">
         <div className="flex items-center gap-2">
           <span className="text-sm text-neutral-600">Updated:</span>
           <FormatedDate
