@@ -70,7 +70,7 @@ export default function Folder() {
           </p>
         </div>
 
-        <motion.div layoutId="folder-details-update-modal">
+        <div>
           <Tooltip
             content={
               <span className="box-content grid min-w-20 rounded-lg bg-neutral-900 px-2.5 py-2 text-center text-xs text-white">
@@ -100,7 +100,7 @@ export default function Folder() {
               </span>
             </Button>
           </Tooltip>
-        </motion.div>
+        </div>
       </div>
 
       <FolderContent code_blocks={codeFolder.code_blocks} />

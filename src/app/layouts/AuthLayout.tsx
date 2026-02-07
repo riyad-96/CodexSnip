@@ -34,7 +34,6 @@ export default function AuthLayout() {
 
       <div className="fixed top-4 left-4">
         <Logo
-          layoutId="CodexSnip-logo"
           onClick={() => navigate('/')}
         />
       </div>

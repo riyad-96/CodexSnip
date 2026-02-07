@@ -34,10 +34,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
         </Tooltip>
 
         {code_blocks.length !== 0 && (
-          <motion.div
-            className="relative z-5"
-            layoutId="create-code-block-modal"
-          >
+          <div className="relative z-5">
             <Button
               onClick={() => setEditorState('new')}
               primary
@@ -50,7 +47,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
                 <span>Add Block</span>
               </span>
             </Button>
-          </motion.div>
+          </div>
         )}
       </div>
 

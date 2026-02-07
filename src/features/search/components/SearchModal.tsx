@@ -131,8 +131,7 @@ export default function SearchModal() {
                     </div>
                     <div className="space-y-2">
                       {data.codes.map((c) => (
-                        <motion.div
-                          layoutId={c._id}
+                        <div
                           key={c._id}
                           className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
@@ -166,7 +165,7 @@ export default function SearchModal() {
                               className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -185,8 +184,7 @@ export default function SearchModal() {
                     </div>
                     <div className="space-y-2">
                       {data.folders.map((f) => (
-                        <motion.div
-                          layoutId={f._id}
+                        <div
                           key={f._id}
                           className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
@@ -220,7 +218,7 @@ export default function SearchModal() {
                               className="text-neutral-400 transition-all pointer-fine:group-hover:translate-x-1 pointer-fine:group-hover:text-neutral-900"
                             />
                           </div>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>

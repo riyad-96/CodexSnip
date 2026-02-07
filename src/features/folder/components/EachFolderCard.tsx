@@ -39,31 +39,34 @@ export default function EachFolderCard({ i, folder }: EachFolderCard) {
   // update folder details
   const { setFolderUpdateDetails, setFolderDeleteDetails } = useCodeStore();
 
+  // prefetch folder data
+  function prefetchFolderData() {
+    const data = queryClient.getQueryData(['folder_with_blocks', _id]);
+
+    if (!data) {
+      queryClient.prefetchQuery({
+        queryKey: ['folder_with_blocks', _id],
+        queryFn: async () => {
+          const response = await api.get(`/codefolder/get/${_id}`);
+          return response.data;
+        },
+      });
+    }
+  }
+
   return (
     <motion.div
       layout
-      className={`group relative grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] overflow-hidden rounded-2xl border bg-white px-5 py-4 transition-colors duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 pointer-fine:hover:border-neutral-400'}`}
-      onMouseEnter={() => {
-        const data = queryClient.getQueryData(['folder_with_blocks', _id]);
-
-        if (!data) {
-          queryClient.prefetchQuery({
-            queryKey: ['folder_with_blocks', _id],
-            queryFn: async () => {
-              const response = await api.get(`/codefolder/get/${_id}`);
-              return response.data;
-            },
-          });
-        }
-      }}
+      className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-default grid-rows-[1fr_auto] rounded-2xl border bg-white px-5 py-4 transition-[border-color,box-shadow] duration-200 ${dropdownShowing ? 'border-neutral-400' : 'border-neutral-200 pointer-fine:hover:border-neutral-400'}`}
+      onMouseEnter={prefetchFolderData}
     >
       <span
-        className={`absolute inset-0 z-4 transition-all duration-150 ${dropdownShowing ? 'bg-white/60' : 'pointer-events-none bg-transparent'}`}
-      ></span>
+        className={`absolute inset-0 z-4 rounded-2xl transition-all duration-150 ${dropdownShowing ? 'bg-white/60' : 'pointer-events-none bg-transparent'}`}
+      />
 
       <button
         onClick={() => navigate(`/code/${_id}`)}
-        className="absolute inset-0 z-1"
+        className="absolute inset-0 z-1 rounded-2xl"
       ></button>
 
       <div
@@ -127,10 +130,7 @@ export default function EachFolderCard({ i, folder }: EachFolderCard) {
               className="absolute top-[calc(100%+4px)] right-0 origin-top-right"
             >
               <div className="grid min-w-30 overflow-hidden rounded-xl border border-neutral-200 bg-white text-sm">
-                <motion.div
-                  layoutId={`update_modal_${_id}`}
-                  className="grid bg-white"
-                >
+                <div className="grid bg-white">
                   <button
                     onClick={() => {
                       setFolderUpdateDetails({
@@ -138,6 +138,7 @@ export default function EachFolderCard({ i, folder }: EachFolderCard) {
                         folder_name: folder_name,
                         folder_description: folder_description,
                       });
+                      setDropdownShowing(false);
                     }}
                     className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:hover:bg-neutral-100"
                   >
@@ -147,18 +148,16 @@ export default function EachFolderCard({ i, folder }: EachFolderCard) {
                     />
                     <span>Edit</span>
                   </button>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className="grid bg-white"
-                  layoutId={`delete-modal_${_id}`}
-                >
+                <div className="grid bg-white">
                   <button
                     onClick={() => {
                       setFolderDeleteDetails({
                         folder_id: _id,
                         folder_name: folder_name,
                       });
+                      setDropdownShowing(false);
                     }}
                     className="flex items-center justify-start gap-2.5 px-4 py-2.5 transition-colors pointer-fine:cursor-pointer pointer-fine:hover:bg-neutral-100"
                   >
@@ -168,7 +167,7 @@ export default function EachFolderCard({ i, folder }: EachFolderCard) {
                     />
                     <span>Delete</span>
                   </button>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           )}

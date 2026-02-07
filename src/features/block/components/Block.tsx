@@ -82,10 +82,7 @@ export default function Block({ block }: CodeBlockViewProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <motion.div
-            className="relative z-5 rounded-xl"
-            layoutId={`delete-modal_${block._id}`}
-          >
+          <div className="relative z-5 rounded-xl">
             <Tooltip content="Delete!">
               <Button
                 onClick={() =>
@@ -104,12 +101,9 @@ export default function Block({ block }: CodeBlockViewProps) {
                 </span>
               </Button>
             </Tooltip>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="relative z-5 rounded-xl"
-            layoutId={`update-code-block-modal-${block._id}`}
-          >
+          <div className="relative z-5 rounded-xl">
             <Tooltip content="Edit">
               <Button
                 onClick={() => {
@@ -125,7 +119,7 @@ export default function Block({ block }: CodeBlockViewProps) {
                 </span>
               </Button>
             </Tooltip>
-          </motion.div>
+          </div>
 
           <Tooltip content={isCopied ? 'Copied' : 'Copy'}>
             <Button onClick={() => copy(block?.code)}>
