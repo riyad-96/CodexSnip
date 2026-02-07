@@ -75,7 +75,7 @@ export default function SignupForm() {
         })}
       />
 
-      <button className="bg-code-900 text-code-100 keyboard-focus-effect block h-10 w-full rounded-full tracking-wide">
+      <button className="keyboard-focus-effect mt-4 block h-10 w-full rounded-xl bg-neutral-900 tracking-wide text-neutral-100">
         {signing ? (
           <span className="loading loading-spinner loading-xs"></span>
         ) : (

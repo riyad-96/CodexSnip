@@ -1,6 +1,7 @@
-import { EyeClosedIcon, EyeIcon } from 'lucide-react';
+import { EyeClosedIcon, EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useState, type HTMLInputTypeAttribute } from 'react';
 import ErrorElement from './ErrorElement';
+import { motion, AnimatePresence } from 'motion/react';
 
 type InputFieldPropsTypes = React.InputHTMLAttributes<HTMLInputElement> & {
   id: string;
@@ -29,7 +30,7 @@ export default function InputField({
       <div className="relative">
         <input
           id={id}
-          className="border-code-200 ring-code-250 focus:border-code-250 w-full min-w-0 rounded-full border px-4 py-1.5 ring-0 transition-shadow outline-none focus:ring-2"
+          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 transition-colors outline-none focus:border-neutral-400"
           type={
             type === 'password' ? (passShowing ? 'text' : 'password') : type
           }
@@ -37,17 +38,35 @@ export default function InputField({
         />
         {type === 'password' && (
           <button
-            onClick={(e) => {
+            onClick={() => {
               setPassShowing((prev) => !prev);
-              const btn = e.currentTarget;
-              const input = btn.closest('button')
-                ?.previousElementSibling as HTMLInputElement;
-              input.focus();
             }}
             type="button"
-            className="pointer-fine:hover:bg-code-150 bg-code-100 absolute top-1/2 right-1 grid h-8 w-11 -translate-y-1/2 place-items-center rounded-full active:transform-[scale(0.96)]"
+            className="absolute top-1/2 right-1 grid h-8 w-11 -translate-y-1/2 place-items-center rounded-lg bg-neutral-100 pointer-fine:hover:bg-neutral-200"
           >
-            {passShowing ? <EyeClosedIcon size="18" /> : <EyeIcon size="18" />}
+            <AnimatePresence mode="wait">
+              {passShowing ? (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ duration: 0.08 }}
+                  key="eye-opened"
+                >
+                  <EyeIcon size="18" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ duration: 0.08 }}
+                  key="eye-off"
+                >
+                  <EyeOffIcon size="18" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         )}
       </div>
