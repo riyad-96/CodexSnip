@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCodeStore } from '../store/folder.store';
+import { useFolderStore } from '../store/folder.store';
 import { useNavigate } from 'react-router-dom';
 import api from '@/shared/api';
 import type { Folder } from '../types/types';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { LogInIcon, PlusIcon } from 'lucide-react';
-import EachFolderCard from './EachFolderCard';
+import EachFolderCard from './folder-card/EachFolderCard';
 
 export default function HomeContent() {
   const navigate = useNavigate();
@@ -21,7 +21,9 @@ export default function HomeContent() {
     enabled: !!user,
   });
 
-  const setFolderCreateDetails = useCodeStore((s) => s.setFolderCreateDetails);
+  const setFolderCreateDetails = useFolderStore(
+    (s) => s.setFolderCreateDetails,
+  );
 
   // visitor state check
   const isOldVisitor = localStorage.getItem('visitor_state');
@@ -79,7 +81,6 @@ export default function HomeContent() {
             data?.map((f, i) => (
               <EachFolderCard
                 key={f._id}
-                i={i}
                 folder={f}
               />
             ))}

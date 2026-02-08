@@ -25,7 +25,7 @@ export default function Footer() {
           <p className="text-sm text-neutral-600">
             Created by{' '}
             <a
-              href="https://github.com/riyad-96/"
+              href="https://riyad-devfolio.vercel.app/"
               target="_self"
               className="text-neutral-900 underline transition-colors pointer-fine:hover:text-neutral-600"
             >

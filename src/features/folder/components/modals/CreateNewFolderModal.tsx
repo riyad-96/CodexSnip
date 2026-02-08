@@ -1,5 +1,5 @@
 import Modal from '@/shared/components/ui/Modal';
-import { useCodeStore } from '../../store/folder.store';
+import { useFolderStore } from '../../store/folder.store';
 import type { AddFolderDetailsType } from '../../types/codeFolderTypes';
 import Button from '@/shared/components/ui/Button';
 import { AnimatePresence } from 'motion/react';
@@ -7,7 +7,7 @@ import useCreateNewFolderMutation from '../../hooks/useCreateNewFolderMutation';
 import { isPointerDevice } from '@/shared/constants/general';
 
 export default function CreateNewFolderModal() {
-  const { folderCreateDetails, setFolderCreateDetails } = useCodeStore();
+  const { folderCreateDetails, setFolderCreateDetails } = useFolderStore();
 
   // mutation: create new folder
   const { mutate: createNewFolder, isPending: isNewFolderCreating } =

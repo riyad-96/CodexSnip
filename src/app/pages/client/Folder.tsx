@@ -1,4 +1,4 @@
-import { useCodeStore } from '@/features/folder/store/folder.store';
+import { useFolderStore } from '@/features/folder/store/folder.store';
 import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
@@ -18,7 +18,7 @@ export default function Folder() {
   } = useFetchFolderQuery({ folderId: codeFolderId });
 
   // udpate folder details
-  const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
+  const setFolderUpdateDetails = useFolderStore((s) => s.setFolderUpdateDetails);
 
   if (codeFolderLoading) {
     return (

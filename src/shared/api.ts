@@ -14,8 +14,4 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
-// function useAxios() {
-//   return api;
-// }
-
 export default api;

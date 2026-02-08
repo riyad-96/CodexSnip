@@ -6,7 +6,7 @@ import type {
 } from '../types/codeFolderTypes';
 import type { SetState } from '@/shared/types';
 
-type CodeStore = {
+type FolderStore = {
   folderCreateDetails: AddFolderDetailsType | null;
   setFolderCreateDetails: SetState<AddFolderDetailsType | null>;
   folderUpdateDetails: UpdateFolderDetailsType | null;
@@ -15,7 +15,7 @@ type CodeStore = {
   setFolderDeleteDetails: SetState<FolderDeleteDetailsType | null>;
 };
 
-const store = create<CodeStore>((set) => ({
+const store = create<FolderStore>((set) => ({
   folderCreateDetails: null,
   setFolderCreateDetails: (state) => {
     set((s) => ({
@@ -39,5 +39,5 @@ const store = create<CodeStore>((set) => ({
   },
 }));
 
-export const codeStore = store;
-export const useCodeStore = store;
+export const folderStore = store;
+export const useFolderStore = store;

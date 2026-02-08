@@ -1,12 +1,12 @@
 import api from '@/shared/api';
-import { useCodeStore } from '../store/folder.store';
+import { useFolderStore } from '../store/folder.store';
 import { useMutation } from '@tanstack/react-query';
 import type { FolderDeleteDetailsType } from '../types/codeFolderTypes';
 import { queryClient } from '@/main';
 import type { Folder } from '../types/types';
 
 export default function useDeleteFolderMutation() {
-  const setFolderDeleteDetails = useCodeStore((s) => s.setFolderDeleteDetails);
+  const setFolderDeleteDetails = useFolderStore((s) => s.setFolderDeleteDetails);
 
   return useMutation({
     mutationFn: async (value: FolderDeleteDetailsType): Promise<string> => {

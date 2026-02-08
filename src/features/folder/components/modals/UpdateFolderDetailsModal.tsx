@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react';
-import { useCodeStore } from '../../store/folder.store';
+import { useFolderStore } from '../../store/folder.store';
 import type { UpdateFolderDetailsType } from '../../types/codeFolderTypes';
 import Button from '@/shared/components/ui/Button';
 import useUpdateFolderDetailsMutation from '../../hooks/useUpdateFolderDetailsMutation';
@@ -7,7 +7,7 @@ import Modal from '@/shared/components/ui/Modal';
 import { isPointerDevice } from '@/shared/constants/general';
 
 export default function UpdateFolderDetailsModal() {
-  const { folderUpdateDetails, setFolderUpdateDetails } = useCodeStore();
+  const { folderUpdateDetails, setFolderUpdateDetails } = useFolderStore();
 
   // mutation: update folder
   const { mutate: updateFolderDetails, isPending: updatingFolderDetails } =

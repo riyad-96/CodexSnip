@@ -1,12 +1,12 @@
 import api from '@/shared/api';
-import { useCodeStore } from '../store/folder.store';
+import { useFolderStore } from '../store/folder.store';
 import { useMutation } from '@tanstack/react-query';
 import type { UpdateFolderDetailsType } from '../types/codeFolderTypes';
 import { queryClient } from '@/main';
 import type { Folder, CodeFolderWithBlocks } from '../types/types';
 
 export default function useUpdateFolderDetailsMutation() {
-  const setFolderUpdateDetails = useCodeStore((s) => s.setFolderUpdateDetails);
+  const setFolderUpdateDetails = useFolderStore((s) => s.setFolderUpdateDetails);
 
   return useMutation({
     mutationFn: async (value: UpdateFolderDetailsType): Promise<string> => {
