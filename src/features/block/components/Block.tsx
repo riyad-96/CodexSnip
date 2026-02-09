@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import type { Block } from '../../folder/types/types';
-import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
+import getCodeNavigationId from '@/shared/lib/getCodeNavigationId';
 import { getStyle, supportedThemes } from '../../folder/lib/editorStyle';
 import Button from '@/shared/components/ui/Button';
 
@@ -66,7 +66,7 @@ export default function Block({ block }: CodeBlockViewProps) {
       <div className="flex flex-wrap items-center justify-end gap-3 px-4 py-4">
         <div className="flex items-center gap-2">
           <Tooltip content="Language">
-            <span className="grid h-8 cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 text-sm text-neutral-700">
+            <span className="grid cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-2.5 text-sm text-neutral-700 h-7.5 sm:h-8.5 max-sm:text-xs sm:px-3">
               {
                 supportedLanguages.find((l) => l.value === block?.language)
                   ?.name
@@ -75,7 +75,7 @@ export default function Block({ block }: CodeBlockViewProps) {
           </Tooltip>
 
           <Tooltip content="Theme">
-            <span className="grid h-8 cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 text-sm text-neutral-700">
+            <span className="grid cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-2.5 text-sm text-neutral-700 h-7.5 sm:h-8.5 max-sm:text-xs sm:px-3">
               {supportedThemes.find((t) => t.value === block?.theme)?.name}
             </span>
           </Tooltip>
@@ -92,8 +92,9 @@ export default function Block({ block }: CodeBlockViewProps) {
                     code_block_title: block?.title,
                   })
                 }
+                variant="outlined"
               >
-                <span className="grid h-8 place-items-center px-3.5">
+                <span className="grid place-items-center">
                   <Trash2Icon
                     size={16}
                     className="text-neutral-700"
@@ -110,8 +111,9 @@ export default function Block({ block }: CodeBlockViewProps) {
                   setBlockEditDetails(block);
                   setEditorState('update');
                 }}
+                variant="outlined"
               >
-                <span className="grid h-8 place-items-center px-3.5">
+                <span className="grid place-items-center">
                   <PencilLineIcon
                     size={16}
                     className="text-neutral-700"
@@ -122,34 +124,37 @@ export default function Block({ block }: CodeBlockViewProps) {
           </div>
 
           <Tooltip content={isCopied ? 'Copied' : 'Copy'}>
-            <Button onClick={() => copy(block?.code)}>
-              <span className="relative grid h-8 w-11 place-items-center">
-                <AnimatePresence mode="wait">
-                  {isCopied ? (
-                    <motion.span
-                      key="copyied-icon"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.8, opacity: 0 }}
-                      transition={{ duration: 0.1 }}
-                      className="absolute text-neutral-700"
-                    >
-                      <CheckIcon size={16} />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="copy-icon"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.8, opacity: 0 }}
-                      transition={{ duration: 0.1 }}
-                      className="absolute text-neutral-700"
-                    >
-                      <CopyIcon size={16} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </span>
+            <Button
+              onClick={() => copy(block?.code)}
+              variant="outlined"
+              className="relative grid place-items-center"
+            >
+              <span className="size-4" />
+              <AnimatePresence mode="wait">
+                {isCopied ? (
+                  <motion.span
+                    key="copyied-icon"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={{ duration: 0.1 }}
+                    className="absolute text-neutral-700"
+                  >
+                    <CheckIcon size={16} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="copy-icon"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={{ duration: 0.1 }}
+                    className="absolute text-neutral-700"
+                  >
+                    <CopyIcon size={16} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </Button>
           </Tooltip>
         </div>

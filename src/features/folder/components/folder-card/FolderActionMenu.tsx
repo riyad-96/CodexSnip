@@ -27,7 +27,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
               folder_description: folder_description,
             });
           }}
-          className="grid size-8 place-items-center rounded-md border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+          className="grid size-8 place-items-center rounded-xl border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
         >
           <PencilLineIcon
             size={16}
@@ -49,7 +49,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
               folder_name: folder_name,
             });
           }}
-          className="grid size-8 place-items-center rounded-md border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+          className="grid size-8 place-items-center rounded-xl border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
         >
           <Trash2Icon
             size={16}

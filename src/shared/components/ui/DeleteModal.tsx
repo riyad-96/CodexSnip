@@ -27,19 +27,24 @@ export default function DeleteModal({
         <p className="text-neutral-600">{description}</p>
       </div>
       <div className="flex justify-end gap-2">
-        <Button onClick={cancelFn}>
-          <span className="grid h-9 place-items-center px-5">Cancel</span>
+        <Button
+          onClick={cancelFn}
+          className="grid place-items-center"
+          variant="outlined"
+        >
+          Cancel
         </Button>
-        <button
+        <Button
           disabled={isLoading}
           onClick={() => {
             if (isLoading) return;
             clickFn();
           }}
-          className="grid h-9 min-w-22.5 place-items-center rounded-xl border border-red-600 bg-red-600 px-5 text-sm text-white transition-colors active:scale-98 pointer-fine:cursor-pointer"
+          variant="delete"
+          className="grid place-items-center"
         >
           <span>Delete</span>
-        </button>
+        </Button>
       </div>
     </Modal>
   );

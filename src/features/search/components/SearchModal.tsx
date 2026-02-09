@@ -12,8 +12,8 @@ import {
   SearchIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
-import { AnimatePresence, motion } from 'motion/react';
+import getCodeNavigationId from '@/shared/lib/getCodeNavigationId';
+import { AnimatePresence } from 'motion/react';
 import { UNTITLED_BLOCK, UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
 
 type QueryFnDataType = {

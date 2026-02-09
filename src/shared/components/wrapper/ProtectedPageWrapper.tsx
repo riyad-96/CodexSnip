@@ -6,6 +6,7 @@ export default function ProtectedPageWrapper() {
   const location = useLocation();
 
   if (!user) {
+    console.log('user to nai --->', user);
     return (
       <Navigate
         to="/auth/login"

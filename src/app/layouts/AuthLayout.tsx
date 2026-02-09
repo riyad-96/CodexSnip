@@ -33,9 +33,7 @@ export default function AuthLayout() {
       )}
 
       <div className="fixed top-4 left-4">
-        <Logo
-          onClick={() => navigate('/')}
-        />
+        <Logo onClick={() => navigate('/')} />
       </div>
 
       <div className="w-full max-w-87.5 md:max-w-100">
@@ -44,7 +42,7 @@ export default function AuthLayout() {
           <span className="text-center">or</span>
           <button
             onClick={googleSignIn}
-            className="keyboard-focus-effect bg-neutral-900 text-neutral-50 flex h-10 items-center justify-center gap-1 rounded-xl tracking-wide"
+            className="keyboard-focus-effect flex h-10 items-center justify-center gap-1 rounded-xl bg-neutral-900 tracking-wide text-neutral-50"
           >
             <GoogleIcon size="20" />
             <span>Continue with google</span>
@@ -61,6 +59,7 @@ export default function AuthLayout() {
             className="text-blue-500 underline-offset-1 transition-[text-underline-offset] pointer-fine:hover:underline pointer-fine:hover:underline-offset-6"
             to={isLoginPage ? '/auth/signup' : '/auth/login'}
             children={isLoginPage ? 'Signup' : 'Login'}
+            replace
           />
         </div>
       </div>

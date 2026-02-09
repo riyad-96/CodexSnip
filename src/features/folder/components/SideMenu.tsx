@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import type { Block } from '../types/types';
-import getCodeNavigationId from '@/shared/utils/getCodeNavigationId';
+import getCodeNavigationId from '@/shared/lib/getCodeNavigationId';
 import { UNTITLED_BLOCK } from '@/shared/constants/fallbacks';
 
-type NavMenuPropsType = {
+type SideMenuPropsType = {
   code_blocks: Block[];
 };
 
-export default function NavMenu({ code_blocks }: NavMenuPropsType) {
+export default function SideMenu({ code_blocks }: SideMenuPropsType) {
   const hash = location.hash;
 
   useEffect(() => {

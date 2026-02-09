@@ -1,6 +1,5 @@
 import { useFolderStore } from '@/features/folder/store/folder.store';
 import { useParams } from 'react-router-dom';
-import { motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
 import Button from '@/shared/components/ui/Button';
 import { PencilLineIcon } from 'lucide-react';
@@ -18,7 +17,9 @@ export default function Folder() {
   } = useFetchFolderQuery({ folderId: codeFolderId });
 
   // udpate folder details
-  const setFolderUpdateDetails = useFolderStore((s) => s.setFolderUpdateDetails);
+  const setFolderUpdateDetails = useFolderStore(
+    (s) => s.setFolderUpdateDetails,
+  );
 
   if (codeFolderLoading) {
     return (
@@ -91,8 +92,9 @@ export default function Folder() {
                   folder_id: codeFolder._id,
                 })
               }
+              variant="outlined"
             >
-              <span className="grid h-9 place-items-center px-3.5">
+              <span className="grid place-items-center">
                 <PencilLineIcon
                   size={16}
                   className="text-neutral-700"

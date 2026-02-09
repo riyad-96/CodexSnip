@@ -86,9 +86,9 @@ export default function Profile() {
               {!isEditing && (
                 <Button
                   onClick={() => setIsEditing(true)}
-                  primary
+                  variant="filled"
                 >
-                  <span className="px-5 py-2.5">Edit Profile</span>
+                  <span>Edit Profile</span>
                 </Button>
               )}
             </div>
@@ -183,16 +183,18 @@ export default function Profile() {
             {/* Action Buttons */}
             {isEditing && (
               <div className="mt-8 flex justify-end gap-2 border-t border-neutral-200 pt-6">
-                <Button onClick={handleCancel}>
-                  <span className="grid h-9 place-items-center px-5">
-                    Cancel
-                  </span>
+                <Button
+                  onClick={handleCancel}
+                  className="grid place-items-center"
+                  variant="outlined"
+                >
+                  Cancel
                 </Button>
                 <Button
                   onClick={handleSave}
-                  primary
+                  variant="filled"
                 >
-                  <span className="grid h-9 min-w-24 place-items-center px-5">
+                  <span className="grid min-w-24 place-items-center">
                     {isSaving ? (
                       <span className="loading loading-spinner loading-xs opacity-80"></span>
                     ) : (

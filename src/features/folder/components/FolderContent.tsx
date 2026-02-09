@@ -1,9 +1,9 @@
 import { Tooltip } from 'kitzo';
 import type { Block as BlockT } from '../types/types';
 import { FileBracesCornerIcon, PlusIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence } from 'motion/react';
 import Button from '@/shared/components/ui/Button';
-import NavMenu from './NavMenu';
+import SideMenu from './SideMenu';
 import Block from '../../block/components/Block';
 import { useBlockStore } from '@/features/block/store/block.store';
 import EditorModal from '@/features/block/components/modal/EditorModal';
@@ -37,15 +37,14 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
           <div className="relative z-5">
             <Button
               onClick={() => setEditorState('new')}
-              primary
+              className="flex items-center gap-2"
+              variant="filled"
             >
-              <span className="flex items-center gap-2 px-4 py-2.5">
-                <PlusIcon
-                  size={16}
-                  strokeWidth="3"
-                />
-                <span>Add Block</span>
-              </span>
+              <PlusIcon
+                size={16}
+                strokeWidth="3"
+              />
+              <span>Add Block</span>
             </Button>
           </div>
         )}
@@ -57,7 +56,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
         >
           {code_blocks.length > 1 && (
             <div className="w-50 max-md:hidden">
-              <NavMenu code_blocks={code_blocks} />
+              <SideMenu code_blocks={code_blocks} />
             </div>
           )}
 
@@ -87,15 +86,14 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
               <div className="mx-auto w-fit">
                 <Button
                   onClick={() => setEditorState('new')}
-                  primary
+                  className="flex items-center gap-2"
+                  variant="filled"
                 >
-                  <span className="flex items-center gap-2 px-4 py-2.5">
-                    <PlusIcon
-                      size={16}
-                      strokeWidth="3"
-                    />
-                    <span>Add Block</span>
-                  </span>
+                  <PlusIcon
+                    size={16}
+                    strokeWidth="3"
+                  />
+                  <span>Add Block</span>
                 </Button>
               </div>
             </div>

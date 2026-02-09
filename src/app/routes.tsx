@@ -1,32 +1,31 @@
 import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 import AppLayout from './layouts/AppLayout';
-import Home from './pages/client/Home';
-import ProtectedPageWrapper from '@/shared/components/wrapper/ProtectedPageWrapper';
-import Folder from './pages/client/Folder';
-import Profile from './pages/client/Profile';
+import Profile from './pages/Profile';
 import AuthProtectedWrapper from '@/features/auth/components/AuthProtectedWrapper';
 import AuthLayout from './layouts/AuthLayout';
-import Login from './pages/auth/Login';
-import Signup from './pages/auth/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Folder from './pages/Folder';
+import Home from './pages/Home';
+import ProtectedPageWrapper from '@/shared/components/wrapper/ProtectedPageWrapper';
 
 const router = createBrowserRouter([
   {
-    path: '/',
     element: <RootLayout />,
     children: [
       {
         element: <AppLayout />,
         children: [
           {
-            index: true,
+            path: '/',
             element: <Home />,
           },
           {
             element: <ProtectedPageWrapper />,
             children: [
               {
-                path: 'code/:id',
+                path: 'folder/:id',
                 element: <Folder />,
               },
               {

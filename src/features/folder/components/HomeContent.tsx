@@ -1,91 +1,60 @@
 import { useQuery } from '@tanstack/react-query';
-import { useFolderStore } from '../store/folder.store';
-import { useNavigate } from 'react-router-dom';
 import api from '@/shared/api';
-import type { Folder } from '../types/types';
 import { useAuthStore } from '@/features/auth/store/auth.store';
-import { LogInIcon, PlusIcon } from 'lucide-react';
-import EachFolderCard from './folder-card/EachFolderCard';
+import { PrefetchSearchData } from '@/features/prefetch/prefetchSearchData';
+import SearchModal from '@/features/search/components/SearchModal';
+import type { Folder } from '@/features/folder/types/types';
+import FolderActionBar from '@/features/folder/components/FolderActionBar';
+import EachFolderCard from '@/features/folder/components/folder-card/EachFolderCard';
+import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
+import CreateNewFolderModal from '@/features/folder/components/modals/CreateNewFolderModal';
+import DeleteFolderModal from '@/features/folder/components/modals/DeleteFolderModal';
 
 export default function HomeContent() {
-  const navigate = useNavigate();
-
   const user = useAuthStore((s) => s.user);
 
-  const { isLoading, data } = useQuery<Folder[]>({
+  const { isLoading, data = [] } = useQuery<Folder[]>({
     queryKey: ['folders'],
     queryFn: async () => {
-      const response = await api.get('/codefolder/getall');
-      return response.data;
+      const res = await api.get('/codefolder/getall');
+      return res.data;
     },
     enabled: !!user,
   });
 
-  const setFolderCreateDetails = useFolderStore(
-    (s) => s.setFolderCreateDetails,
-  );
-
-  // visitor state check
-  const isOldVisitor = localStorage.getItem('visitor_state');
-
   if (isLoading) {
     return (
-      <div className="flex justify-center pt-42">
-        <span className="loading loading-spinner loading-xl opacity-80"></span>
+      <div className="flex justify-center pt-32">
+        <span className="loading loading-spinner loading-lg opacity-70" />
       </div>
     );
   }
 
   return (
-    <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
-      <div className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400">
-        <div className="grid justify-items-center gap-2">
-          {user ? (
-            <>
-              <div className="rounded-xl bg-neutral-100 p-3 transition-colors pointer-fine:group-hover:bg-neutral-900">
-                <PlusIcon
-                  size={28}
-                  className="text-neutral-600"
-                />
-              </div>
-              <span className="tracking-tight">Add Code folder</span>
-            </>
-          ) : (
-            <>
-              <div className="rounded-xl bg-neutral-100 p-3">
-                <LogInIcon
-                  size={28}
-                  className="text-neutral-600"
-                />
-              </div>
-              <span className="tracking-tight">
-                {isOldVisitor ? 'Login' : 'Get started'}
-              </span>
-            </>
-          )}
-        </div>
-        <button
-          onClick={() => {
-            if (!user) {
-              navigate(isOldVisitor ? '/auth/login' : '/auth/signup');
-              return;
-            }
-            setFolderCreateDetails({
-              folder_name: '',
-              folder_description: '',
-            });
-          }}
-          className="absolute inset-0"
-        ></button>
-      </div>
+    <>
+      <section className="pt-12 md:pt-16">
+        {/* Action bar */}
+        <FolderActionBar count={data.length} />
 
-      {user &&
-        data?.map((f) => (
-          <EachFolderCard
-            key={f._id}
-            folder={f}
-          />
-        ))}
-    </div>
+        {/* Content */}
+        {user && data.length === 0 ? (
+          <div className="mt-16 rounded-2xl border border-dashed border-neutral-300 py-22 text-center">
+            <p className="text-neutral-500">
+              No folders yet. Create your first one to start saving code.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {user &&
+              data.map((folder) => (
+                <EachFolderCard
+                  key={folder._id}
+                  folder={folder}
+                />
+              ))}
+          </div>
+        )}
+      </section>
+    </>
   );
 }

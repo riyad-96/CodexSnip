@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Modal from '@/shared/components/ui/Modal';
-import Select from '@/features/folder/components/Select';
 import { supportedLanguages } from '@/features/folder/lib/editorLanguage';
 import { supportedThemes } from '@/features/folder/lib/editorStyle';
 import Button from '@/shared/components/ui/Button';
@@ -8,6 +7,7 @@ import { useBlockStore } from '@/features/block/store/block.store';
 import type { EditorValuesType } from '@/features/folder/types/editor';
 import useAddNewCodeBlockMutation from '../../hooks/useAddNewCodeBlockMutation';
 import useUpdateCodeBlockMutation from '../../hooks/useUpdateCodeBlockMutation';
+import Select from '@/shared/components/ui/Select';
 
 export default function EditorModal() {
   const { blockEditDetails, setBlockEditDetails, editorState, setEditorState } =
@@ -141,8 +141,10 @@ export default function EditorModal() {
               setEditorState(null);
               setBlockEditDetails(null);
             }}
+            className="grid place-items-center"
+            variant="outlined"
           >
-            <span className="grid h-9 place-items-center px-5">Cancel</span>
+            Cancel
           </Button>
         )}
         <Button
@@ -158,15 +160,14 @@ export default function EditorModal() {
               });
             }
           }}
-          primary
+          variant="filled"
+          className="grid h-8.5 min-w-25 place-items-center sm:h-9.5"
         >
-          <span className="grid h-9 min-w-25 place-items-center px-5">
-            {isAddingCodeBlock || isUpdatingCodeBlock ? (
-              <span className="loading loading-spinner loading-xs opacity-80"></span>
-            ) : (
-              <span>{editorState === 'new' ? 'Add block' : 'Update'}</span>
-            )}
-          </span>
+          {isAddingCodeBlock || isUpdatingCodeBlock ? (
+            <span className="loading loading-spinner loading-xs opacity-80"></span>
+          ) : (
+            <span>{editorState === 'new' ? 'Add block' : 'Update'}</span>
+          )}
         </Button>
       </div>
     </Modal>

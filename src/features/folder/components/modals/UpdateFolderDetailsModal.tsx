@@ -72,8 +72,12 @@ export default function UpdateFolderDetailsModal() {
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <Button onClick={() => setFolderUpdateDetails(null)}>
-              <span className="grid h-9 place-items-center px-5">Cancel</span>
+            <Button
+              onClick={() => setFolderUpdateDetails(null)}
+              className="grid place-items-center"
+              variant="outlined"
+            >
+              Cancel
             </Button>
             <Button
               onClick={() => {
@@ -84,12 +88,11 @@ export default function UpdateFolderDetailsModal() {
                   folder_id: folderUpdateDetails.folder_id,
                 });
               }}
-              primary
               disabled={updatingFolderDetails}
+              variant="filled"
+              className="grid place-items-center"
             >
-              <span className="grid h-9 min-w-20 place-items-center px-5">
-                <span>Update</span>
-              </span>
+              Update
             </Button>
           </div>
         </Modal>
