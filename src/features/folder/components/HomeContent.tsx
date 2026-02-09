@@ -1,14 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import api from '@/shared/api';
 import { useAuthStore } from '@/features/auth/store/auth.store';
-import { PrefetchSearchData } from '@/features/prefetch/prefetchSearchData';
-import SearchModal from '@/features/search/components/SearchModal';
 import type { Folder } from '@/features/folder/types/types';
 import FolderActionBar from '@/features/folder/components/FolderActionBar';
 import EachFolderCard from '@/features/folder/components/folder-card/EachFolderCard';
-import UpdateFolderDetailsModal from '@/features/folder/components/modals/UpdateFolderDetailsModal';
-import CreateNewFolderModal from '@/features/folder/components/modals/CreateNewFolderModal';
-import DeleteFolderModal from '@/features/folder/components/modals/DeleteFolderModal';
 
 export default function HomeContent() {
   const user = useAuthStore((s) => s.user);

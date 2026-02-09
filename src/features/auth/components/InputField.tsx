@@ -1,4 +1,4 @@
-import { EyeClosedIcon, EyeIcon, EyeOffIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useState, type HTMLInputTypeAttribute } from 'react';
 import ErrorElement from './ErrorElement';
 import { motion, AnimatePresence } from 'motion/react';
