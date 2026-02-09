@@ -1,6 +1,7 @@
 import { PencilLineIcon, Trash2Icon } from 'lucide-react';
 import type { Folder } from '../../types/types';
 import { useFolderStore } from '../../store/folder.store';
+import { Tooltip } from 'kitzo';
 
 type ActionMenuProps = {
   folder: Folder;
@@ -12,37 +13,50 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
 
   return (
     <div className="space-y-1">
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setFolderUpdateDetails({
-            folder_id: _id,
-            folder_name: folder_name,
-            folder_description: folder_description,
-          });
-        }}
-        className="grid size-8 place-items-center border rounded-md border-neutral-200 pointer-fine:hover:border-neutral-300 pointer-fine:hover:bg-neutral-100"
+      <Tooltip
+        content="Edit"
+        position="left"
+        smartHover={false}
       >
-        <PencilLineIcon
-          size={16}
-          className="text-neutral-600"
-        />
-      </button>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setFolderDeleteDetails({
-            folder_id: _id,
-            folder_name: folder_name,
-          });
-        }}
-        className="grid size-8 place-items-center border rounded-md border-neutral-200 pointer-fine:hover:border-neutral-300 pointer-fine:hover:bg-neutral-100"
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setFolderUpdateDetails({
+              folder_id: _id,
+              folder_name: folder_name,
+              folder_description: folder_description,
+            });
+          }}
+          className="grid size-8 place-items-center rounded-md border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+        >
+          <PencilLineIcon
+            size={16}
+            className="text-neutral-600"
+          />
+        </button>
+      </Tooltip>
+
+      <Tooltip
+        content="Delete"
+        position="left"
+        smartHover={false}
       >
-        <Trash2Icon
-          size={16}
-          className="text-neutral-600"
-        />
-      </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setFolderDeleteDetails({
+              folder_id: _id,
+              folder_name: folder_name,
+            });
+          }}
+          className="grid size-8 place-items-center rounded-md border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+        >
+          <Trash2Icon
+            size={16}
+            className="text-neutral-600"
+          />
+        </button>
+      </Tooltip>
     </div>
   );
 }

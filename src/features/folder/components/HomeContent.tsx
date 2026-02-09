@@ -28,64 +28,64 @@ export default function HomeContent() {
   // visitor state check
   const isOldVisitor = localStorage.getItem('visitor_state');
 
-  return (
-    <>
-      {isLoading ? (
-        <div className="flex justify-center pt-42">
-          <span className="loading loading-spinner loading-xl opacity-80"></span>
-        </div>
-      ) : (
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
-          <div className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400">
-            <div className="grid justify-items-center gap-2">
-              {user ? (
-                <>
-                  <div className="rounded-xl bg-neutral-100 p-3 transition-colors pointer-fine:group-hover:bg-neutral-900">
-                    <PlusIcon
-                      size={28}
-                      className="text-neutral-600"
-                    />
-                  </div>
-                  <span className="tracking-tight">Add Code folder</span>
-                </>
-              ) : (
-                <>
-                  <div className="rounded-xl bg-neutral-100 p-3">
-                    <LogInIcon
-                      size={28}
-                      className="text-neutral-600"
-                    />
-                  </div>
-                  <span className="tracking-tight">
-                    {isOldVisitor ? 'Login' : 'Get started'}
-                  </span>
-                </>
-              )}
-            </div>
-            <button
-              onClick={() => {
-                if (!user) {
-                  navigate(isOldVisitor ? '/auth/login' : '/auth/signup');
-                  return;
-                }
-                setFolderCreateDetails({
-                  folder_name: '',
-                  folder_description: '',
-                });
-              }}
-              className="absolute inset-0"
-            ></button>
-          </div>
+  if (isLoading) {
+    return (
+      <div className="flex justify-center pt-42">
+        <span className="loading loading-spinner loading-xl opacity-80"></span>
+      </div>
+    );
+  }
 
-          {user &&
-            data?.map((f, i) => (
-              <EachFolderCard
-                key={f._id}
-                folder={f}
-              />
-            ))}
+  return (
+    <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="relative z-5 grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors duration-200 select-none pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400">
+        <div className="grid justify-items-center gap-2">
+          {user ? (
+            <>
+              <div className="rounded-xl bg-neutral-100 p-3 transition-colors pointer-fine:group-hover:bg-neutral-900">
+                <PlusIcon
+                  size={28}
+                  className="text-neutral-600"
+                />
+              </div>
+              <span className="tracking-tight">Add Code folder</span>
+            </>
+          ) : (
+            <>
+              <div className="rounded-xl bg-neutral-100 p-3">
+                <LogInIcon
+                  size={28}
+                  className="text-neutral-600"
+                />
+              </div>
+              <span className="tracking-tight">
+                {isOldVisitor ? 'Login' : 'Get started'}
+              </span>
+            </>
+          )}
         </div>
-      )}
-    </>
+        <button
+          onClick={() => {
+            if (!user) {
+              navigate(isOldVisitor ? '/auth/login' : '/auth/signup');
+              return;
+            }
+            setFolderCreateDetails({
+              folder_name: '',
+              folder_description: '',
+            });
+          }}
+          className="absolute inset-0"
+        ></button>
+      </div>
+
+      {user &&
+        data?.map((f) => (
+          <EachFolderCard
+            key={f._id}
+            folder={f}
+          />
+        ))}
+    </div>
   );
 }
