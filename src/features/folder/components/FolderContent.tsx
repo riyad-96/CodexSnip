@@ -8,6 +8,7 @@ import Block from '../../block/components/Block';
 import { useBlockStore } from '@/features/block/store/block.store';
 import EditorModal from '@/features/block/components/modal/EditorModal';
 import BlockDeleteModal from '@/features/block/components/modal/BlockDeleteModal';
+import TooltipContent from '@/shared/components/ui/TooltipContent';
 
 type FolderContentType = {
   code_blocks: BlockT[];
@@ -20,9 +21,10 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
     <>
       <div className="mb-8 flex items-center justify-between">
         <Tooltip
-          content={`${code_blocks.length} Blocks`}
+          content={<TooltipContent children={`${code_blocks.length} Blocks`} />}
           position="top-start"
-          animation={{ delay: 40 }}
+          animation={{ startDelay: 40 }}
+          smartHover={false}
         >
           <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
             <FileBracesCornerIcon

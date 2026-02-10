@@ -6,6 +6,7 @@ import { PencilLineIcon } from 'lucide-react';
 import FolderContent from '@/features/folder/components/FolderContent';
 import useFetchFolderQuery from '@/features/folder/hooks/useFetchFolderQuery';
 import { UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
+import TooltipContent from '@/shared/components/ui/TooltipContent';
 
 export default function Folder() {
   const codeFolderId = useParams().id as string;
@@ -74,10 +75,10 @@ export default function Folder() {
         <div>
           <Tooltip
             content={
-              <span className="box-content grid min-w-20 rounded-lg bg-neutral-900 px-2.5 py-2 text-center text-xs text-white">
-                <span>Edit folder</span>
-                <span>name & description</span>
-              </span>
+              <TooltipContent
+                className="text-center"
+                children={'Edit folder \nname & description'}
+              />
             }
             position="left-start"
             animation={{

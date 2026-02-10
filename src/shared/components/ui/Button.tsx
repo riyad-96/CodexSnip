@@ -11,9 +11,9 @@ const buttonVariants = cva('text-sm', {
       destructive: 'rounded-xl border border-red-600 bg-red-600 text-white',
     },
     size: {
-      default: 'px-2.5 py-1.5 sm:px-3 sm:py-2',
+      default: 'px-2.5 py-1.25 sm:px-3 sm:py-1.5',
       sm: 'px-2 py-1 sm:px-2.5 sm:py-1.5',
-      icon: 'size-8'
+      icon: 'size-8',
     },
   },
   defaultVariants: {
@@ -23,7 +23,7 @@ const buttonVariants = cva('text-sm', {
 });
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants> & {};
+  VariantProps<typeof buttonVariants>;
 
 export default function Button({
   className,
@@ -33,8 +33,10 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cn(buttonVariants({ className, variant, size }))}
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
   );
 }
+
+export { buttonVariants };

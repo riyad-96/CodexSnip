@@ -63,7 +63,7 @@ export default function Nav() {
               {dropdownShowing && (
                 <motion.div
                   initial={{
-                    scale: 0.95,
+                    scale: 0.9,
                     opacity: 0,
                   }}
                   animate={{
@@ -71,21 +71,21 @@ export default function Nav() {
                     opacity: 1,
                   }}
                   exit={{
-                    scale: 0.95,
+                    scale: 0.9,
                     opacity: 0,
                   }}
                   transition={{
-                    duration: 0.15,
+                    duration: 0.1,
                   }}
-                  className="dropdown absolute top-[calc(100%+12px)] right-0 min-w-35 origin-top-right overflow-hidden rounded-xl border border-neutral-200 bg-white"
+                  className="dropdown absolute top-[calc(100%+12px)] right-0 min-w-35 origin-top-right overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md/5"
                 >
-                  <div className="py-1">
+                  <div className="p-1">
                     <button
                       onClick={() => {
                         navigate('/profile');
                         setDropdownShowing(false);
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors pointer-fine:hover:bg-neutral-100"
+                      className="w-full rounded-lg px-4 py-2 text-start text-sm transition-colors pointer-fine:hover:bg-neutral-100"
                     >
                       Profile
                     </button>
@@ -98,7 +98,7 @@ export default function Nav() {
                           setDropdownShowing(false);
                         });
                       }}
-                      className="w-full px-4 py-2.5 text-start transition-colors pointer-fine:hover:bg-neutral-100"
+                      className="w-full rounded-lg px-4 py-2 text-start text-sm transition-colors pointer-fine:hover:bg-neutral-100"
                     >
                       Logout
                     </button>

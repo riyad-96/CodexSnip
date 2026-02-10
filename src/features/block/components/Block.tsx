@@ -2,7 +2,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import type { Block } from '../../folder/types/types';
 import getCodeNavigationId from '@/shared/lib/getCodeNavigationId';
 import { getStyle, supportedThemes } from '../../folder/lib/editorStyle';
-import Button from '@/shared/components/ui/Button';
+import Button, { buttonVariants } from '@/shared/components/ui/Button';
 
 import { AnimatePresence, motion } from 'motion/react';
 import { Tooltip } from 'kitzo';
@@ -12,6 +12,7 @@ import { CheckIcon, CopyIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
 import { useCopy } from 'kitzo';
 import { useBlockStore } from '@/features/block/store/block.store';
 import { UNTITLED_BLOCK } from '@/shared/constants/fallbacks';
+import TooltipContent from '@/shared/components/ui/TooltipContent';
 
 type CodeBlockViewProps = {
   block: Block;
@@ -33,7 +34,7 @@ export default function Block({ block }: CodeBlockViewProps) {
     >
       <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
-          content="Created on"
+          content={<TooltipContent children={'Created on'} />}
           position="bottom"
           hideOnTouch={false}
         >
@@ -65,8 +66,13 @@ export default function Block({ block }: CodeBlockViewProps) {
 
       <div className="flex flex-wrap items-center justify-end gap-3 px-4 py-4">
         <div className="flex items-center gap-2">
-          <Tooltip content="Language">
-            <span className="grid cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-2.5 text-sm text-neutral-700 h-7.5 sm:h-8.5 max-sm:text-xs sm:px-3">
+          <Tooltip content={<TooltipContent children={'Language'} />}>
+            <span
+              className={buttonVariants({
+                variant: 'outline',
+                className: 'grid text-xs',
+              })}
+            >
               {
                 supportedLanguages.find((l) => l.value === block?.language)
                   ?.name
@@ -74,8 +80,13 @@ export default function Block({ block }: CodeBlockViewProps) {
             </span>
           </Tooltip>
 
-          <Tooltip content="Theme">
-            <span className="grid cursor-default place-items-center rounded-xl border border-neutral-200 bg-neutral-50 px-2.5 text-sm text-neutral-700 h-7.5 sm:h-8.5 max-sm:text-xs sm:px-3">
+          <Tooltip content={<TooltipContent children={'Theme'} />}>
+            <span
+              className={buttonVariants({
+                variant: 'outline',
+                className: 'grid text-xs',
+              })}
+            >
               {supportedThemes.find((t) => t.value === block?.theme)?.name}
             </span>
           </Tooltip>
@@ -83,7 +94,7 @@ export default function Block({ block }: CodeBlockViewProps) {
 
         <div className="flex items-center gap-2">
           <div className="relative z-5 rounded-xl">
-            <Tooltip content="Delete!">
+            <Tooltip content={<TooltipContent children={'Delete!'} />}>
               <Button
                 onClick={() =>
                   setBlockDeleteDetails({
@@ -105,7 +116,7 @@ export default function Block({ block }: CodeBlockViewProps) {
           </div>
 
           <div className="relative z-5 rounded-xl">
-            <Tooltip content="Edit">
+            <Tooltip content={<TooltipContent children={'Edit'} />}>
               <Button
                 onClick={() => {
                   setBlockEditDetails(block);
@@ -123,7 +134,9 @@ export default function Block({ block }: CodeBlockViewProps) {
             </Tooltip>
           </div>
 
-          <Tooltip content={isCopied ? 'Copied' : 'Copy'}>
+          <Tooltip
+            content={<TooltipContent children={isCopied ? 'Copied' : 'Copy'} />}
+          >
             <Button
               onClick={() => copy(block?.code)}
               variant="outline"
@@ -167,15 +180,15 @@ export default function Block({ block }: CodeBlockViewProps) {
               children={block?.code as string}
               style={getStyle(block?.theme)}
               language={block?.language}
+              showLineNumbers={true}
               customStyle={{
-                fontSize: 'clamp(0.875rem, 0.8333rem + 0.1852vw, 1rem)',
+                fontSize: 'clamp(0.8125rem, 0.7895rem + 0.1053vw, 0.875rem)',
                 padding: '1rem 1.25rem',
                 margin: 0,
                 minHeight: 40,
                 maxHeight: 450,
                 borderRadius: 0,
               }}
-              showLineNumbers={true}
             />
           </div>
         </div>

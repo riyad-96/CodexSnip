@@ -25,7 +25,7 @@ export default function SideMenu({ code_blocks }: SideMenuPropsType) {
 
   return (
     <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-1">
-      <div className="max-h-75 overflow-y-auto">
+      <div className="max-h-72 overflow-y-auto px-1">
         {code_blocks?.map((p) => {
           const id = getCodeNavigationId(p.title, p._id);
 
@@ -33,9 +33,9 @@ export default function SideMenu({ code_blocks }: SideMenuPropsType) {
           return (
             <div
               key={`title-link-${p._id}`}
-              className={`relative px-4 py-2.5 text-sm pointer-fine:cursor-pointer ${
+              className={`relative rounded-xl px-4 py-2 text-sm pointer-fine:cursor-pointer ${
                 hash === link
-                  ? 'bg-neutral-100 font-semibold'
+                  ? 'bg-neutral-100'
                   : 'text-neutral-700 pointer-fine:hover:bg-neutral-100'
               }`}
             >

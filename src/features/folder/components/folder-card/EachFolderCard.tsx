@@ -8,6 +8,7 @@ import { FileBracesCornerIcon } from 'lucide-react';
 import FormatedDate from '@/shared/components/ui/FormatedDate';
 import { UNTITLED_FOLDER } from '@/shared/constants/fallbacks';
 import FolderActionMenu from './FolderActionMenu';
+import TooltipContent from '@/shared/components/ui/TooltipContent';
 
 type EachFolderCard = {
   folder: Folder;
@@ -38,7 +39,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
     <motion.div
       layout
       onClick={() => navigate(`/folder/${_id}`)}
-      className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-pointer grid-rows-[1fr_auto] rounded-2xl border border-neutral-200 bg-white px-5 py-4 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-400`}
+      className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-pointer grid-rows-[1fr_auto] rounded-2xl border border-neutral-200 bg-white px-5 py-4 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-300`}
       onMouseEnter={prefetchFolderData}
       onTouchStart={prefetchFolderData}
     >
@@ -57,7 +58,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
 
       <div className="relative flex w-fit gap-2">
         <Tooltip
-          content="Updated on"
+          content={<TooltipContent children={'Updated on'} />}
           animation={{ startDelay: 40 }}
           hideOnTouch={false}
           smartHover={false}
@@ -69,7 +70,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
         </Tooltip>
 
         <Tooltip
-          content={`${code_blocks.length} Blocks`}
+          content={<TooltipContent children={`${code_blocks.length} Blocks`} />}
           animation={{ startDelay: 40 }}
           hideOnTouch={false}
           smartHover={false}

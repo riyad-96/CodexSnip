@@ -3,7 +3,7 @@
 @plugin 'daisyui';
 
 :root {
-  --main-bg: hsl(0, 0%, 96%);
+  --main-bg: hsl(0, 0%, 97%);
   --keyboard-focus-shadow-color: hsl(0, 0%, 10%);
 }
 
@@ -58,6 +58,10 @@ a {
 .syntax-highlighted-container *::-moz-selection {
   background-color: hsl(221, 78%, 40%);
   color: white;
+}
+
+.linenumber.react-syntax-highlighter-line-number {
+  font-style: normal !important;
 }
 
 /* Utils */

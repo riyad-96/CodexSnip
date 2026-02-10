@@ -18,8 +18,7 @@ export default function EditorModal() {
     useAddNewCodeBlockMutation();
 
   // mutation: update code block
-  const { mutate: updateCodeBlock, isPending: isUpdatingCodeBlock } =
-    useUpdateCodeBlockMutation();
+  const { mutate: updateCodeBlock } = useUpdateCodeBlockMutation();
 
   const [values, setValues] = useState<EditorValuesType>({
     title: '',
@@ -129,13 +128,13 @@ export default function EditorModal() {
               setValues((prev) => ({ ...prev, code: e.target.value }))
             }
             placeholder="Type or paste your code here..."
-            className="relative max-h-125 min-h-50 resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-base transition-colors outline-none focus:border-neutral-400 max-sm:text-sm"
+            className="relative max-h-125 min-h-50 resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 font-[monospace] text-sm transition-colors outline-none focus:border-neutral-400 max-sm:text-sm"
           />
         </div>
       </div>
 
       <div className="flex justify-end gap-2 pt-2">
-        {!isAddingCodeBlock && !isUpdatingCodeBlock && (
+        {!isAddingCodeBlock && (
           <Button
             onClick={() => {
               setEditorState(null);
@@ -149,7 +148,7 @@ export default function EditorModal() {
         )}
         <Button
           onClick={() => {
-            if (isAddingCodeBlock || isUpdatingCodeBlock) return;
+            if (isAddingCodeBlock) return;
             if (editorState === 'new') {
               addNewCodeBlock(values);
             } else {
@@ -163,10 +162,16 @@ export default function EditorModal() {
           variant="default"
           className="grid h-8.5 min-w-25 place-items-center sm:h-9.5"
         >
-          {isAddingCodeBlock || isUpdatingCodeBlock ? (
-            <span className="loading loading-spinner loading-xs opacity-80"></span>
+          {editorState === 'new' ? (
+            <>
+              {isAddingCodeBlock ? (
+                <span className="loading loading-spinner loading-xs opacity-80"></span>
+              ) : (
+                'Add Block'
+              )}
+            </>
           ) : (
-            <span>{editorState === 'new' ? 'Add block' : 'Update'}</span>
+            'Update'
           )}
         </Button>
       </div>

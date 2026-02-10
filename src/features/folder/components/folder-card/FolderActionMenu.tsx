@@ -3,6 +3,7 @@ import type { Folder } from '../../types/types';
 import { useFolderStore } from '../../store/folder.store';
 import { Tooltip } from 'kitzo';
 import Button from '@/shared/components/ui/Button';
+import TooltipContent from '@/shared/components/ui/TooltipContent';
 
 type ActionMenuProps = {
   folder: Folder;
@@ -13,9 +14,9 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
   const { setFolderUpdateDetails, setFolderDeleteDetails } = useFolderStore();
 
   return (
-    <div className="space-y-1 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100">
+    <div className="space-y-1">
       <Tooltip
-        content="Edit"
+        content={<TooltipContent children={'Edit'} />}
         position="left"
         smartHover={false}
       >
@@ -30,7 +31,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
           }}
           variant="outline"
           size="icon"
-          className="grid place-items-center"
+          className="grid pointer-fine:scale-0 place-items-center pointer-fine:transition-[opacity,scale]! duration-150 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
         >
           <PencilLineIcon
             size={16}
@@ -40,7 +41,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
       </Tooltip>
 
       <Tooltip
-        content="Delete"
+        content={<TooltipContent children={'Delete!'} />}
         position="left"
         smartHover={false}
       >
@@ -54,7 +55,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
           }}
           variant="outline"
           size="icon"
-          className="grid place-items-center"
+          className="grid pointer-fine:scale-0 place-items-center pointer-fine:transition-[opacity,scale]! duration-150 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
         >
           <Trash2Icon
             size={16}

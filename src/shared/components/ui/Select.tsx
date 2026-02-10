@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useDropdownClose from '@/shared/hooks/useDropdownClose';
-import { ChevronDownIcon } from 'lucide-react';
+import { Check, ChevronDownIcon } from 'lucide-react';
 import type { SupportedThemesType } from '@/features/folder/lib/editorStyle';
 import type { SupportedLanguagesType } from '@/features/folder/lib/editorLanguage';
 
@@ -74,13 +74,13 @@ export default function Select<T extends Options>({
             display: 'grid',
           }}
           ref={closeOptionRef}
-          className="max-h-48.75 w-full overflow-y-auto rounded-xl border border-neutral-200 bg-white"
+          className="max-h-48.75 w-full overflow-y-auto rounded-xl border border-neutral-200 bg-white p-1 shadow-md/5"
         >
           {options.map((o) => (
             <button
-              className={`px-4 py-2.5 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
+              className={`rounded-lg px-3 py-2 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
                 defaultOption?.value === o.value
-                  ? 'selected-option bg-neutral-200'
+                  ? 'selected-option bg-neutral-100 flex items-center scroll-mt-1 justify-between gap-2'
                   : 'pointer-fine:hover:bg-neutral-100'
               }`}
               onClick={() => {
@@ -89,7 +89,8 @@ export default function Select<T extends Options>({
               }}
               key={o.value}
             >
-              {o.name}
+              <span>{o.name}</span>
+              {defaultOption?.value === o.value && <Check className="shrink-0" size="14" />}
             </button>
           ))}
         </div>
