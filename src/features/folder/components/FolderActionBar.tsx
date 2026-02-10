@@ -25,7 +25,7 @@ export default function FolderActionBar({ count }: { count: number }) {
             folder_description: '',
           });
         }}
-        variant='filled'
+        variant='default'
       >
         <span className="flex items-center gap-2">
           <PlusIcon

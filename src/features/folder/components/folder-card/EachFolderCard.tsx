@@ -40,6 +40,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
       onClick={() => navigate(`/folder/${_id}`)}
       className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-pointer grid-rows-[1fr_auto] rounded-2xl border border-neutral-200 bg-white px-5 py-4 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-400`}
       onMouseEnter={prefetchFolderData}
+      onTouchStart={prefetchFolderData}
     >
       <div className="flex">
         <div className="mb-4 flex-1 space-y-2">

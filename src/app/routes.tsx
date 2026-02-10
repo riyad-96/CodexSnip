@@ -9,10 +9,12 @@ import Signup from './pages/Signup';
 import Folder from './pages/Folder';
 import Home from './pages/Home';
 import ProtectedPageWrapper from '@/shared/components/wrapper/ProtectedPageWrapper';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         element: <AppLayout />,

@@ -92,7 +92,7 @@ export default function Folder() {
                   folder_id: codeFolder._id,
                 })
               }
-              variant="outlined"
+              variant="outline"
             >
               <span className="grid place-items-center">
                 <PencilLineIcon

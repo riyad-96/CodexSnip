@@ -92,7 +92,7 @@ export default function Block({ block }: CodeBlockViewProps) {
                     code_block_title: block?.title,
                   })
                 }
-                variant="outlined"
+                variant="outline"
               >
                 <span className="grid place-items-center">
                   <Trash2Icon
@@ -111,7 +111,7 @@ export default function Block({ block }: CodeBlockViewProps) {
                   setBlockEditDetails(block);
                   setEditorState('update');
                 }}
-                variant="outlined"
+                variant="outline"
               >
                 <span className="grid place-items-center">
                   <PencilLineIcon
@@ -126,7 +126,7 @@ export default function Block({ block }: CodeBlockViewProps) {
           <Tooltip content={isCopied ? 'Copied' : 'Copy'}>
             <Button
               onClick={() => copy(block?.code)}
-              variant="outlined"
+              variant="outline"
               className="relative grid place-items-center"
             >
               <span className="size-4" />

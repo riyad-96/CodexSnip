@@ -86,7 +86,7 @@ export default function Profile() {
               {!isEditing && (
                 <Button
                   onClick={() => setIsEditing(true)}
-                  variant="filled"
+                  variant="default"
                 >
                   <span>Edit Profile</span>
                 </Button>
@@ -186,13 +186,13 @@ export default function Profile() {
                 <Button
                   onClick={handleCancel}
                   className="grid place-items-center"
-                  variant="outlined"
+                  variant="outline"
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={handleSave}
-                  variant="filled"
+                  variant="default"
                 >
                   <span className="grid min-w-24 place-items-center">
                     {isSaving ? (

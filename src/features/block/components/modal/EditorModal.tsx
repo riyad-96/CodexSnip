@@ -142,7 +142,7 @@ export default function EditorModal() {
               setBlockEditDetails(null);
             }}
             className="grid place-items-center"
-            variant="outlined"
+            variant="outline"
           >
             Cancel
           </Button>
@@ -160,7 +160,7 @@ export default function EditorModal() {
               });
             }
           }}
-          variant="filled"
+          variant="default"
           className="grid h-8.5 min-w-25 place-items-center sm:h-9.5"
         >
           {isAddingCodeBlock || isUpdatingCodeBlock ? (

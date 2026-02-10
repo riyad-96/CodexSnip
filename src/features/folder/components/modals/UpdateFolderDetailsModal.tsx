@@ -75,7 +75,7 @@ export default function UpdateFolderDetailsModal() {
             <Button
               onClick={() => setFolderUpdateDetails(null)}
               className="grid place-items-center"
-              variant="outlined"
+              variant="outline"
             >
               Cancel
             </Button>
@@ -89,7 +89,7 @@ export default function UpdateFolderDetailsModal() {
                 });
               }}
               disabled={updatingFolderDetails}
-              variant="filled"
+              variant="default"
               className="grid place-items-center"
             >
               Update

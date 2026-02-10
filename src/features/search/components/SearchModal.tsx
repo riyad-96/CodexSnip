@@ -138,7 +138,7 @@ export default function SearchModal() {
                           <Link
                             className="absolute inset-0 z-5"
                             onClick={() => setSearchModalShowing(false)}
-                            to={`/code/${c.folder_id}#${getCodeNavigationId(c.title, c._id)}`}
+                            to={`/folder/${c.folder_id}#${getCodeNavigationId(c.title, c._id)}`}
                           />
 
                           <div className="flex min-w-0 flex-1 items-start gap-4">
@@ -191,7 +191,7 @@ export default function SearchModal() {
                           <Link
                             className="absolute inset-0 z-5"
                             onClick={() => setSearchModalShowing(false)}
-                            to={`/code/${f._id}`}
+                            to={`/folder/${f._id}`}
                           />
 
                           <div className="flex min-w-0 flex-1 items-start gap-4">

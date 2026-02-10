@@ -38,7 +38,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
             <Button
               onClick={() => setEditorState('new')}
               className="flex items-center gap-2"
-              variant="filled"
+              variant="default"
             >
               <PlusIcon
                 size={16}
@@ -87,7 +87,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
                 <Button
                   onClick={() => setEditorState('new')}
                   className="flex items-center gap-2"
-                  variant="filled"
+                  variant="default"
                 >
                   <PlusIcon
                     size={16}

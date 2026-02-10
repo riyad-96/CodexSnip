@@ -72,13 +72,15 @@ export default function CreateNewFolderModal() {
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <Button
-              onClick={() => setFolderCreateDetails(null)}
-              variant="outlined"
-              className="grid place-items-center"
-            >
-              Cancel
-            </Button>
+            {!isNewFolderCreating && (
+              <Button
+                onClick={() => setFolderCreateDetails(null)}
+                variant="outline"
+                className="grid place-items-center"
+              >
+                Cancel
+              </Button>
+            )}
             <Button
               onClick={() => {
                 if (isNewFolderCreating) return;
@@ -87,8 +89,8 @@ export default function CreateNewFolderModal() {
                   folder_description: folderCreateDetails.folder_description,
                 });
               }}
-              className="grid min-w-20 place-items-center"
-              variant="filled"
+              className="grid min-w-20 h-8.5 sm:h-9.5 place-items-center"
+              variant="default"
             >
               {isNewFolderCreating ? (
                 <span className="loading loading-spinner loading-xs opacity-80"></span>

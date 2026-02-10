@@ -30,7 +30,7 @@ export default function DeleteModal({
         <Button
           onClick={cancelFn}
           className="grid place-items-center"
-          variant="outlined"
+          variant="outline"
         >
           Cancel
         </Button>
@@ -40,7 +40,7 @@ export default function DeleteModal({
             if (isLoading) return;
             clickFn();
           }}
-          variant="delete"
+          variant="destructive"
           className="grid place-items-center"
         >
           <span>Delete</span>
