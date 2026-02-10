@@ -58,7 +58,7 @@ export default function SearchModal() {
                 placeholder="Search code blocks and folders..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full min-w-0 rounded-xl border border-neutral-200 bg-neutral-50 py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-neutral-400 focus:bg-white"
+                className="w-full min-w-0 rounded-xl border border-neutral-200 bg-neutral-50 py-2.5 sm:py-3.5 pr-4 pl-12 transition-colors outline-none focus:border-neutral-400 focus:bg-white"
               />
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function SearchModal() {
                       {data.codes.map((c) => (
                         <div
                           key={c._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-3 py-2 transition-colors duration-200 sm:px-4 sm:py-3 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -141,18 +141,19 @@ export default function SearchModal() {
                             to={`/folder/${c.folder_id}#${getCodeNavigationId(c.title, c._id)}`}
                           />
 
-                          <div className="flex min-w-0 flex-1 items-start gap-4">
-                            <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5">
+                          <div className="flex min-w-0 flex-1 items-center gap-4">
+                            <div className="shrink-0 rounded-lg bg-neutral-100 p-2.5">
                               <FileIcon
                                 size={18}
                                 className="text-neutral-600 transition-colors"
                               />
                             </div>
-                            <div className="grid min-w-0 gap-1">
-                              <h4 className="tracking-tight">
+
+                            <div className="grid min-w-0">
+                              <h4 className="max-sm:text-sm">
                                 {c.title || UNTITLED_BLOCK}
                               </h4>
-                              <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
+                              <p className="line-clamp-2 text-xs leading-relaxed text-neutral-500 sm:text-sm">
                                 {c.description || 'No description'}
                               </p>
                             </div>
@@ -186,7 +187,7 @@ export default function SearchModal() {
                       {data.folders.map((f) => (
                         <div
                           key={f._id}
-                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-5 py-4 transition-colors duration-200 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
+                          className="group relative flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-3 py-2 transition-colors duration-200 sm:px-4 sm:py-3 pointer-fine:cursor-pointer pointer-fine:hover:border-neutral-400"
                         >
                           <Link
                             className="absolute inset-0 z-5"
@@ -194,18 +195,19 @@ export default function SearchModal() {
                             to={`/folder/${f._id}`}
                           />
 
-                          <div className="flex min-w-0 flex-1 items-start gap-4">
-                            <div className="mt-0.5 shrink-0 rounded-lg bg-neutral-100 p-2.5">
+                          <div className="flex min-w-0 flex-1 items-center gap-4">
+                            <div className="shrink-0 rounded-lg bg-neutral-100 p-2.5">
                               <FolderIcon
                                 size={18}
                                 className="text-neutral-600"
                               />
                             </div>
-                            <div className="grid min-w-0 gap-1">
-                              <h4 className="tracking-tight">
+
+                            <div className="grid min-w-0">
+                              <h4 className="max-sm:text-sm">
                                 {f.folder_name || UNTITLED_FOLDER}
                               </h4>
-                              <p className="line-clamp-2 text-sm leading-relaxed text-neutral-500">
+                              <p className="line-clamp-2 text-xs leading-relaxed text-neutral-500 sm:text-sm">
                                 {f.folder_description || 'No description'}
                               </p>
                             </div>

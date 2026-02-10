@@ -17,9 +17,7 @@ export default function NotFoundPage() {
         <p className="text-sm font-medium text-neutral-500">404</p>
 
         {/* Title */}
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900">
-          This page doesn’t exist
-        </h1>
+        <h1 className="mt-2 text-2xl font-semibold">This page doesn’t exist</h1>
 
         {/* Description */}
         <p className="mt-3 text-sm text-neutral-600">

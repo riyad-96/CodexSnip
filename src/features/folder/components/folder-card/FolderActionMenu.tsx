@@ -2,6 +2,7 @@ import { PencilLineIcon, Trash2Icon } from 'lucide-react';
 import type { Folder } from '../../types/types';
 import { useFolderStore } from '../../store/folder.store';
 import { Tooltip } from 'kitzo';
+import Button from '@/shared/components/ui/Button';
 
 type ActionMenuProps = {
   folder: Folder;
@@ -12,13 +13,13 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
   const { setFolderUpdateDetails, setFolderDeleteDetails } = useFolderStore();
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100">
       <Tooltip
         content="Edit"
         position="left"
         smartHover={false}
       >
-        <button
+        <Button
           onClick={(e) => {
             e.stopPropagation();
             setFolderUpdateDetails({
@@ -27,13 +28,15 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
               folder_description: folder_description,
             });
           }}
-          className="grid size-8 place-items-center rounded-xl border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+          variant="outline"
+          size="icon"
+          className="grid place-items-center"
         >
           <PencilLineIcon
             size={16}
             className="text-neutral-600"
           />
-        </button>
+        </Button>
       </Tooltip>
 
       <Tooltip
@@ -41,7 +44,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
         position="left"
         smartHover={false}
       >
-        <button
+        <Button
           onClick={(e) => {
             e.stopPropagation();
             setFolderDeleteDetails({
@@ -49,13 +52,15 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
               folder_name: folder_name,
             });
           }}
-          className="grid size-8 place-items-center rounded-xl border border-neutral-200 bg-neutral-50 pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-100"
+          variant="outline"
+          size="icon"
+          className="grid place-items-center"
         >
           <Trash2Icon
             size={16}
             className="text-neutral-600"
           />
-        </button>
+        </Button>
       </Tooltip>
     </div>
   );
