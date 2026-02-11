@@ -31,7 +31,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
           }}
           variant="outline"
           size="icon"
-          className="grid pointer-fine:scale-0 place-items-center pointer-fine:transition-[opacity,scale]! duration-150 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
+          className="grid place-items-center duration-150 pointer-fine:scale-0 pointer-fine:opacity-0 pointer-fine:transition-[opacity,scale]! pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
         >
           <PencilLineIcon
             size={16}
@@ -55,7 +55,7 @@ export default function FolderActionMenu({ folder }: ActionMenuProps) {
           }}
           variant="outline"
           size="icon"
-          className="grid pointer-fine:scale-0 place-items-center pointer-fine:transition-[opacity,scale]! duration-150 pointer-fine:opacity-0 pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
+          className="grid place-items-center duration-150 pointer-fine:scale-0 pointer-fine:opacity-0 pointer-fine:transition-[opacity,scale]! pointer-fine:group-hover:scale-100 pointer-fine:group-hover:opacity-100"
         >
           <Trash2Icon
             size={16}

@@ -89,7 +89,7 @@ export default function CreateNewFolderModal() {
                   folder_description: folderCreateDetails.folder_description,
                 });
               }}
-              className="grid min-w-20 h-8.5 sm:h-9.5 place-items-center"
+              className="grid h-8.5 min-w-20 place-items-center sm:h-9.5"
               variant="default"
             >
               {isNewFolderCreating ? (

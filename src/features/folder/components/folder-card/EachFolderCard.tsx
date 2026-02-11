@@ -1,5 +1,5 @@
 import type { Folder } from '@/features/folder/types/types';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { queryClient } from '@/main';
@@ -39,7 +39,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
     <motion.div
       layout
       onClick={() => navigate(`/folder/${_id}`)}
-      className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-pointer grid-rows-[1fr_auto] rounded-2xl border border-neutral-200 bg-white px-5 py-4 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-300`}
+      className={`group relative isolate grid min-h-[clamp(8.75rem,7.5rem+6.25vw,12.5rem)] cursor-pointer grid-rows-[1fr_auto] rounded-2xl border border-neutral-200 bg-white px-5 py-4 shadow-lg/3 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-300 pointer-fine:hover:shadow-lg/5`}
       onMouseEnter={prefetchFolderData}
       onTouchStart={prefetchFolderData}
     >
@@ -64,7 +64,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
           smartHover={false}
         >
           <FormatedDate
-            className="rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 text-xs text-neutral-700"
+            className="rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-700"
             time={updated_at}
           />
         </Tooltip>
@@ -75,7 +75,7 @@ export default function EachFolderCard({ folder }: EachFolderCard) {
           hideOnTouch={false}
           smartHover={false}
         >
-          <div className="flex w-fit cursor-default items-center gap-1.5 rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 text-xs text-neutral-700">
+          <div className="flex w-fit cursor-default items-center gap-1.5 rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-700">
             <FileBracesCornerIcon
               size={14}
               className="text-neutral-600"

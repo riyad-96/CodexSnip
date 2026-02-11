@@ -24,7 +24,7 @@ export default function SideMenu({ code_blocks }: SideMenuPropsType) {
   }, [hash]);
 
   return (
-    <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-1">
+    <div className="sticky top-21.25 overflow-hidden rounded-2xl border border-neutral-200 bg-white py-1 shadow-lg/3">
       <div className="max-h-72 overflow-y-auto px-1">
         {code_blocks?.map((p) => {
           const id = getCodeNavigationId(p.title, p._id);

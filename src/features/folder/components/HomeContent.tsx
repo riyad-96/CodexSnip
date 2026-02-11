@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import type { Folder } from '@/features/folder/types/types';
 import FolderActionBar from '@/features/folder/components/FolderActionBar';

@@ -48,7 +48,7 @@ export default function Landing() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="mt-28 rounded-2xl border bg-white border-neutral-200 p-6">
+      <section className="mt-28 rounded-2xl border border-neutral-200 bg-white p-6">
         <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
           Start building your personal code library
         </h2>

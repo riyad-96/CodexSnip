@@ -26,7 +26,7 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
           animation={{ startDelay: 40 }}
           smartHover={false}
         >
-          <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
+          <div className="relative z-2 flex w-fit cursor-default items-center gap-2 rounded-xl border border-neutral-200 bg-white px-2 py-1.5 text-xs text-neutral-700 shadow/3">
             <FileBracesCornerIcon
               size={16}
               className="text-neutral-600"

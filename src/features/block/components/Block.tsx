@@ -30,7 +30,7 @@ export default function Block({ block }: CodeBlockViewProps) {
     <motion.div
       layout
       id={'#' + id}
-      className="relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white pt-5 pb-4"
+      className="group relative scroll-mt-21.25 rounded-2xl border border-neutral-200 bg-white pt-5 pb-4 shadow-lg/3 transition-[border-color,box-shadow] duration-200 pointer-fine:hover:border-neutral-300 pointer-fine:hover:shadow-lg/5"
     >
       <div className="absolute top-0 right-5 -translate-y-1/2">
         <Tooltip
@@ -39,7 +39,7 @@ export default function Block({ block }: CodeBlockViewProps) {
           hideOnTouch={false}
         >
           <FormatedDate
-            className="rounded-lg border border-neutral-200 bg-white px-2.5 py-1.5 text-xs text-neutral-700"
+            className="rounded-lg border border-neutral-200 bg-white px-2.5 py-1 text-xs text-neutral-700 shadow-md/4 transition-colors duration-200 pointer-fine:group-hover:border-neutral-300"
             time={block?.created_at as string}
           />
         </Tooltip>

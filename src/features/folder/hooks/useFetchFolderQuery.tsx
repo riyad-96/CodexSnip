@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { CodeFolderWithBlocks } from '../types/types';
 import type { AxiosError } from 'axios';
 import { useAuthStore } from '@/features/auth/store/auth.store';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 
 export default function useFetchCodeFolderQuery({
   folderId,

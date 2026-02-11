@@ -2,7 +2,7 @@ import type { Block, Folder } from '@/features/folder/types/types';
 import { useSearchStore } from '../store/search.store';
 import { useState } from 'react';
 import { useDebounce } from 'kitzo';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import Modal from '@/shared/components/ui/Modal';
 import {

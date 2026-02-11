@@ -1,4 +1,4 @@
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import type { AddFolderDetailsType } from '../types/codeFolderTypes';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/main';

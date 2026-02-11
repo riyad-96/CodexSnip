@@ -1,5 +1,5 @@
 import { queryClient } from '@/main';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import { useAuthStore } from '../auth/store/auth.store';
 
 export function PrefetchFolders() {

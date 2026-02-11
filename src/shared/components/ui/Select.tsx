@@ -3,6 +3,7 @@ import useDropdownClose from '@/shared/hooks/useDropdownClose';
 import { Check, ChevronDownIcon } from 'lucide-react';
 import type { SupportedThemesType } from '@/features/folder/lib/editorStyle';
 import type { SupportedLanguagesType } from '@/features/folder/lib/editorLanguage';
+import { AnimatePresence, motion } from 'motion/react';
 
 type Options = SupportedThemesType | SupportedLanguagesType;
 
@@ -24,7 +25,8 @@ export default function Select<T extends Options>({
 
   const defaultOption = option ? option : { name: 'Select', value: '' };
 
-  const randomClass = `close_select_${crypto.randomUUID().slice(0, 8)}`;
+  const randomString = crypto.randomUUID().slice(0, 8);
+  const randomClass = `close_select_${randomString}`;
 
   const closeOptionRef = useDropdownClose({
     isOpen,
@@ -35,11 +37,17 @@ export default function Select<T extends Options>({
   });
 
   useEffect(() => {
-    if (!isOpen) return;
-    const selectedOptions = document.querySelector(
-      '.selected-option',
-    ) as HTMLDivElement;
+    const selectedOptions = document.querySelector<HTMLDivElement>(
+      `.selected-option-${randomString}`,
+    );
+    if (!selectedOptions) return;
+
     selectedOptions.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    const timeoutId = setTimeout(() => {}, 50);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [isOpen]);
 
   return (
@@ -52,9 +60,9 @@ export default function Select<T extends Options>({
           onClick={() => {
             setIsOpen((prev) => !prev);
           }}
-          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 transition-colors pointer-fine:cursor-pointer pointer-fine:hover:bg-neutral-50`}
+          className={`${randomClass} flex size-full items-center justify-between gap-2 rounded-xl px-3 py-2 transition-colors pointer-fine:cursor-pointer pointer-fine:hover:bg-neutral-50`}
         >
-          <span className="line-clamp-1 text-sm text-nowrap text-neutral-900">
+          <span className="line-clamp-1 text-xs text-nowrap text-neutral-900">
             {defaultOption?.name}
           </span>
           <ChevronDownIcon
@@ -65,36 +73,49 @@ export default function Select<T extends Options>({
         </button>
       </div>
 
-      {isOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: `calc(100% + 8px)`,
-            display: 'grid',
-          }}
-          ref={closeOptionRef}
-          className="max-h-48.75 w-full overflow-y-auto rounded-xl border border-neutral-200 bg-white p-1 shadow-md/5"
-        >
-          {options.map((o) => (
-            <button
-              className={`rounded-lg px-3 py-2 text-start text-sm transition-colors pointer-fine:cursor-pointer ${
-                defaultOption?.value === o.value
-                  ? 'selected-option bg-neutral-100 flex items-center scroll-mt-1 justify-between gap-2'
-                  : 'pointer-fine:hover:bg-neutral-100'
-              }`}
-              onClick={() => {
-                onChange(o);
-                setIsOpen(false);
-              }}
-              key={o.value}
-            >
-              <span>{o.name}</span>
-              {defaultOption?.value === o.value && <Check className="shrink-0" size="14" />}
-            </button>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: `calc(100% + 8px)`,
+              display: 'grid',
+            }}
+            ref={closeOptionRef}
+            className="max-h-48.75 w-full origin-top overflow-y-auto rounded-xl border border-neutral-200 bg-white p-1 shadow-md/5 will-change-transform"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{
+              duration: 0.1,
+            }}
+          >
+            {options.map((o) => (
+              <button
+                className={`rounded-lg px-3 py-2 text-start text-xs transition-colors pointer-fine:cursor-pointer ${
+                  defaultOption?.value === o.value
+                    ? `selected-option-${randomString} flex scroll-mt-1 items-center justify-between gap-2 bg-neutral-100`
+                    : 'pointer-fine:hover:bg-neutral-100'
+                }`}
+                onClick={() => {
+                  onChange(o);
+                  setIsOpen(false);
+                }}
+                key={o.value}
+              >
+                <span>{o.name}</span>
+                {defaultOption?.value === o.value && (
+                  <Check
+                    className="shrink-0"
+                    size="14"
+                  />
+                )}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

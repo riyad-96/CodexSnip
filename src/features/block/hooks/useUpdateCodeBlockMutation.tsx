@@ -1,6 +1,6 @@
 import type { EditorUpdateValuesType } from '@/features/folder/types/editor';
 import { queryClient } from '@/main';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 import { useMutation } from '@tanstack/react-query';
 import { useBlockStore } from '../store/block.store';
 import type { CodeFolderWithBlocks } from '@/features/folder/types/types';

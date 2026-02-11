@@ -3,7 +3,7 @@ import { queryClient } from '@/main';
 import { useMutation } from '@tanstack/react-query';
 import { useBlockStore } from '../store/block.store';
 import { useParams } from 'react-router-dom';
-import api from '@/shared/api';
+import api from '@/shared/lib/api';
 
 export default function useAddNewCodeBlockMutation() {
   const folder_id = useParams().id;
