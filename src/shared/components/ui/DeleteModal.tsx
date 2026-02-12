@@ -23,7 +23,7 @@ export default function DeleteModal({
       className="w-full max-w-112.5 rounded-2xl border border-neutral-200 bg-white p-6"
     >
       <div className="mb-6">
-        <h4 className="mb-3">{title}</h4>
+        <h4 className="mb-3 text-lg font-medium">{title}</h4>
         <p className="text-neutral-600">{description}</p>
       </div>
       <div className="flex justify-end gap-2">

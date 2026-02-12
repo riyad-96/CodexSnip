@@ -25,6 +25,7 @@ export default function Modal({
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.1 }}
+        layout
         onMouseDown={(e) => e.stopPropagation()}
         className={cn('shadow-xl/5', className)}
       >
