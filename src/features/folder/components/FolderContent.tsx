@@ -15,7 +15,7 @@ type FolderContentType = {
 };
 
 export default function FolderContent({ code_blocks }: FolderContentType) {
-  const { editorState, setEditorState } = useBlockStore();
+  const { editorState, setEditorState, blockEditDetails } = useBlockStore();
 
   return (
     <>
@@ -103,7 +103,14 @@ export default function FolderContent({ code_blocks }: FolderContentType) {
         </div>
       )}
 
-      <AnimatePresence>{editorState && <EditorModal />}</AnimatePresence>
+      <AnimatePresence>
+        {editorState && (
+          <EditorModal
+            mode={editorState}
+            block={blockEditDetails}
+          />
+        )}
+      </AnimatePresence>
       <BlockDeleteModal />
     </>
   );
