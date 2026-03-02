@@ -18,7 +18,7 @@ export default function Modal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onMouseDown={onMouseDown}
-      className="uni-modal fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/20 px-4 pt-16 pb-26 pointer-fine:backdrop-blur-xs"
+      className="uni-modal fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/20 px-4 py-8 pointer-fine:backdrop-blur-xs"
     >
       <motion.div
         initial={{ opacity: 0, scale: 1.1 }}
