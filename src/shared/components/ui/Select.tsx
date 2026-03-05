@@ -95,7 +95,7 @@ export default function Select<T extends Options>({
               <button
                 className={`rounded-lg px-3 py-2 text-start text-xs transition-colors pointer-fine:cursor-pointer ${
                   defaultOption?.value === o.value
-                    ? `selected-option-${randomString} flex scroll-mt-1 items-center justify-between gap-2 bg-neutral-100`
+                    ? `selected-option-${randomString} flex scroll-my-1 items-center justify-between gap-2 bg-neutral-100`
                     : 'pointer-fine:hover:bg-neutral-100'
                 }`}
                 onClick={() => {
