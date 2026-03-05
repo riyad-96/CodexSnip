@@ -42,7 +42,7 @@ export default function Select<T extends Options>({
     );
     if (!selectedOptions) return;
 
-    selectedOptions.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    selectedOptions.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     const timeoutId = setTimeout(() => {}, 50);
 
     return () => {
